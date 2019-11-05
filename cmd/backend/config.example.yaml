@@ -1,0 +1,38 @@
+port: ":3000"
+env: "dev"
+host: "http://localhost:3000"
+oauth:
+  google:
+    redirectURL: "http://localhost:3000/api/v1/google/oauth/callback"
+    clientID: "203743370138-7o73o9s8feet82bbkgqqrn8lpgue8k2i.apps.googleusercontent.com"
+    clientSecret: "UdtS64NVSlwPcrzyQZqWP-bm"
+    scopes:
+      - "https://www.googleapis.com/auth/userinfo.email"
+      - "https://www.googleapis.com/auth/userinfo.profile"
+    getUserInfoURL: "https://www.googleapis.com/oauth2/v2/userinfo?access_token={{.}}"
+  yandex:
+    redirectURL: "http://localhost:3000/api/v1/yandex/oauth/callback"
+    clientID: "7b0d7524e025454fa809548eb680baf5"
+    clientSecret: "ea11b2a912ae4348911a288c4ae6a9c3"
+    scopes:
+      - "login:birthday"
+      - "login:email"
+      - "login:info"
+      - "login:avatar"
+    getUserInfoURL: "https://login.yandex.ru/info?format=json&with_openid_identity=1&oauth_token={{.}}"
+  github:
+    redirectURL: "http://localhost:3000/api/v1/github/oauth/callback"
+    clientID: "9606b1258a79ed9b5d32"
+    clientSecret: "aa0cc36e475efca3a2393963ad370f3d638d061d"
+    scopes:
+      - "login:birthday"
+      - "login:email"
+      - "login:info"
+      - "login:avatar"
+    getUserInfoURL: "https://api.github.com/user"
+tracer:
+  jaeger:
+    collectorEndpoint: "http://localhost:14268/api/traces"
+    serviceName: "bbckend"
+databases:
+  postgres: "postgres://postgres:postgres@localhost:5432/bbckend?sslmode=disable"
