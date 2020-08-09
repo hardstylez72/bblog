@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yaml"
-	"github.com/hardstylez72/bbckend/internal/controller"
-	"github.com/hardstylez72/bbckend/internal/store"
+	"github.com/hardstylez72/bbckend/internal/api/controller/auth"
+	"github.com/hardstylez72/bbckend/internal/storage"
 	"github.com/hardstylez72/bbckend/internal/tracer"
 )
 
@@ -13,19 +13,19 @@ const (
 )
 
 type Config struct {
-	Port   string
-	Env    string
-	Host   string
-	Tracer tracer.Config
-	Oauth  controller.Oauth
+	Port      string
+	Env       string
+	Host      string
+	Tracer    tracer.Config
+	Oauth     auth.Oauth
 	Databases Databases
 }
 
 type Databases struct {
-	Postgres store.Postgres
+	Postgres storage.PostgresConnect
 }
 
-func Load(filePath string) (*Config, error) {
+func LoadFromFile(filePath string) (*Config, error) {
 	config.WithOptions(func(options *config.Options) {
 		options = &config.Options{
 			ParseEnv:    false,

@@ -9,7 +9,7 @@ oauth:
     scopes:
       - "https://www.googleapis.com/auth/userinfo.email"
       - "https://www.googleapis.com/auth/userinfo.profile"
-    getUserInfoURL: "https://www.googleapis.com/oauth2/v2/userinfo?access_token={{.}}"
+    userInfoURL: "https://www.googleapis.com/oauth2/v2/userinfo"
   yandex:
     redirectURL: "http://localhost:3000/api/v1/yandex/oauth/callback"
     clientID: "7b0d7524e025454fa809548eb680baf5"
@@ -29,10 +29,10 @@ oauth:
       - "login:email"
       - "login:info"
       - "login:avatar"
-    getUserInfoURL: "https://api.github.com/user"
+    userInfoURL: "https://api.github.com/user"
 tracer:
   jaeger:
     collectorEndpoint: "http://localhost:14268/api/traces"
-    serviceName: "bbckend"
+    serviceName: "bbackend"
 databases:
-  postgres: "postgres://postgres:postgres@localhost:5432/bbckend?sslmode=disable"
+  postgres: "postgres://postgres:postgres@localhost:6667/bback?sslmode=disable"

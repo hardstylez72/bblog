@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/server/server.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_delete.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_get_by_id.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_get_list_by_period.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_save.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/auth/google.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/auth/interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/auth/service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/errors.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_delete.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_by_id.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_list_by_period.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_save.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/article/interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/article/pg.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/middleware2/logout.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/pg.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/user/errors.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/user/pg.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/00001_schema_bb.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/00003_table_user_emails.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/00004_table_articles.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/backend/config.example.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/config.example.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/backend/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/backend/server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/auth.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/auth_github.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/github.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/auth_google.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/auth_yandex.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/store/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/user/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/store/pg.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/changelog.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/changelog.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-auth_types-table.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-emails-table.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-phones-table.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-users-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00002_table_users.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,45 +115,43 @@
     </option>
   </component>
   <component name="GOROOT" path="$PROJECT_DIR$/../../../../go1.13" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1T6y10k1QYM4GxFQ8C03Bdv0Zov" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bbckend/internal/controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="goland.project.structure" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../bbckend/internal/controller" />
-      <recent name="$PROJECT_DIR$/../bbckend/migrations/src/v0.0.1" />
-      <recent name="$PROJECT_DIR$/../bbckend/migrations" />
+      <recent name="$PROJECT_DIR$/internal/controller" />
+      <recent name="$PROJECT_DIR$/migrations/src/v0.0.1" />
+      <recent name="$PROJECT_DIR$/migrations" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../bbckend" />
-      <recent name="$PROJECT_DIR$/../bbckend/migrations/src" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/migrations/src" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Go Build.go build github.com/hardstylez72/bbckend/cmd/backend">
+  <component name="RunManager" selected="Go Build.go build github.com/hardstylez72/bbckend/cmd/server">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="bbckend" />
+      <module name="bblog" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
       <kind value="FILE" />
@@ -115,17 +160,28 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/hardstylez72/bbckend/cmd/backend" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="bbckend" />
-      <working_directory value="$PROJECT_DIR$/../bbckend" />
-      <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/../bbckend/cmd/backend/main.go" />
-      <package value="github.com/hardstylez72/bbckend/cmd/backend" />
-      <directory value="$PROJECT_DIR$/" />
+    <configuration name="go build github.com/hardstylez72/bbckend/cmd/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="bblog" />
+      <working_directory value="$PROJECT_DIR$/cmd/server/" />
+      <parameters value="-c=$PROJECT_DIR$/cmd/server/config.example.yaml" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
+      <kind value="DIRECTORY" />
+      <filePath value="$PROJECT_DIR$/cmd/backend/main.go" />
+      <package value="github.com/hardstylez72/bblog/" />
+      <directory value="$PROJECT_DIR$/cmd/server/" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="bbckend" />
+      <module name="bblog" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
       <framework value="gotest" />
@@ -148,49 +204,96 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Docker.bbckend/docker-compose.dev.yml.postgres: Compose Deployment" />
+      <item itemvalue="Go Build.go build github.com/hardstylez72/bbckend/cmd/server" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/hardstylez72/bbckend/cmd/backend" />
+        <item itemvalue="Go Build.go build github.com/hardstylez72/bbckend/cmd/server" />
         <item itemvalue="Docker.bbckend/docker-compose.dev.yml.postgres: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="allServicesViewState">
-      <serviceView>
-        <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5dd24f41" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5dd24f41" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@95210e2" type="9fbbdea:ServiceModel$ServiceNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@1217f8f4" type="9fbbdea:ServiceModel$ServiceNode" />
-            </path>
-          </expand>
-          <select />
-        </treeState>
-      </serviceView>
-    </option>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+    <environment>
+      <map>
+        <entry key="GOPROXY" value="direct" />
+      </map>
+    </environment>
     <proxy>direct</proxy>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596956547752">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596956547752" />
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1596956290691">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1596956290691" />
+    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl" timestamp="1596955991102">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1596955991102" />
+    <state width="1223" height="265" key="GridCell.Tab.0.bottom" timestamp="1596956743438">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
+    <state width="1223" height="265" key="GridCell.Tab.0.center" timestamp="1596956743437">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743437" />
+    <state width="1223" height="265" key="GridCell.Tab.0.left" timestamp="1596956743437">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743437" />
+    <state width="1223" height="265" key="GridCell.Tab.0.right" timestamp="1596956743438">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
+    <state width="1223" height="265" key="GridCell.Tab.1.bottom" timestamp="1596956743438">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
+    <state width="1223" height="265" key="GridCell.Tab.1.center" timestamp="1596956743438">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
+    <state width="1223" height="265" key="GridCell.Tab.1.left" timestamp="1596956743438">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
+    <state width="1223" height="265" key="GridCell.Tab.1.right" timestamp="1596956743438">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1223" height="265" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
+    <state x="984" y="156" key="SettingsEditor" timestamp="1596955995583">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596955995583" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/../bbckend/cmd/backend/server.go</url>
+          <url>file://$PROJECT_DIR$/cmd/backend/server.go</url>
           <line>13</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
@@ -205,12 +308,12 @@
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/../bbckend/internal/controller/auth.go</url>
-          <line>36</line>
+          <url>file://$PROJECT_DIR$/internal/controller/auth.go</url>
+          <line>38</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/../bbckend/internal/store/pg.go</url>
+          <url>file://$PROJECT_DIR$/internal/store/pg.go</url>
           <line>125</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
