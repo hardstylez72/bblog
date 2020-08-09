@@ -1,54 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/server/server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_delete.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_get_by_id.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_get_list_by_period.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_save.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/auth/google.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/auth/interface.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/auth/service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/errors.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_delete.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_by_id.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_list_by_period.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_save.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/storage/article/interface.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/storage/article/pg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/storage/middleware2/logout.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/storage/pg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/storage/user/errors.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/storage/user/pg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/00001_schema_bb.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/00003_table_user_emails.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/00004_table_articles.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/guide.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/backend/config.example.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/config.example.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/backend/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/backend/server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/bbckend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/controller/auth.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/controller/auth_github.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/github.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/controller/auth_google.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/controller/auth_yandex.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/store/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/user/interface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/store/pg.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/changelog.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/changelog.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-auth_types-table.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-emails-table.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-phones-table.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/src/v0.0.1/create-users-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00002_table_users.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,9 +107,9 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="GO_FMT" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -230,6 +208,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Refactors code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactors code" />
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
     <environment>
@@ -244,50 +226,58 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596956547752" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1596956290691">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1596956791124">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1596956290691" />
-    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl" timestamp="1596955991102">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1596956791124" />
+    <state x="946" y="103" width="1069" height="837" key="DiffContextDialog" timestamp="1596957056629">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1596955991102" />
-    <state width="1223" height="265" key="GridCell.Tab.0.bottom" timestamp="1596956743438">
+    <state x="946" y="103" width="1069" height="837" key="DiffContextDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596957056629" />
+    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl" timestamp="1596957045660">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
-    <state width="1223" height="265" key="GridCell.Tab.0.center" timestamp="1596956743437">
+    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1596957045660" />
+    <state width="2514" height="265" key="GridCell.Tab.0.bottom" timestamp="1596957109019">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743437" />
-    <state width="1223" height="265" key="GridCell.Tab.0.left" timestamp="1596956743437">
+    <state width="2514" height="265" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109019" />
+    <state width="2514" height="265" key="GridCell.Tab.0.center" timestamp="1596957109016">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743437" />
-    <state width="1223" height="265" key="GridCell.Tab.0.right" timestamp="1596956743438">
+    <state width="2514" height="265" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109016" />
+    <state width="2514" height="265" key="GridCell.Tab.0.left" timestamp="1596957109014">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
-    <state width="1223" height="265" key="GridCell.Tab.1.bottom" timestamp="1596956743438">
+    <state width="2514" height="265" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109014" />
+    <state width="2514" height="265" key="GridCell.Tab.0.right" timestamp="1596957109018">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
-    <state width="1223" height="265" key="GridCell.Tab.1.center" timestamp="1596956743438">
+    <state width="2514" height="265" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109018" />
+    <state width="2514" height="265" key="GridCell.Tab.1.bottom" timestamp="1596957109025">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
-    <state width="1223" height="265" key="GridCell.Tab.1.left" timestamp="1596956743438">
+    <state width="2514" height="265" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109025" />
+    <state width="2514" height="265" key="GridCell.Tab.1.center" timestamp="1596957109022">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
-    <state width="1223" height="265" key="GridCell.Tab.1.right" timestamp="1596956743438">
+    <state width="2514" height="265" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109022" />
+    <state width="2514" height="265" key="GridCell.Tab.1.left" timestamp="1596957109020">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1223" height="265" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596956743438" />
-    <state x="984" y="156" key="SettingsEditor" timestamp="1596955995583">
+    <state width="2514" height="265" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109020" />
+    <state width="2514" height="265" key="GridCell.Tab.1.right" timestamp="1596957109023">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596955995583" />
+    <state width="2514" height="265" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109023" />
+    <state x="984" y="156" key="SettingsEditor" timestamp="1596957056256">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596957056256" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1596957012617">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1596957012617" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

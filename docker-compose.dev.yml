@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  #  minio:
-  #    image: "minio/minio"
-  #    restart: always
-  #    environment:
-  #      MINIO_ACCESS_KEY: OR7DZ0AQRAEP1EGIXBXG
-  #      MINIO_SECRET_KEY: dJSQvadUHWz6rxuRwipsQHBm3Z1XacIkdKqYFyUP
-  #    command: "server /data"
-  #    ports:
-  #      - 9000:9000
+  minio:
+    image: "minio/minio"
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: OR7DZ0AQRAEP1EGIXBXG
+      MINIO_SECRET_KEY: dJSQvadUHWz6rxuRwipsQHBm3Z1XacIkdKqYFyUP
+    command: "server /data"
+    ports:
+      - 9000:9000
   postgres:
     image: "postgres"
     restart: always
