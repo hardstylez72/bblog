@@ -36,3 +36,9 @@ tracer:
     serviceName: "bbackend"
 databases:
   postgres: "postgres://postgres:postgres@localhost:6667/bback?sslmode=disable"
+objectStorage:
+  minio:
+    host: localhost:9000
+    accessKeyID: OR7DZ0AQRAEP1EGIXBXG
+    secretAccessKey: dJSQvadUHWz6rxuRwipsQHBm3Z1XacIkdKqYFyUP
+    useSSL: false

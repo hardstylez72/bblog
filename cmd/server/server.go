@@ -7,7 +7,9 @@ import (
 	"github.com/go-chi/cors"
 	article2 "github.com/hardstylez72/bblog/internal/api/controller/article"
 	"github.com/hardstylez72/bblog/internal/api/controller/auth"
+	objectstorage2 "github.com/hardstylez72/bblog/internal/api/controller/objectstorage"
 	"github.com/hardstylez72/bblog/internal/logger"
+	"github.com/hardstylez72/bblog/internal/objectstorage"
 	"github.com/hardstylez72/bblog/internal/storage"
 	"github.com/hardstylez72/bblog/internal/storage/article"
 	"github.com/hardstylez72/bblog/internal/storage/middleware2"
@@ -28,6 +30,7 @@ type Server struct {
 type Services struct {
 	userStorage    user.Storage
 	articleStorage article.Storage
+	objectStorage  objectstorage.Storage
 }
 
 func main() {
@@ -62,9 +65,16 @@ func initServices(cfg *Config) (*Services, error) {
 	userStorage := user.NewPGStorage(pgConn)
 	articleStorage := article.NewPgStorage(pgConn)
 
+	minioClient, err := objectstorage.NewMinioClient(cfg.ObjectStorage.Minio)
+	if err != nil {
+		return nil, err
+	}
+	objectStorage := objectstorage.NewMinioStorage(minioClient)
+
 	return &Services{
 		userStorage:    userStorage,
 		articleStorage: articleStorage,
+		objectStorage:  objectStorage,
 	}, nil
 }
 
@@ -113,6 +123,7 @@ func (s *Server) Handler() chi.Router {
 
 	auth.NewAuthController(s.config.Oauth, s.services.userStorage).Mount(s.router)
 	article2.NewArticleController(s.services.articleStorage).Mount(s.router)
+	objectstorage2.NewObjectStorageController(s.services.objectStorage).Mount(s.router)
 
 	return r
 }

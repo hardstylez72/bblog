@@ -4,6 +4,7 @@ import (
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yaml"
 	"github.com/hardstylez72/bblog/internal/api/controller/auth"
+	"github.com/hardstylez72/bblog/internal/objectstorage"
 	"github.com/hardstylez72/bblog/internal/storage"
 	"github.com/hardstylez72/bblog/internal/tracer"
 )
@@ -19,6 +20,11 @@ type Config struct {
 	Tracer    tracer.Config
 	Oauth     auth.Oauth
 	Databases Databases
+	ObjectStorage
+}
+
+type ObjectStorage struct {
+	Minio objectstorage.Config
 }
 
 type Databases struct {
