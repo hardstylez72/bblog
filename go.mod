@@ -1,4 +1,4 @@
-module github.com/hardstylez72/bbckend
+module github.com/hardstylez72/bblog
 
 go 1.13
 

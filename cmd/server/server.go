@@ -5,14 +5,14 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
-	article2 "github.com/hardstylez72/bbckend/internal/api/controller/article"
-	"github.com/hardstylez72/bbckend/internal/api/controller/auth"
-	"github.com/hardstylez72/bbckend/internal/logger"
-	"github.com/hardstylez72/bbckend/internal/storage"
-	"github.com/hardstylez72/bbckend/internal/storage/article"
-	"github.com/hardstylez72/bbckend/internal/storage/middleware2"
-	"github.com/hardstylez72/bbckend/internal/storage/user"
-	"github.com/hardstylez72/bbckend/internal/tracer"
+	article2 "github.com/hardstylez72/bblog/internal/api/controller/article"
+	"github.com/hardstylez72/bblog/internal/api/controller/auth"
+	"github.com/hardstylez72/bblog/internal/logger"
+	"github.com/hardstylez72/bblog/internal/storage"
+	"github.com/hardstylez72/bblog/internal/storage/article"
+	"github.com/hardstylez72/bblog/internal/storage/middleware2"
+	"github.com/hardstylez72/bblog/internal/storage/user"
+	"github.com/hardstylez72/bblog/internal/tracer"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"time"
@@ -108,7 +108,6 @@ func (s *Server) Handler() chi.Router {
 	r.Use(middleware.Timeout(60 * time.Second))
 	r.Use(middleware2.LoginCheck)
 	r.Mount(apiPathPrefix, r)
-
 
 	s.log.Info("app is successfully running")
 

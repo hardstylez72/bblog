@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/hardstylez72/bbckend/internal/storage/user"
+	"github.com/hardstylez72/bblog/internal/storage/user"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"net/http"
@@ -35,6 +35,7 @@ type googleAuth struct {
 	userStore user.Storage
 	httClient *http.Client
 }
+
 const finalRoute = "http://localhost:8080/"
 
 func NewGoogleOAuth2Controller(cfg Config, userStore user.Storage) *googleAuth {
@@ -102,7 +103,7 @@ func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*u
 	}
 	token := oauthToken.(*oauth2.Token)
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, buildGoogleGetUserUrl(token.AccessToken, a.UserInfoURL) , nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, buildGoogleGetUserUrl(token.AccessToken, a.UserInfoURL), nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed getting user info: %s", err.Error())
 	}
@@ -126,8 +127,8 @@ func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*u
 	return convertGoogleUser(user, authTypeGoogle), nil
 }
 
-func  buildGoogleGetUserUrl(token, baseUrl string) string {
-	return baseUrl +"?access_token=" + token
+func buildGoogleGetUserUrl(token, baseUrl string) string {
+	return baseUrl + "?access_token=" + token
 }
 
 func (a *googleAuth) GetToken(ctx context.Context, code string) (interface{}, error) {

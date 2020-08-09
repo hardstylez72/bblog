@@ -2,7 +2,7 @@ package auth
 
 import (
 	"context"
-	"github.com/hardstylez72/bbckend/internal/storage/user"
+	"github.com/hardstylez72/bblog/internal/storage/user"
 	"net/http"
 )
 

@@ -3,8 +3,8 @@ package article
 import (
 	"github.com/go-chi/chi"
 	"github.com/go-playground/validator/v10"
-	"github.com/hardstylez72/bbckend/internal/api/controller"
-	"github.com/hardstylez72/bbckend/internal/storage/article"
+	"github.com/hardstylez72/bblog/internal/api/controller"
+	"github.com/hardstylez72/bblog/internal/storage/article"
 )
 
 type articleController struct {

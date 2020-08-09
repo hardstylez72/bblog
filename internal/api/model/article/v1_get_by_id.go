@@ -1,13 +1,13 @@
 package article
 
 import (
-	"github.com/hardstylez72/bbckend/internal/storage/article"
+	"github.com/hardstylez72/bblog/internal/storage/article"
 	"time"
 )
 
 type ArticleWithBody struct {
 	Article
-	Body      string     `json:"body" validate:"required"`
+	Body string `json:"body" validate:"required"`
 }
 
 type Article struct {
@@ -28,7 +28,7 @@ func NewGetArticleByIdResponse(in *article.Article) *ArticleWithBody {
 			UserId:    in.UserId,
 			CreatedAt: in.CreatedAt,
 		},
-		Body:    in.Body,
+		Body: in.Body,
 	}
 
 	if in.UpdatedAt.Valid {

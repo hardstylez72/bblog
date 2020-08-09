@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"github.com/go-chi/render"
 	"github.com/google/uuid"
-	"github.com/hardstylez72/bbckend/internal/api/controller"
-	ma "github.com/hardstylez72/bbckend/internal/api/model/article"
-	"github.com/hardstylez72/bbckend/internal/storage/article"
+	"github.com/hardstylez72/bblog/internal/api/controller"
+	ma "github.com/hardstylez72/bblog/internal/api/model/article"
+	"github.com/hardstylez72/bblog/internal/storage/article"
 	"net/http"
 )
 

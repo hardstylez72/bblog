@@ -3,8 +3,8 @@ package article
 import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/render"
-	"github.com/hardstylez72/bbckend/internal/api/controller"
-	ma "github.com/hardstylez72/bbckend/internal/api/model/article"
+	"github.com/hardstylez72/bblog/internal/api/controller"
+	ma "github.com/hardstylez72/bblog/internal/api/model/article"
 	"net/http"
 )
 

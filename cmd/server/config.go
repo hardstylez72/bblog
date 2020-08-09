@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/gookit/config/v2"
 	"github.com/gookit/config/v2/yaml"
-	"github.com/hardstylez72/bbckend/internal/api/controller/auth"
-	"github.com/hardstylez72/bbckend/internal/storage"
-	"github.com/hardstylez72/bbckend/internal/tracer"
+	"github.com/hardstylez72/bblog/internal/api/controller/auth"
+	"github.com/hardstylez72/bblog/internal/storage"
+	"github.com/hardstylez72/bblog/internal/tracer"
 )
 
 const (

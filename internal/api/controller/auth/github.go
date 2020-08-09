@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/hardstylez72/bbckend/internal/storage/user"
+	"github.com/hardstylez72/bblog/internal/storage/user"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
 	"net/http"
@@ -93,7 +93,7 @@ func (a *githubAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 
 	_, err = a.userStore.GetUserByExternalId(ctx, extUser.Id, authTypeGithub)
 	if err != nil {
-		if err ==  user.ErrNotFound {
+		if err == user.ErrNotFound {
 			err = a.userStore.SaveUserWithEmail(ctx, extUser)
 			if err != nil {
 				return

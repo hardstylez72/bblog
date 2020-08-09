@@ -2,7 +2,7 @@ package auth
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/hardstylez72/bbckend/internal/storage/user"
+	"github.com/hardstylez72/bblog/internal/storage/user"
 	"net/http"
 	"time"
 )
@@ -53,12 +53,12 @@ func (a *controller) Mount(r chi.Router) {
 	})
 }
 
-func setUserCookie(w http.ResponseWriter, userId string)  {
+func setUserCookie(w http.ResponseWriter, userId string) {
 	http.SetCookie(w, &http.Cookie{
-		Name:       "user_id",
-		Value:      userId,
-		MaxAge: 999999999,
+		Name:    "user_id",
+		Value:   userId,
+		MaxAge:  999999999,
 		Expires: time.Now().Add(time.Hour),
-		Path: "/",
+		Path:    "/",
 	})
 }

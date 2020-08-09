@@ -20,13 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/bbckend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/article/v1.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/article/v1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/article/v1_delete.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_delete.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/article/v1_get_by_id.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_get_by_id.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/article/v1_get_list_by_period.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_get_list_by_period.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/article/v1_save.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_save.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/github.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/github.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/google.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/google.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/model/article/v1_get_by_id.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_by_id.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/model/article/v1_get_list_by_period.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_list_by_period.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +109,7 @@
     <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1T6y10k1QYM4GxFQ8C03Bdv0Zov" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -111,6 +121,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -193,8 +206,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -210,10 +224,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Refactors code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactors code" />
+    <MESSAGE value="Adds ide configs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds ide configs" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+    <auto-vendoring-mode>false</auto-vendoring-mode>
     <environment>
       <map>
         <entry key="GOPROXY" value="direct" />
@@ -226,58 +242,66 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596956547752" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1596956791124">
+    <state x="963" y="257" width="624" height="522" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1596957337465">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1596956791124" />
+    <state x="963" y="257" width="624" height="522" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596957337465" />
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1596957216149">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1596957216149" />
     <state x="946" y="103" width="1069" height="837" key="DiffContextDialog" timestamp="1596957056629">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="946" y="103" width="1069" height="837" key="DiffContextDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596957056629" />
-    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl" timestamp="1596957045660">
+    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl" timestamp="1596957681282">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1596957045660" />
-    <state width="2514" height="265" key="GridCell.Tab.0.bottom" timestamp="1596957109019">
+    <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1596957681282" />
+    <state width="2514" height="265" key="GridCell.Tab.0.bottom" timestamp="1596957643802">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109019" />
-    <state width="2514" height="265" key="GridCell.Tab.0.center" timestamp="1596957109016">
+    <state width="2514" height="265" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596957643802" />
+    <state width="2514" height="265" key="GridCell.Tab.0.center" timestamp="1596957643802">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109016" />
-    <state width="2514" height="265" key="GridCell.Tab.0.left" timestamp="1596957109014">
+    <state width="2514" height="265" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596957643802" />
+    <state width="2514" height="265" key="GridCell.Tab.0.left" timestamp="1596957643801">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109014" />
-    <state width="2514" height="265" key="GridCell.Tab.0.right" timestamp="1596957109018">
+    <state width="2514" height="265" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596957643801" />
+    <state width="2514" height="265" key="GridCell.Tab.0.right" timestamp="1596957643802">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109018" />
-    <state width="2514" height="265" key="GridCell.Tab.1.bottom" timestamp="1596957109025">
+    <state width="2514" height="265" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596957643802" />
+    <state width="2514" height="265" key="GridCell.Tab.1.bottom" timestamp="1596957591512">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109025" />
-    <state width="2514" height="265" key="GridCell.Tab.1.center" timestamp="1596957109022">
+    <state width="2514" height="265" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1596957591512" />
+    <state width="2514" height="265" key="GridCell.Tab.1.center" timestamp="1596957591512">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109022" />
-    <state width="2514" height="265" key="GridCell.Tab.1.left" timestamp="1596957109020">
+    <state width="2514" height="265" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1596957591512" />
+    <state width="2514" height="265" key="GridCell.Tab.1.left" timestamp="1596957591512">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109020" />
-    <state width="2514" height="265" key="GridCell.Tab.1.right" timestamp="1596957109023">
+    <state width="2514" height="265" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1596957591512" />
+    <state width="2514" height="265" key="GridCell.Tab.1.right" timestamp="1596957591512">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="2514" height="265" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596957109023" />
-    <state x="984" y="156" key="SettingsEditor" timestamp="1596957056256">
+    <state width="2514" height="265" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1596957591512" />
+    <state x="984" y="156" key="SettingsEditor" timestamp="1596957684171">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596957056256" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1596957012617">
+    <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596957684171" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1596957219161">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1596957012617" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1596957219161" />
+    <state x="986" y="234" width="587" height="570" key="find.popup" timestamp="1596957635316">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="986" y="234" width="587" height="570" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1596957635316" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

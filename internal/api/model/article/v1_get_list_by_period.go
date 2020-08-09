@@ -1,7 +1,7 @@
 package article
 
 import (
-	"github.com/hardstylez72/bbckend/internal/storage/article"
+	"github.com/hardstylez72/bblog/internal/storage/article"
 )
 
 func NewGetArticlesByPeriodResponse(in []article.Article) []Article {
