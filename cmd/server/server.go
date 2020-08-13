@@ -8,6 +8,7 @@ import (
 	article2 "github.com/hardstylez72/bblog/internal/api/controller/article"
 	"github.com/hardstylez72/bblog/internal/api/controller/auth"
 	objectstorage2 "github.com/hardstylez72/bblog/internal/api/controller/objectstorage"
+	user2 "github.com/hardstylez72/bblog/internal/api/controller/user"
 	"github.com/hardstylez72/bblog/internal/logger"
 	"github.com/hardstylez72/bblog/internal/objectstorage"
 	"github.com/hardstylez72/bblog/internal/storage"
@@ -105,14 +106,13 @@ func (s *Server) Handler() chi.Router {
 	c := cors.Handler(cors.Options{
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
-		AllowedOrigins:   []string{"http://localhost:8080"},
+		AllowedOrigins:   []string{"http://localhost:*"},
 		AllowCredentials: true,
 		Debug:            true,
 	})
 	r.Use(c)
 
 	r.Use(middleware.RequestID)
-
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Timeout(60 * time.Second))
@@ -124,6 +124,7 @@ func (s *Server) Handler() chi.Router {
 	auth.NewAuthController(s.config.Oauth, s.services.userStorage).Mount(s.router)
 	article2.NewArticleController(s.services.articleStorage).Mount(s.router)
 	objectstorage2.NewObjectStorageController(s.services.objectStorage).Mount(s.router)
+	user2.NewUserController(s.services.userStorage).Mount(s.router)
 
 	return r
 }

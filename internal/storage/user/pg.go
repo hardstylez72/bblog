@@ -17,52 +17,7 @@ func NewPGStorage(db *sqlx.DB) *pgStore {
 	}
 }
 
-func (pg *pgStore) SaveUserWithEmail(ctx context.Context, u *UserAgr) error {
-	tx, err := pg.db.BeginTxx(ctx, nil)
-	if err != nil {
-		return err
-	}
-	err = pg.SaveUser(ctx, tx, &u.User)
-	if err != nil {
-		_ = tx.Rollback()
-		return err
-	}
-
-	for _, email := range u.Emails {
-		email.UserId.Valid = true
-		email.UserId.String = u.User.Id
-
-		err = pg.SaveEmail(ctx, tx, &email)
-		if err != nil {
-			_ = tx.Rollback()
-			return err
-		}
-	}
-
-	return tx.Commit()
-}
-
-func (pg *pgStore) SaveEmail(ctx context.Context, tx *sqlx.Tx, u *Email) error {
-
-	query := `
-		insert into bb.user_emails
-		(
-		  "id",
-		  address,
-		  user_id
-		)
-		  values
-		(
-		    :id,
-		    :address,
-		    :user_id
-	    );`
-
-	_, err := tx.NamedExecContext(ctx, query, u)
-	return err
-}
-
-func (pg *pgStore) SaveUser(ctx context.Context, tx *sqlx.Tx, u *User) error {
+func (pg *pgStore) SaveUser(ctx context.Context, u *User) error {
 
 	query := `
 		insert into bb.users
@@ -72,10 +27,10 @@ func (pg *pgStore) SaveUser(ctx context.Context, tx *sqlx.Tx, u *User) error {
 		  "external_id",
 		  "external_auth_type",
 		  "login",
-		  "first_name",
-		  "last_name",
-		  "middle_name",
-		  "is_banned"
+		  "name",
+		  "is_banned",
+		  "role_id",
+		  "email"
 		)
 		  values
 		(
@@ -84,19 +39,29 @@ func (pg *pgStore) SaveUser(ctx context.Context, tx *sqlx.Tx, u *User) error {
 		    :external_id,
 		    :external_auth_type,
 		    :login,
-		    :first_name,
-		    :last_name,
-		    :middle_name,
-		    :is_banned
+		    :name,
+		    :is_banned,
+		    (select id from bb.roles where code = :role_code),
+		    :email
 	    );`
 
-	_, err := tx.NamedExecContext(ctx, query, u)
+	_, err := pg.db.NamedExecContext(ctx, query, u)
 	return err
 }
 
 func (pg *pgStore) GetUserById(ctx context.Context, id string) (*User, error) {
 
-	query := `select * from bb.users u where u.id = $1`
+	query := `select id,
+				   registered_at,
+				   external_auth_type,
+				   external_id,
+				   email,
+				   login,
+				   name,
+				   is_banned,
+				   (select code from bb.roles where id = role_id)  as role_code
+			    from bb.users u 
+  			   where u.id = $1`
 
 	u := new(User)
 	err := pg.db.GetContext(ctx, u, query, id)
@@ -112,7 +77,15 @@ func (pg *pgStore) GetUserById(ctx context.Context, id string) (*User, error) {
 
 func (pg *pgStore) GetUserByExternalId(ctx context.Context, id, authTypeId string) (*User, error) {
 
-	query := `select *
+	query := `select id,
+				   registered_at,
+				   external_auth_type,
+				   external_id,
+				   email,
+				   login,
+				   name,
+				   is_banned,
+				   (select code from bb.roles where id = role_id)  as role_code
  			    from bb.users u
 		       where u.external_id = $1
 		         and u.external_auth_type = $2;`

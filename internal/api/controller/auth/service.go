@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"context"
 	"github.com/go-chi/chi"
 	"github.com/hardstylez72/bblog/internal/storage/user"
 	"net/http"
@@ -20,12 +21,18 @@ type Oauth struct {
 	Github Config
 }
 
+type UserRedirects struct {
+	OnSuccess string
+	OnFailure string
+}
+
 type Config struct {
-	RedirectURL  string
-	ClientID     string
-	ClientSecret string
-	Scopes       []string
-	UserInfoURL  string
+	RedirectURL   string
+	ClientID      string
+	ClientSecret  string
+	Scopes        []string
+	UserInfoURL   string
+	UserRedirects UserRedirects
 }
 
 var (
@@ -51,6 +58,27 @@ func (a *controller) Mount(r chi.Router) {
 		r.HandleFunc("/github/oauth/login", a.github.HandleLogin)
 		r.HandleFunc("/github/oauth/callback", a.github.HandleCallback)
 	})
+}
+
+func saveUser(ctx context.Context, userStore user.Storage, extUser *user.User, authType string) (userId string, err error) {
+
+	u, err := userStore.GetUserByExternalId(ctx, extUser.ExternalId, authType)
+	if err != nil {
+		if err == user.ErrNotFound {
+			err = userStore.SaveUser(ctx, extUser)
+			if err != nil {
+				return "", err
+			}
+		} else {
+			return "", err
+		}
+	}
+	u, err = userStore.GetUserByExternalId(ctx, extUser.ExternalId, authType)
+	if err != nil {
+		return "", err
+	}
+
+	return u.Id, nil
 }
 
 func setUserCookie(w http.ResponseWriter, userId string) {

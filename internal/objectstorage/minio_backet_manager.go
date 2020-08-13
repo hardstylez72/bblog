@@ -42,6 +42,9 @@ func (m *minioBucketManager) ResolveBucket(ctx context.Context, t time.Time) (st
 
 func (m *minioBucketManager) ResolvePublicBucket(ctx context.Context, t time.Time) (string, error) {
 	bucketName, err := m.ResolveBucket(ctx, t)
+	if err != nil {
+		return "", err
+	}
 
 	policy := `{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"AWS":["*"]},"Action":["s3:GetBucketLocation","s3:ListBucket"],"Resource":["arn:aws:s3:::` + bucketName + `"]},{"Effect":"Allow","Principal":{"AWS":["*"]},"Action":["s3:GetObject"],"Resource":["arn:aws:s3:::` + bucketName + `/*"]}]}`
 

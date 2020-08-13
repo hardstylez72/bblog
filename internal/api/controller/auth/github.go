@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
@@ -53,11 +52,11 @@ type GithubOauthUserData struct {
 }
 
 type githubAuth struct {
-	OauthConfig *oauth2.Config
-	UserInfoURL string
-
-	userStore user.Storage
-	httClient *http.Client
+	OauthConfig   *oauth2.Config
+	UserInfoURL   string
+	UserRedirects UserRedirects
+	userStore     user.Storage
+	httClient     *http.Client
 }
 
 func NewGithubOAuth2Controller(cfg Config, userStore user.Storage) *githubAuth {
@@ -69,9 +68,10 @@ func NewGithubOAuth2Controller(cfg Config, userStore user.Storage) *githubAuth {
 			Scopes:       cfg.Scopes,
 			Endpoint:     github.Endpoint,
 		},
-		UserInfoURL: cfg.UserInfoURL,
-		userStore:   userStore,
-		httClient:   &http.Client{},
+		UserRedirects: cfg.UserRedirects,
+		UserInfoURL:   cfg.UserInfoURL,
+		userStore:     userStore,
+		httClient:     &http.Client{},
 	}
 }
 
@@ -85,33 +85,28 @@ func (a *githubAuth) HandleLogin(w http.ResponseWriter, r *http.Request) {
 func (a *githubAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	extUser, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
+	githubUser, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
 	if err != nil {
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
 
-	_, err = a.userStore.GetUserByExternalId(ctx, extUser.Id, authTypeGithub)
+	userId, err := saveUser(ctx, a.userStore, githubUser, authTypeGithub)
 	if err != nil {
-		if err == user.ErrNotFound {
-			err = a.userStore.SaveUserWithEmail(ctx, extUser)
-			if err != nil {
-				return
-				// todo: handle
-			}
-		} else {
-			return
-		}
+		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
+		return
 	}
 
-	http.Redirect(w, r, "/protected", http.StatusTemporaryRedirect)
+	setUserCookie(w, userId)
+
+	http.Redirect(w, r, a.UserRedirects.OnSuccess, http.StatusTemporaryRedirect)
 }
 
 func (a *githubAuth) GetToken(ctx context.Context, code string) (interface{}, error) {
 	return a.OauthConfig.Exchange(ctx, code)
 }
 
-func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*user.UserAgr, error) {
+func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*user.User, error) {
 	if !rm[state] {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
@@ -143,44 +138,27 @@ func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*u
 	return convertGithubUser(user, authTypeGithub), nil
 }
 
-func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string) *user.UserAgr {
+func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string) *user.User {
 	userId := uuid.New().String()
 
 	u := user.User{
-		Id: userId,
-		ExternalId: sql.NullString{
-			String: strconv.Itoa(githubUser.ID),
-			Valid:  true,
-		},
-		ExternalAuthType: sql.NullString{
-			String: authTypeYandexId,
-			Valid:  true,
-		},
-		Login: sql.NullString{
-			String: githubUser.Login,
-			Valid:  true,
-		},
-		FirstName:  sql.NullString{},
-		LastName:   sql.NullString{},
-		MiddleName: sql.NullString{},
-		IsBanned:   sql.NullBool{},
+		RoleCode:         UserRoleCode,
+		Id:               userId,
+		ExternalId:       strconv.Itoa(githubUser.ID),
+		ExternalAuthType: authTypeYandexId,
+		IsBanned:         false,
+		RegisteredAt:     time.Now(),
 	}
 
-	emails := make([]user.Email, 0)
-	emails = append(emails, user.Email{
-		Id: uuid.New().String(),
-		UserId: sql.NullString{
-			String: userId,
-			Valid:  true,
-		},
-		Address: sql.NullString{
-			String: githubUser.Email,
-			Valid:  true,
-		},
-	})
-
-	return &user.UserAgr{
-		User:   u,
-		Emails: emails,
+	if githubUser.Email != "" {
+		u.Email.String = githubUser.Email
+		u.Email.Valid = true
 	}
+
+	if githubUser.Login != "" {
+		u.Login.String = githubUser.Login
+		u.Login.Valid = true
+	}
+
+	return &u
 }

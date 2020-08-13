@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"database/sql"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,6 +10,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"net/http"
+	"time"
 )
 
 const (
@@ -29,11 +29,11 @@ type GoogleOauthUserData struct {
 }
 
 type googleAuth struct {
-	Oauth2Config *oauth2.Config
-	UserInfoURL  string
-
-	userStore user.Storage
-	httClient *http.Client
+	Oauth2Config  *oauth2.Config
+	UserInfoURL   string
+	UserRedirects UserRedirects
+	userStore     user.Storage
+	httClient     *http.Client
 }
 
 const finalRoute = "http://localhost:8080/"
@@ -48,9 +48,10 @@ func NewGoogleOAuth2Controller(cfg Config, userStore user.Storage) *googleAuth {
 			Scopes:       cfg.Scopes,
 			Endpoint:     google.Endpoint,
 		},
-		UserInfoURL: cfg.UserInfoURL,
-		userStore:   userStore,
-		httClient:   &http.Client{},
+		UserRedirects: cfg.UserRedirects,
+		UserInfoURL:   cfg.UserInfoURL,
+		userStore:     userStore,
+		httClient:     &http.Client{},
 	}
 }
 
@@ -65,35 +66,25 @@ func (a *googleAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 
 	ctx := r.Context()
 
-	user, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
+	googleUser, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
 	if err != nil {
 		fmt.Println(err.Error())
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
 
-	var userId string
-
-	u, err := a.userStore.GetUserByExternalId(ctx, user.ExternalId.String, authTypeGoogle)
+	userId, err := saveUser(ctx, a.userStore, googleUser, authTypeGoogle)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			err = a.userStore.SaveUserWithEmail(ctx, user)
-			if err != nil {
-				return
-			}
-			userId = user.Id
-		} else {
-			return
-		}
+		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
+		return
 	}
-	userId = u.Id
 
 	setUserCookie(w, userId)
 
-	http.Redirect(w, r, finalRoute, http.StatusTemporaryRedirect)
+	http.Redirect(w, r, a.UserRedirects.OnSuccess, http.StatusTemporaryRedirect)
 }
 
-func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*user.UserAgr, error) {
+func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*user.User, error) {
 	if !rm[state] {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
@@ -135,47 +126,26 @@ func (a *googleAuth) GetToken(ctx context.Context, code string) (interface{}, er
 	return a.Oauth2Config.Exchange(ctx, code)
 }
 
-func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string) *user.UserAgr {
+func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string) *user.User {
 	userId := uuid.New().String()
 
 	u := user.User{
-		Id: userId,
-		ExternalId: sql.NullString{
-			String: googleUser.ID,
-			Valid:  true,
-		},
-		ExternalAuthType: sql.NullString{
-			String: authTypeGoogleId,
-			Valid:  true,
-		},
-		Login: sql.NullString{},
-		FirstName: sql.NullString{
-			String: googleUser.GivenName,
-			Valid:  true,
-		},
-		LastName: sql.NullString{
-			String: googleUser.FamilyName,
-			Valid:  true,
-		},
-		MiddleName: sql.NullString{},
-		IsBanned:   sql.NullBool{},
+		RoleCode:         UserRoleCode,
+		Id:               userId,
+		ExternalId:       googleUser.ID,
+		ExternalAuthType: authTypeGoogleId,
+		IsBanned:         false,
+		RegisteredAt:     time.Now(),
 	}
 
-	emails := make([]user.Email, 0)
-	emails = append(emails, user.Email{
-		Id: uuid.New().String(),
-		UserId: sql.NullString{
-			String: userId,
-			Valid:  true,
-		},
-		Address: sql.NullString{
-			String: googleUser.Email,
-			Valid:  true,
-		},
-	})
-
-	return &user.UserAgr{
-		User:   u,
-		Emails: emails,
+	if googleUser.Email != "" {
+		u.Email.String = googleUser.Email
+		u.Email.Valid = true
 	}
+
+	if googleUser.Name != "" {
+		u.Name.String = googleUser.FamilyName + " " + googleUser.Name
+		u.Name.Valid = true
+	}
+	return &u
 }

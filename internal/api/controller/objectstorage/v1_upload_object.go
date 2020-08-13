@@ -26,13 +26,6 @@ type UploadObjectResponse struct {
 	Files []UploadedFile `json:"files"`
 }
 
-func ErrObjectTooBig(err error) controller.Error {
-	return controller.Error{
-		Inner:   err,
-		Message: "object is too big, max size is: " + strconv.Itoa(numberOfMegabytes) + " mb",
-	}
-}
-
 func (c objectStorageController) UploadObjectHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
@@ -83,6 +76,13 @@ func (c objectStorageController) UploadObjectHandler(w http.ResponseWriter, r *h
 	}
 
 	render.JSON(w, r, responseBody)
+}
+
+func ErrObjectTooBig(err error) controller.Error {
+	return controller.Error{
+		Inner:   err,
+		Message: "object is too big, max size is: " + strconv.Itoa(numberOfMegabytes) + " mb",
+	}
 }
 
 func convertAs(fileHeader *multipart.FileHeader, source multipart.File) objectstorage.Image {
