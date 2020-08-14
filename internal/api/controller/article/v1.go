@@ -31,6 +31,7 @@ func (c articleController) Mount(r chi.Router) {
 		r.Get("/{id}", c.GetArticleByIdHandler)
 		r.Delete("/{id}", c.DeleteArticleByIdHandler)
 		r.Post("/", c.SaveArticleHandler)
+		r.Put("/", c.UpdateArticleHandler)
 	})
 	r.Get("/v1/articles", c.GetArticlesByPeriodHandler)
 }

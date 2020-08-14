@@ -19,6 +19,7 @@ type Article struct {
 
 type Storage interface {
 	SaveArticle(ctx context.Context, article *Article) (id string, err error)
+	UpdateArticle(ctx context.Context, article *Article) (id string, err error)
 
 	GetArticleById(ctx context.Context, id string) (*Article, error)
 	GetArticleIdsByPeriod(ctx context.Context, from, to time.Time) ([]string, error)

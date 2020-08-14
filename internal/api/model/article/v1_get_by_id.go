@@ -23,6 +23,7 @@ type Article struct {
 func NewGetArticleByIdResponse(in *article.Article) *ArticleWithBody {
 	out := &ArticleWithBody{
 		Article: Article{
+			Preface:   in.Preface,
 			Id:        in.Id,
 			Title:     in.Title,
 			UserId:    in.UserId,

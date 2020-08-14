@@ -12,7 +12,21 @@ type pgStore struct {
 }
 
 func NewPgStorage(db *sqlx.DB) *pgStore {
-	return &pgStore{db : db}
+	return &pgStore{db: db}
+}
+
+func (p pgStore) UpdateArticle(ctx context.Context, article *Article) (id string, err error) {
+	query := `
+	   update bb.articles
+			set body = :body,
+			    title = :title,
+			    preface = :preface,
+			    updated_at = now()
+     	where id = :id
+	`
+	_, err = p.db.NamedExecContext(ctx, query, article)
+
+	return article.Id, err
 }
 
 func (p pgStore) SaveArticle(ctx context.Context, article *Article) (id string, err error) {
@@ -62,7 +76,7 @@ func (p pgStore) GetArticleIdsByPeriod(ctx context.Context, from, to time.Time) 
 	return ids, nil
 }
 
-func (p pgStore) GetArticlesByPeriod(ctx context.Context, from, to time.Time) ([]Article, error)  {
+func (p pgStore) GetArticlesByPeriod(ctx context.Context, from, to time.Time) ([]Article, error) {
 	query := `
 	    select id, preface, title, user_id, created_at, updated_at, deleted_at
 	      from bb.articles
@@ -76,7 +90,6 @@ func (p pgStore) GetArticlesByPeriod(ctx context.Context, from, to time.Time) ([
 	return articles, nil
 }
 
-
 func (p pgStore) DeleteArticleById(ctx context.Context, id string) error {
 	query := `
 	    update bb.articles
@@ -85,6 +98,5 @@ func (p pgStore) DeleteArticleById(ctx context.Context, id string) error {
 	`
 	_, err := p.db.ExecContext(ctx, query, id)
 
-	return  err
+	return err
 }
-

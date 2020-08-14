@@ -23,25 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/user/v1.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/controller/user/v1_get_by_id.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/api/model/user/v1_get_by_id.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/00002_table_roles.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/00005_table_api_access_rules.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/controller/article/v1_update.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/api/model/article/v1_update.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/server/config.example.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/config.example.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/github.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/github.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/google.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/google.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/interface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/api/controller/objectstorage/v1_upload_object.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/objectstorage/v1_upload_object.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/objectstorage/minio_backet_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/objectstorage/minio_backet_manager.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/storage/user/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/user/interface.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/storage/user/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/user/pg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/00002_table_users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00003_table_users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/00003_table_user_emails.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/article/v1.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/article/v1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/model/article/v1_get_by_id.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/model/article/v1_get_by_id.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/article/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/article/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/article/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/article/pg.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,17 +121,17 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/migrations" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/internal/api/model/article" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="goland.project.structure" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/api/model/article" />
+      <recent name="$PROJECT_DIR$/internal/api/controller/article" />
       <recent name="$PROJECT_DIR$/migrations" />
       <recent name="$PROJECT_DIR$/internal/api/controller/objectstorage" />
       <recent name="$PROJECT_DIR$/internal/objectstorage/testdata" />
-      <recent name="$PROJECT_DIR$/internal/controller" />
-      <recent name="$PROJECT_DIR$/migrations/src/v0.0.1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -233,15 +223,30 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.dev.yml.minio: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="minio" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.dev.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Docker.bbckend/docker-compose.dev.yml.postgres: Compose Deployment" />
       <item itemvalue="Go Build.go build github.com/hardstylez72/bbckend/cmd/server" />
       <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/cmd/server" />
       <item itemvalue="Go Test.TestNewMinioStorage in github.com/hardstylez72/bblog/internal/objectstorage" />
+      <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/cmd/server" />
+        <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
         <item itemvalue="Go Build.go build github.com/hardstylez72/bbckend/cmd/server" />
         <item itemvalue="Go Test.TestNewMinioStorage in github.com/hardstylez72/bblog/internal/objectstorage" />
         <item itemvalue="Docker.bbckend/docker-compose.dev.yml.postgres: Compose Deployment" />
@@ -268,7 +273,8 @@
     <MESSAGE value="Refactors code" />
     <MESSAGE value="Adds ide configs" />
     <MESSAGE value="Changes project routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes project routes" />
+    <MESSAGE value="Adds roles and fixes auth redirects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds roles and fixes auth redirects" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -289,10 +295,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="963" y="257" width="624" height="522" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596957337465" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1596957783254">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1597337929662">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1596957783254" />
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1597337929662" />
     <state width="792" height="485" key="DebuggerActiveHint" timestamp="1597325766337">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -305,38 +311,38 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1597313968955" />
-    <state width="1233" height="264" key="GridCell.Tab.0.bottom" timestamp="1597336978646">
+    <state width="1233" height="264" key="GridCell.Tab.0.bottom" timestamp="1597397351715">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1597336978646" />
-    <state width="1233" height="264" key="GridCell.Tab.0.center" timestamp="1597336978645">
+    <state width="1233" height="264" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1597397351715" />
+    <state width="1233" height="264" key="GridCell.Tab.0.center" timestamp="1597397351714">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1597336978645" />
-    <state width="1233" height="264" key="GridCell.Tab.0.left" timestamp="1597336978645">
+    <state width="1233" height="264" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1597397351714" />
+    <state width="1233" height="264" key="GridCell.Tab.0.left" timestamp="1597397351714">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1597336978645" />
-    <state width="1233" height="264" key="GridCell.Tab.0.right" timestamp="1597336978646">
+    <state width="1233" height="264" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1597397351714" />
+    <state width="1233" height="264" key="GridCell.Tab.0.right" timestamp="1597397351715">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1597336978646" />
-    <state width="1233" height="264" key="GridCell.Tab.1.bottom" timestamp="1597337748536">
+    <state width="1233" height="264" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1597397351715" />
+    <state width="1233" height="264" key="GridCell.Tab.1.bottom" timestamp="1597397353490">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1597337748536" />
-    <state width="1233" height="264" key="GridCell.Tab.1.center" timestamp="1597337748535">
+    <state width="1233" height="264" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1597397353490" />
+    <state width="1233" height="264" key="GridCell.Tab.1.center" timestamp="1597397353489">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1597337748535" />
-    <state width="1233" height="264" key="GridCell.Tab.1.left" timestamp="1597337748535">
+    <state width="1233" height="264" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1597397353489" />
+    <state width="1233" height="264" key="GridCell.Tab.1.left" timestamp="1597397353488">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1597337748535" />
-    <state width="1233" height="264" key="GridCell.Tab.1.right" timestamp="1597337748536">
+    <state width="1233" height="264" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1597397353488" />
+    <state width="1233" height="264" key="GridCell.Tab.1.right" timestamp="1597397353489">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1597337748536" />
+    <state width="1233" height="264" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1597397353489" />
     <state x="414" y="215" width="431" height="608" key="RollbackChangesDialog" timestamp="1597317641182">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -345,14 +351,14 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596957684171" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1596957786272">
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1597337933284">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1596957786272" />
-    <state x="986" y="234" width="587" height="570" key="find.popup" timestamp="1597324774275">
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1597337933284" />
+    <state x="986" y="234" width="587" height="570" key="find.popup" timestamp="1597410090974">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="986" y="234" width="587" height="570" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1597324774275" />
+    <state x="986" y="234" width="587" height="570" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1597410090974" />
     <state x="943" y="228" width="672" height="678" key="search.everywhere.popup" timestamp="1597320189396">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -390,11 +396,6 @@
           <url>file://$PROJECT_DIR$/internal/objectstorage/minio_storage.go</url>
           <line>19</line>
           <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/api/controller/auth/github.go</url>
-          <line>112</line>
-          <option name="timeStamp" value="103" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
