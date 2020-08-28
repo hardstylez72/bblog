@@ -17,7 +17,10 @@ func NewMinioBucketManager(client *minio.Client) *minioBucketManager {
 }
 
 func (m *minioBucketManager) ResolveBucket(ctx context.Context, t time.Time) (string, error) {
-	bucketName := formBucketName(t)
+	return m.resolveBucket(ctx, formBucketName(t))
+}
+
+func (m *minioBucketManager) resolveBucket(ctx context.Context, bucketName string) (string, error) {
 	isBucketExists, err := m.client.BucketExists(ctx, bucketName)
 	if err != nil {
 		return "", err
@@ -41,7 +44,9 @@ func (m *minioBucketManager) ResolveBucket(ctx context.Context, t time.Time) (st
 }
 
 func (m *minioBucketManager) ResolvePublicBucket(ctx context.Context, t time.Time) (string, error) {
-	bucketName, err := m.ResolveBucket(ctx, t)
+	bucketName := formPublicBucketName(t)
+
+	bucketName, err := m.resolveBucket(ctx, bucketName)
 	if err != nil {
 		return "", err
 	}
@@ -57,4 +62,8 @@ func (m *minioBucketManager) ResolvePublicBucket(ctx context.Context, t time.Tim
 
 func formBucketName(t time.Time) string {
 	return t.Format("2006")
+}
+
+func formPublicBucketName(t time.Time) string {
+	return t.Format("2006-public")
 }

@@ -89,8 +89,8 @@ func convertAs(fileHeader *multipart.FileHeader, source multipart.File) objectst
 	return objectstorage.Image{
 		Name:      fileHeader.Filename,
 		CreatedAt: time.Now(),
-		MimeType:  fileHeader.Header.Get("dd"),
-		IsPublic:  false,
+		MimeType:  fileHeader.Header.Get("Content-Type"),
+		IsPublic:  true,
 		Source:    source,
 	}
 }
