@@ -60,7 +60,7 @@ func (a *controller) Mount(r chi.Router) {
 	})
 }
 
-func saveUser(ctx context.Context, userStore user.Storage, extUser *user.User, authType string) (userId string, err error) {
+func resolveUser(ctx context.Context, userStore user.Storage, extUser *user.User, authType string) (userId string, err error) {
 
 	u, err := userStore.GetUserByExternalId(ctx, extUser.ExternalId, authType)
 	if err != nil {

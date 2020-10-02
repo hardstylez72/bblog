@@ -13,8 +13,6 @@ type User struct {
 	Login            *string   `json:"login"`
 	Name             *string   `json:"name"`
 	Email            *string   `json:"email"`
-	IsBanned         bool      `json:"isBanned"`
-	RoleId           string    `json:"roleId"`
 }
 
 func NewGetUserByIdResponse(u *user.User) *User {
@@ -26,8 +24,6 @@ func NewGetUserByIdResponse(u *user.User) *User {
 		Login:            nil,
 		Name:             nil,
 		Email:            nil,
-		IsBanned:         u.IsBanned,
-		RoleId:           u.RoleCode,
 	}
 
 	if u.Name.Valid {

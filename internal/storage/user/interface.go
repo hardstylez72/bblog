@@ -7,19 +7,21 @@ import (
 )
 
 type User struct {
-	Id               string         `db:"id"`
-	RegisteredAt     time.Time      `db:"registered_at"`
-	ExternalId       string         `db:"external_id"`
-	ExternalAuthType string         `db:"external_auth_type"`
-	Login            sql.NullString `db:"login"`
-	Name             sql.NullString `db:"name"`
-	Email            sql.NullString `db:"email"`
-	IsBanned         bool           `db:"is_banned"`
-	RoleCode         string         `db:"role_code"`
+	Id         int    `db:"id"`
+	AuthType   string `db:"auth_type"`
+	ExternalId string `db:"external_id"`
+
+	Email sql.NullString `db:"email"`
+	Login sql.NullString `db:"login"`
+	Name  sql.NullString `db:"name"`
+
+	CreatedAt time.Time    `db:"created_at"`
+	UpdatedAt sql.NullTime `db:"updated_at"`
+	DeletedAt sql.NullTime `db:"deleted_at"`
 }
 
 type Storage interface {
-	SaveUser(ctx context.Context, u *User) error
-	GetUserById(ctx context.Context, id string) (*User, error)
-	GetUserByExternalId(ctx context.Context, id, authTypeId string) (*User, error)
+	SaveUser(ctx context.Context, user *User) error
+	GetUserById(ctx context.Context, id int) (*User, error)
+	GetUserByExternalId(ctx context.Context, userExternalId, authTypeId string) (*User, error)
 }

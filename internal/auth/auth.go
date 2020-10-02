@@ -1,10 +1,8 @@
-package middleware2
+package auth
 
-import (
-	"net/http"
-)
+import "net/http"
 
-func LoginCheck(next http.Handler) http.Handler {
+func CheckUserPermissions(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 

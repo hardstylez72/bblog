@@ -20,7 +20,7 @@ func NewMinioStorage(client *minio.Client) *minioStorage {
 	}
 }
 
-func (s *minioStorage) Upload(ctx context.Context, image Image) (url string, err error) {
+func (s *minioStorage) UploadImage(ctx context.Context, image Image) (url string, err error) {
 
 	var bucketName string
 	if image.IsPublic {

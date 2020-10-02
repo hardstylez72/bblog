@@ -23,9 +23,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/auth/cookie.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/ad/interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/storage/ad/pg.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/00004_table_users_groups.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/00005_table_routes.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/00006_table_groups_routes.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/github.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/github.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/google.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/google.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/controller/auth/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/auth/service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/api/controller/objectstorage/v1_upload_object.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/controller/objectstorage/v1_upload_object.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/objectstorage/minio_backet_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/objectstorage/minio_backet_manager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/api/model/user/v1_get_by_id.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/api/model/user/v1_get_by_id.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/objectstorage/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/objectstorage/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/objectstorage/minio_learning_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/objectstorage/minio_learning_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/objectstorage/minio_storage.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/objectstorage/minio_storage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/article/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/article/pg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/middleware2/logout.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/auth/auth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/pg_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/user/interface.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/user/interface.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/storage/user/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/user/pg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/00001_schema_bb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00001_schema_ad.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/00002_table_roles.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00002_table_groups.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/00003_table_users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00003_table_users.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/00004_table_articles.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/00007_table_articles.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/00005_table_api_access_rules.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/guide.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,21 +141,21 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/internal/api/model/article" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/internal/storage/ad" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="goland.project.structure" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/internal/api/model/article" />
-      <recent name="$PROJECT_DIR$/internal/api/controller/article" />
-      <recent name="$PROJECT_DIR$/migrations" />
-      <recent name="$PROJECT_DIR$/internal/api/controller/objectstorage" />
-      <recent name="$PROJECT_DIR$/internal/objectstorage/testdata" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/migrations/src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/storage/ad" />
+      <recent name="$PROJECT_DIR$/migrations" />
+      <recent name="$PROJECT_DIR$/internal/api/model/article" />
+      <recent name="$PROJECT_DIR$/internal/api/controller/article" />
+      <recent name="$PROJECT_DIR$/internal/api/controller/objectstorage" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/hardstylez72/bblog/cmd/server">
@@ -165,7 +191,6 @@
     <configuration name="go build github.com/hardstylez72/bblog/cmd/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="bblog" />
       <working_directory value="$PROJECT_DIR$" />
-      <parameters value="-c=$PROJECT_DIR$/cmd/server/config.example.yaml" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -232,10 +257,10 @@
     </configuration>
     <list>
       <item itemvalue="Docker.bbckend/docker-compose.dev.yml.postgres: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
       <item itemvalue="Go Build.go build github.com/hardstylez72/bbckend/cmd/server" />
       <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/cmd/server" />
       <item itemvalue="Go Test.TestNewMinioStorage in github.com/hardstylez72/bblog/internal/objectstorage" />
-      <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
@@ -269,7 +294,8 @@
     <MESSAGE value="Changes project routes" />
     <MESSAGE value="Adds roles and fixes auth redirects" />
     <MESSAGE value="Adds article update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds article update" />
+    <MESSAGE value="Fixes header name" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes header name" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -282,22 +308,28 @@
     <proxy>direct</proxy>
   </component>
   <component name="WindowStateProjectService">
-    <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597315157676">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="2302" y="275" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599217387844">
+      <screen x="0" y="0" width="3840" height="1040" />
     </state>
-    <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1597315157676" />
+    <state x="938" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1598598316321" />
+    <state x="2302" y="275" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1599217387844" />
+    <state x="302" y="323" width="471" height="391" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601659314025">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="402" y="323" width="465" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1598591166368" />
+    <state x="302" y="323" width="471" height="391" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601659314025" />
     <state x="963" y="257" width="624" height="522" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1596957337465">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="963" y="257" width="624" height="522" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1596957337465" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1597410363508">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1598589954803">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1597410363508" />
-    <state width="792" height="485" key="DebuggerActiveHint" timestamp="1597475625344">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1598589954803" />
+    <state width="792" height="485" key="DebuggerActiveHint" timestamp="1598592165689">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="792" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1597475625344" />
+    <state width="792" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1598592165689" />
     <state x="946" y="103" width="1069" height="837" key="DiffContextDialog" timestamp="1597317702476">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -306,38 +338,62 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1263" y="279" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1597313968955" />
-    <state width="1233" height="264" key="GridCell.Tab.0.bottom" timestamp="1598588699788">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1480" height="263" key="GridCell.Tab.0.bottom" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699788" />
-    <state width="1233" height="264" key="GridCell.Tab.0.center" timestamp="1598588699787">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077307" />
+    <state width="1874" height="264" key="GridCell.Tab.0.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1599217443223" />
+    <state width="1480" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
+    <state width="1480" height="263" key="GridCell.Tab.0.center" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699787" />
-    <state width="1233" height="264" key="GridCell.Tab.0.left" timestamp="1598588699787">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077306" />
+    <state width="1874" height="264" key="GridCell.Tab.0.center/0.0.3840.1040@0.0.3840.1040" timestamp="1599217443220" />
+    <state width="1480" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
+    <state width="1480" height="263" key="GridCell.Tab.0.left" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699787" />
-    <state width="1233" height="264" key="GridCell.Tab.0.right" timestamp="1598588699787">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077306" />
+    <state width="1874" height="264" key="GridCell.Tab.0.left/0.0.3840.1040@0.0.3840.1040" timestamp="1599217443218" />
+    <state width="1480" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
+    <state width="1480" height="263" key="GridCell.Tab.0.right" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699787" />
-    <state width="1233" height="264" key="GridCell.Tab.1.bottom" timestamp="1598588699678">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077307" />
+    <state width="1874" height="264" key="GridCell.Tab.0.right/0.0.3840.1040@0.0.3840.1040" timestamp="1599217443222" />
+    <state width="1480" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
+    <state width="1480" height="263" key="GridCell.Tab.1.bottom" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699678" />
-    <state width="1233" height="264" key="GridCell.Tab.1.center" timestamp="1598588699678">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077308" />
+    <state width="1874" height="264" key="GridCell.Tab.1.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1599217391565" />
+    <state width="1480" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509497" />
+    <state width="1480" height="263" key="GridCell.Tab.1.center" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699678" />
-    <state width="1233" height="264" key="GridCell.Tab.1.left" timestamp="1598588699677">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077307" />
+    <state width="1874" height="264" key="GridCell.Tab.1.center/0.0.3840.1040@0.0.3840.1040" timestamp="1599217391565" />
+    <state width="1480" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
+    <state width="1480" height="263" key="GridCell.Tab.1.left" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699677" />
-    <state width="1233" height="264" key="GridCell.Tab.1.right" timestamp="1598588699678">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state width="1233" height="264" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077307" />
+    <state width="1874" height="264" key="GridCell.Tab.1.left/0.0.3840.1040@0.0.3840.1040" timestamp="1599217391564" />
+    <state width="1480" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
+    <state width="1480" height="263" key="GridCell.Tab.1.right" timestamp="1601658727614">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1233" height="264" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1598588699678" />
+    <state width="1233" height="264" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1598597077308" />
+    <state width="1874" height="264" key="GridCell.Tab.1.right/0.0.3840.1040@0.0.3840.1040" timestamp="1599217391565" />
+    <state width="1480" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
+    <state width="1233" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
     <state x="414" y="215" width="431" height="608" key="RollbackChangesDialog" timestamp="1597317641182">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -346,14 +402,15 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="984" y="156" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1596957684171" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1597410367493">
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1598589958704">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1597410367493" />
-    <state x="986" y="234" width="587" height="570" key="find.popup" timestamp="1597410090974">
-      <screen x="0" y="0" width="2560" height="1040" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1598589958704" />
+    <state x="740" y="234" width="557" height="570" key="find.popup" timestamp="1601660012903">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="986" y="234" width="587" height="570" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1597410090974" />
+    <state x="740" y="234" width="557" height="570" key="find.popup/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660012903" />
     <state x="943" y="228" width="672" height="678" key="search.everywhere.popup" timestamp="1597320189396">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

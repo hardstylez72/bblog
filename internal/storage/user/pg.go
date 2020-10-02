@@ -20,47 +20,49 @@ func NewPGStorage(db *sqlx.DB) *pgStore {
 func (pg *pgStore) SaveUser(ctx context.Context, u *User) error {
 
 	query := `
-		insert into bb.users
+		insert into ad.users
 		(
 		  "id",
-		  "registered_at",
 		  "external_id",
-		  "external_auth_type",
+		  "auth_type",
+		 
 		  "login",
 		  "name",
-		  "is_banned",
-		  "role_id",
-		  "email"
+		  "email",
+		  
+		  created_at
 		)
 		  values
 		(
 		    :id,
-		    default,
 		    :external_id,
-		    :external_auth_type,
+		    :auth_type,
+		 
 		    :login,
 		    :name,
-		    :is_banned,
-		    (select id from bb.roles where code = :role_code),
-		    :email
+		    :email,
+		 
+		    default
 	    );`
 
 	_, err := pg.db.NamedExecContext(ctx, query, u)
 	return err
 }
 
-func (pg *pgStore) GetUserById(ctx context.Context, id string) (*User, error) {
+func (pg *pgStore) GetUserById(ctx context.Context, id int) (*User, error) {
 
 	query := `select id,
-				   registered_at,
-				   external_auth_type,
+				   auth_type,
 				   external_id,
-				   email,
-				   login,
-				   name,
-				   is_banned,
-				   (select code from bb.roles where id = role_id)  as role_code
-			    from bb.users u 
+       
+				   "email",
+				   "login",
+				   "name",
+       
+      			   created_at,
+				   updated_at,
+				   deleted_at
+			    from ad.users u 
   			   where u.id = $1`
 
 	u := new(User)
@@ -78,17 +80,19 @@ func (pg *pgStore) GetUserById(ctx context.Context, id string) (*User, error) {
 func (pg *pgStore) GetUserByExternalId(ctx context.Context, id, authTypeId string) (*User, error) {
 
 	query := `select id,
-				   registered_at,
-				   external_auth_type,
+				   auth_type,
 				   external_id,
-				   email,
-				   login,
-				   name,
-				   is_banned,
-				   (select code from bb.roles where id = role_id)  as role_code
- 			    from bb.users u
+       
+				   "email",
+				   "login",
+				   "name",
+       
+      			   created_at,
+				   updated_at,
+				   deleted_at
+ 			    from ad.users u
 		       where u.external_id = $1
-		         and u.external_auth_type = $2;`
+		         and u.auth_type = $2;`
 
 	u := new(User)
 	err := pg.db.GetContext(ctx, u, query, id, authTypeId)

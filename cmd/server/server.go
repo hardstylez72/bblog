@@ -9,14 +9,15 @@ import (
 	"github.com/hardstylez72/bblog/internal/api/controller/auth"
 	objectstorage2 "github.com/hardstylez72/bblog/internal/api/controller/objectstorage"
 	user2 "github.com/hardstylez72/bblog/internal/api/controller/user"
+	usermw "github.com/hardstylez72/bblog/internal/auth"
 	"github.com/hardstylez72/bblog/internal/logger"
 	"github.com/hardstylez72/bblog/internal/objectstorage"
 	"github.com/hardstylez72/bblog/internal/storage"
 	"github.com/hardstylez72/bblog/internal/storage/article"
-	"github.com/hardstylez72/bblog/internal/storage/middleware2"
 	"github.com/hardstylez72/bblog/internal/storage/user"
 	"github.com/hardstylez72/bblog/internal/tracer"
 	"github.com/sirupsen/logrus"
+	"log"
 	"net/http"
 	"time"
 )
@@ -35,7 +36,7 @@ type Services struct {
 }
 
 func main() {
-	configPath := flag.String("c", ".", "path to config file")
+	configPath := flag.String("config", "cmd/server/config.example.yaml", "path to config file")
 	flag.Parse()
 
 	cfg, err := LoadFromFile(*configPath)
@@ -54,7 +55,7 @@ func errCheck(err error, errorText string) {
 	if err == nil {
 		return
 	}
-	panic(err)
+	log.Fatal(errorText, ": ", err)
 }
 
 func initServices(cfg *Config) (*Services, error) {
@@ -116,7 +117,7 @@ func (s *Server) Handler() chi.Router {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Timeout(60 * time.Second))
-	r.Use(middleware2.LoginCheck)
+	r.Use(usermw.InjectUserIdFromCookies)
 	r.Mount(apiPathPrefix, r)
 
 	s.log.Info("app is successfully running")

@@ -91,7 +91,7 @@ func (a *githubAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userId, err := saveUser(ctx, a.userStore, githubUser, authTypeGithub)
+	userId, err := resolveUser(ctx, a.userStore, githubUser, authTypeGithub)
 	if err != nil {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
@@ -142,11 +142,9 @@ func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string)
 	userId := uuid.New().String()
 
 	u := user.User{
-		RoleCode:         UserRoleCode,
 		Id:               userId,
 		ExternalId:       strconv.Itoa(githubUser.ID),
 		ExternalAuthType: authTypeYandexId,
-		IsBanned:         false,
 		RegisteredAt:     time.Now(),
 	}
 

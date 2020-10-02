@@ -60,7 +60,7 @@ func (c objectStorageController) UploadObjectHandler(w http.ResponseWriter, r *h
 		}
 		defer f.Close()
 
-		url, err := c.objectStorage.Upload(ctx, convertAs(file, f))
+		url, err := c.objectStorage.UploadImage(ctx, convertAs(file, f))
 		if err != nil {
 			continue
 		}

@@ -37,7 +37,7 @@ func TestNewMinioStorage(t *testing.T) {
 		Source:    bytes.NewBuffer(imageSource),
 	}
 
-	_, err = storage.Upload(context.TODO(), image)
+	_, err = storage.UploadImage(context.TODO(), image)
 	if err != nil {
 		t.Fatal(err)
 	}

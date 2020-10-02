@@ -3,7 +3,7 @@
 1) Raise up postgres database
 2) install migration tool [goose](https://github.com/pressly/goose)
 3) Check status 
->goose postgres "user=postgres password=postgres dbname=bback sslmode=disable port=6666" status
+>goose postgres "user=autoclr password=postgres dbname=clrdb sslmode=disable port=5431" status
 >
 4) Deploy
 

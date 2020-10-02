@@ -36,8 +36,6 @@ type googleAuth struct {
 	httClient     *http.Client
 }
 
-const finalRoute = "http://localhost:8080/"
-
 func NewGoogleOAuth2Controller(cfg Config, userStore user.Storage) *googleAuth {
 
 	return &googleAuth{
@@ -73,7 +71,7 @@ func (a *googleAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userId, err := saveUser(ctx, a.userStore, googleUser, authTypeGoogle)
+	userId, err := resolveUser(ctx, a.userStore, googleUser, authTypeGoogle)
 	if err != nil {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
@@ -130,11 +128,9 @@ func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string)
 	userId := uuid.New().String()
 
 	u := user.User{
-		RoleCode:         UserRoleCode,
 		Id:               userId,
 		ExternalId:       googleUser.ID,
 		ExternalAuthType: authTypeGoogleId,
-		IsBanned:         false,
 		RegisteredAt:     time.Now(),
 	}
 
@@ -147,5 +143,6 @@ func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string)
 		u.Name.String = googleUser.FamilyName + " " + googleUser.Name
 		u.Name.Valid = true
 	}
+
 	return &u
 }

@@ -20,5 +20,5 @@ type Image struct {
 }
 
 type Storage interface {
-	Upload(ctx context.Context, image Image) (url string, err error)
+	UploadImage(ctx context.Context, image Image) (url string, err error)
 }
