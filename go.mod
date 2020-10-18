@@ -6,6 +6,7 @@ require (
 	contrib.go.opencensus.io/exporter/jaeger v0.1.0
 	contrib.go.opencensus.io/integrations/ocsql v0.1.4
 	github.com/cockroachdb/apd v1.1.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/go-chi/cors v1.1.1
 	github.com/go-chi/render v1.0.1
@@ -20,7 +21,7 @@ require (
 	github.com/minio/minio-go/v7 v7.0.4
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5 // indirect
 	github.com/sirupsen/logrus v1.6.0
+	github.com/spf13/viper v1.7.1
 	go.opencensus.io v0.22.1
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 )

@@ -15,6 +15,11 @@ func NewPgStorage(db *sqlx.DB) *pgStore {
 	return &pgStore{db: db}
 }
 
+/*
+
+
+ */
+
 func (p pgStore) UpdateArticle(ctx context.Context, article *Article) (id string, err error) {
 	query := `
 	   update ad.articles

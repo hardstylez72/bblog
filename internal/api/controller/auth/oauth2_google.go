@@ -6,11 +6,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/hardstylez72/bblog/internal/storage/user"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"net/http"
-	"time"
 )
 
 const (
@@ -32,12 +30,11 @@ type googleAuth struct {
 	Oauth2Config  *oauth2.Config
 	UserInfoURL   string
 	UserRedirects UserRedirects
-	userStore     user.Storage
 	httClient     *http.Client
+	SessionCookie SessionCookieConfig
 }
 
-func NewGoogleOAuth2Controller(cfg Config, userStore user.Storage) *googleAuth {
-
+func NewGoogleOAuth2Controller(cfg Config, sessionCookie SessionCookieConfig) *googleAuth {
 	return &googleAuth{
 		Oauth2Config: &oauth2.Config{
 			RedirectURL:  cfg.RedirectURL,
@@ -48,8 +45,8 @@ func NewGoogleOAuth2Controller(cfg Config, userStore user.Storage) *googleAuth {
 		},
 		UserRedirects: cfg.UserRedirects,
 		UserInfoURL:   cfg.UserInfoURL,
-		userStore:     userStore,
 		httClient:     &http.Client{},
+		SessionCookie: sessionCookie,
 	}
 }
 
@@ -64,37 +61,35 @@ func (a *googleAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 
 	ctx := r.Context()
 
-	googleUser, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
-	if err != nil {
-		fmt.Println(err.Error())
-		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
-		return
-	}
-
-	userId, err := resolveUser(ctx, a.userStore, googleUser, authTypeGoogle)
+	u, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
 	if err != nil {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
 
-	setUserCookie(w, userId)
+	token, err := GenerateToken(u)
+	if err != nil {
+		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
+		return
+	}
+
+	setSessionCookie(w, token, a.SessionCookie)
 
 	http.Redirect(w, r, a.UserRedirects.OnSuccess, http.StatusTemporaryRedirect)
 }
 
-func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*user.User, error) {
+func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*User, error) {
 	if !rm[state] {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
-	oauthToken, err := a.GetToken(ctx, code)
+	token, err := a.Oauth2Config.Exchange(ctx, code)
 	if err != nil {
 		return nil, fmt.Errorf("code exchange failed: %s", err.Error())
 	}
-	token := oauthToken.(*oauth2.Token)
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, buildGoogleGetUserUrl(token.AccessToken, a.UserInfoURL), nil)
 	if err != nil {
-		return nil, fmt.Errorf("failed getting user info: %s", err.Error())
+		return nil, fmt.Errorf("can not get user from google: %s", err.Error())
 	}
 
 	response, err := a.httClient.Do(req)
@@ -102,7 +97,7 @@ func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*u
 		return nil, fmt.Errorf("failed getting user info: %s", err.Error())
 	}
 	if response.StatusCode == http.StatusUnauthorized {
-		return nil, errors.New("authorization error")
+		return nil, errors.New("can not get user from google: authorization error")
 	}
 	defer response.Body.Close()
 
@@ -110,7 +105,7 @@ func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*u
 
 	dec := json.NewDecoder(response.Body)
 	if err := dec.Decode(user); err != nil {
-		return nil, fmt.Errorf("failed reading response body: %s", err.Error())
+		return nil, fmt.Errorf("can not decode response body: %s", err.Error())
 	}
 
 	return convertGoogleUser(user, authTypeGoogle), nil
@@ -120,18 +115,14 @@ func buildGoogleGetUserUrl(token, baseUrl string) string {
 	return baseUrl + "?access_token=" + token
 }
 
-func (a *googleAuth) GetToken(ctx context.Context, code string) (interface{}, error) {
-	return a.Oauth2Config.Exchange(ctx, code)
-}
+func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string) *User {
 
-func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string) *user.User {
-	userId := uuid.New().String()
-
-	u := user.User{
-		Id:               userId,
-		ExternalId:       googleUser.ID,
-		ExternalAuthType: authTypeGoogleId,
-		RegisteredAt:     time.Now(),
+	u := User{
+		AuthType:   authTypeGoogleId,
+		ExternalId: googleUser.ID,
+		Email:      NullString{},
+		Login:      NullString{},
+		Name:       NullString{},
 	}
 
 	if googleUser.Email != "" {

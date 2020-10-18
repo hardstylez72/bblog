@@ -7,18 +7,15 @@ import (
 	"time"
 )
 
-type PostgresConnect string
-
 type TimeTamps struct {
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 	DeletedAt time.Time `json:"deletedAt"`
 }
 
-func NewPGConnection(cfg PostgresConnect) (*sqlx.DB, error) {
+func NewPGConnection(connString string) (*sqlx.DB, error) {
 	var err error
 	const postgresDriverName = "pgx"
-	connString := string(cfg)
 
 	driverName, err := ocsql.Register(postgresDriverName, ocsql.WithOptions(ocsql.TraceOptions{
 		AllowRoot:         false,

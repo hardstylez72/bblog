@@ -106,3 +106,16 @@ func (pg *pgStore) GetUserByExternalId(ctx context.Context, id, authTypeId strin
 
 	return u, nil
 }
+
+func (pg *pgStore) GetUsersAmount(ctx context.Context) (int, error) {
+
+	query := `select count(*) from ad.users`
+	var amount int
+
+	err := pg.db.GetContext(ctx, amount, query)
+	if err != nil {
+		return -1, err
+	}
+
+	return amount, nil
+}

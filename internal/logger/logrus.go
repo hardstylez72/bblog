@@ -2,13 +2,14 @@ package logger
 
 import (
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"os"
 )
 
-func New(env string) *logrus.Logger {
+func New() *logrus.Logger {
 	log := logrus.New()
 
-	if env != "dev" {
+	if viper.GetString("env") != "dev" {
 		log.SetFormatter(&logrus.JSONFormatter{})
 	} else {
 		log.SetFormatter(&logrus.TextFormatter{})

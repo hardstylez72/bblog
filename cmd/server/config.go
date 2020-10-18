@@ -1,12 +1,9 @@
 package main
 
 import (
-	"github.com/gookit/config/v2"
-	"github.com/gookit/config/v2/yaml"
 	"github.com/hardstylez72/bblog/internal/api/controller/auth"
 	"github.com/hardstylez72/bblog/internal/objectstorage"
-	"github.com/hardstylez72/bblog/internal/storage"
-	"github.com/hardstylez72/bblog/internal/tracer"
+	"github.com/spf13/viper"
 )
 
 const (
@@ -17,10 +14,10 @@ type Config struct {
 	Port      string
 	Env       string
 	Host      string
-	Tracer    tracer.Config
 	Oauth     auth.Oauth
 	Databases Databases
 	ObjectStorage
+	SessionCookie auth.SessionCookieConfig
 }
 
 type ObjectStorage struct {
@@ -28,33 +25,16 @@ type ObjectStorage struct {
 }
 
 type Databases struct {
-	Postgres storage.PostgresConnect
+	Postgres string
 }
 
-func LoadFromFile(filePath string) (*Config, error) {
-	config.WithOptions(func(options *config.Options) {
-		options = &config.Options{
-			ParseEnv:    false,
-			Readonly:    true,
-			EnableCache: false,
-			ParseKey:    true,
-			Delimiter:   0,
-			DumpFormat:  "",
-			ReadFormat:  "",
-		}
-	})
-	config.AddDriver(yaml.Driver)
+func Load(filePath string) error {
 
-	err := config.LoadFiles(filePath)
-	if err != nil {
-		return nil, err
+	viper.SetConfigFile(filePath)
+	err := viper.ReadInConfig() // Find and read the config file
+	if err != nil {             // Handle errors reading the config file
+		return err
 	}
 
-	cfg := new(Config)
-	err = config.BindStruct(cfgAllData, cfg)
-	if err != nil {
-		return nil, err
-	}
-
-	return cfg, nil
+	return nil
 }

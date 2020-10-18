@@ -6,7 +6,7 @@ import (
 )
 
 type User struct {
-	Id               string    `json:"id"`
+	Id               int       `json:"id"`
 	RegisteredAt     time.Time `json:"registeredAt"`
 	ExternalId       string    `json:"externalId"`
 	ExternalAuthType string    `json:"externalAuthType"`
@@ -18,9 +18,9 @@ type User struct {
 func NewGetUserByIdResponse(u *user.User) *User {
 	out := &User{
 		Id:               u.Id,
-		RegisteredAt:     u.RegisteredAt,
+		RegisteredAt:     u.CreatedAt,
 		ExternalId:       u.ExternalId,
-		ExternalAuthType: u.ExternalAuthType,
+		ExternalAuthType: u.AuthType,
 		Login:            nil,
 		Name:             nil,
 		Email:            nil,

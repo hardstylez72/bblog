@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/hardstylez72/bblog/internal/storage/user"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
 	"net/http"
@@ -55,11 +54,11 @@ type githubAuth struct {
 	OauthConfig   *oauth2.Config
 	UserInfoURL   string
 	UserRedirects UserRedirects
-	userStore     user.Storage
 	httClient     *http.Client
+	SessionCookie SessionCookieConfig
 }
 
-func NewGithubOAuth2Controller(cfg Config, userStore user.Storage) *githubAuth {
+func NewGithubOAuth2Controller(cfg Config, sessionCookie SessionCookieConfig) *githubAuth {
 	return &githubAuth{
 		OauthConfig: &oauth2.Config{
 			RedirectURL:  cfg.RedirectURL,
@@ -70,8 +69,8 @@ func NewGithubOAuth2Controller(cfg Config, userStore user.Storage) *githubAuth {
 		},
 		UserRedirects: cfg.UserRedirects,
 		UserInfoURL:   cfg.UserInfoURL,
-		userStore:     userStore,
 		httClient:     &http.Client{},
+		SessionCookie: sessionCookie,
 	}
 }
 
@@ -85,20 +84,18 @@ func (a *githubAuth) HandleLogin(w http.ResponseWriter, r *http.Request) {
 func (a *githubAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	githubUser, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
+	u, err := a.GetUser(ctx, r.FormValue("state"), r.FormValue("code"))
+	if err != nil {
+		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
+		return
+	}
+	token, err := GenerateToken(u)
 	if err != nil {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
 
-	userId, err := resolveUser(ctx, a.userStore, githubUser, authTypeGithub)
-	if err != nil {
-		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
-		return
-	}
-
-	setUserCookie(w, userId)
-
+	setSessionCookie(w, token, a.SessionCookie)
 	http.Redirect(w, r, a.UserRedirects.OnSuccess, http.StatusTemporaryRedirect)
 }
 
@@ -106,7 +103,7 @@ func (a *githubAuth) GetToken(ctx context.Context, code string) (interface{}, er
 	return a.OauthConfig.Exchange(ctx, code)
 }
 
-func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*user.User, error) {
+func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*User, error) {
 	if !rm[state] {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
@@ -138,14 +135,14 @@ func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*u
 	return convertGithubUser(user, authTypeGithub), nil
 }
 
-func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string) *user.User {
-	userId := uuid.New().String()
+func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string) *User {
 
-	u := user.User{
-		Id:               userId,
-		ExternalId:       strconv.Itoa(githubUser.ID),
-		ExternalAuthType: authTypeYandexId,
-		RegisteredAt:     time.Now(),
+	u := User{
+		AuthType:   authTypeYandexId,
+		ExternalId: strconv.Itoa(githubUser.ID),
+		Email:      NullString{},
+		Login:      NullString{},
+		Name:       NullString{},
 	}
 
 	if githubUser.Email != "" {

@@ -10,18 +10,11 @@ const (
 	probabilitySampler = 1.0
 )
 
-type Config struct {
-	Jaeger struct{
-		CollectorEndpoint string
-		ServiceName string
-	}
-}
-
-func New(cfg Config) error {
+func New(collectorEndpoint, serviceName string) error {
 	je, err := jaeger.NewExporter(jaeger.Options{
-		CollectorEndpoint: cfg.Jaeger.CollectorEndpoint,
+		CollectorEndpoint: collectorEndpoint,
 		Process: jaeger.Process{
-			ServiceName:cfg.Jaeger.ServiceName,
+			ServiceName: serviceName,
 			Tags:        nil,
 		},
 	})

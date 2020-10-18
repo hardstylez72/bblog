@@ -1,11 +1,21 @@
 port: ":3000"
 env: "dev"
 host: "http://localhost:3000"
+admin:
+  login: admin
+  password: password
 oauth:
+  sessionCookie:
+    name: "eblog_session"
+    domain: "localhost"
+    path: "/"
+    max_age: 300
+    same_site: 1
+    secure: false
   google:
     userRedirects:
-      onSuccess: "http://localhost:8081/home"
-      onFailure: "http://localhost:8081"
+      onSuccess: "http://localhost:8080/home"
+      onFailure: "http://localhost:8080"
     redirectURL: "http://localhost:3000/api/v1/google/oauth/callback"
     clientID: "203743370138-7o73o9s8feet82bbkgqqrn8lpgue8k2i.apps.googleusercontent.com"
     clientSecret: "UdtS64NVSlwPcrzyQZqWP-bm"
@@ -38,3 +48,4 @@ objectStorage:
     accessKeyID: OR7DZ0AQRAEP1EGIXBXG
     secretAccessKey: dJSQvadUHWz6rxuRwipsQHBm3Z1XacIkdKqYFyUP
     useSSL: false
+

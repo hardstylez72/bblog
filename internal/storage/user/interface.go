@@ -24,4 +24,5 @@ type Storage interface {
 	SaveUser(ctx context.Context, user *User) error
 	GetUserById(ctx context.Context, id int) (*User, error)
 	GetUserByExternalId(ctx context.Context, userExternalId, authTypeId string) (*User, error)
+	GetUsersAmount(ctx context.Context) (int, error)
 }

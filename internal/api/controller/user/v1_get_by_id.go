@@ -7,16 +7,26 @@ import (
 	"github.com/hardstylez72/bblog/internal/api/controller"
 	view "github.com/hardstylez72/bblog/internal/api/model/user"
 	"net/http"
+	"strconv"
 )
 
 func (c userController) GetUserById(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	userId := chi.URLParam(r, "user_id")
-	if userId == "" {
-		err := errors.New("userId is missed")
+	userIdString := chi.URLParam(r, "user_id")
+	if userIdString == "" {
+		err := errors.New("userIdString is missed")
 		controller.ResponseWithError(controller.ErrInvalidInputParams(err), http.StatusBadRequest, w)
 		return
+	}
+
+	userId, err := strconv.Atoi(userIdString)
+	if err != nil {
+		if userIdString == "" {
+			err := errors.New("userIdString is missed")
+			controller.ResponseWithError(controller.ErrInvalidInputParams(err), http.StatusBadRequest, w)
+			return
+		}
 	}
 
 	user, err := c.userStorage.GetUserById(ctx, userId)

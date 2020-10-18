@@ -1,10 +1,20 @@
 package auth
 
-import "net/http"
+import (
+	"github.com/hardstylez72/bblog/internal/api/controller/auth"
+	"github.com/spf13/viper"
+	"net/http"
+)
 
 func InjectUserIdFromCookies(next http.Handler) http.Handler {
+
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
+
+		sessionCookie, err := r.Cookie(viper.GetString("oauth.sessionCookie.name"))
+
+		user, err := auth.ExtractUserFromCookies(sessionCookie)
+		println(user.AuthType)
 
 		cookie, err := r.Cookie("user_id")
 		if err == nil {
