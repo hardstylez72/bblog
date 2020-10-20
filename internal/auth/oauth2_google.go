@@ -67,18 +67,22 @@ func (a *googleAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := GenerateToken(u)
+	token, err := GenerateToken(&User{
+		ExternalUser: *u,
+		SessionId:    uuid.New().String(),
+		IsAuthorized: true,
+	})
 	if err != nil {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
 
-	setSessionCookie(w, token, a.SessionCookie)
+	SetSessionCookie(w, token, a.SessionCookie)
 
 	http.Redirect(w, r, a.UserRedirects.OnSuccess, http.StatusTemporaryRedirect)
 }
 
-func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*User, error) {
+func (a *googleAuth) GetUser(ctx context.Context, state string, code string) (*ExternalUser, error) {
 	if !rm[state] {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
@@ -115,9 +119,9 @@ func buildGoogleGetUserUrl(token, baseUrl string) string {
 	return baseUrl + "?access_token=" + token
 }
 
-func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string) *User {
+func convertGoogleUser(googleUser *GoogleOauthUserData, authTypeGoogleId string) *ExternalUser {
 
-	u := User{
+	u := ExternalUser{
 		AuthType:   authTypeGoogleId,
 		ExternalId: googleUser.ID,
 		Email:      NullString{},

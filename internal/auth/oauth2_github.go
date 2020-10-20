@@ -89,13 +89,17 @@ func (a *githubAuth) HandleCallback(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
-	token, err := GenerateToken(u)
+	token, err := GenerateToken(&User{
+		ExternalUser: *u,
+		SessionId:    uuid.New().String(),
+		IsAuthorized: true,
+	})
 	if err != nil {
 		http.Redirect(w, r, a.UserRedirects.OnFailure, http.StatusTemporaryRedirect)
 		return
 	}
 
-	setSessionCookie(w, token, a.SessionCookie)
+	SetSessionCookie(w, token, a.SessionCookie)
 	http.Redirect(w, r, a.UserRedirects.OnSuccess, http.StatusTemporaryRedirect)
 }
 
@@ -103,7 +107,7 @@ func (a *githubAuth) GetToken(ctx context.Context, code string) (interface{}, er
 	return a.OauthConfig.Exchange(ctx, code)
 }
 
-func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*User, error) {
+func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*ExternalUser, error) {
 	if !rm[state] {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
@@ -135,9 +139,9 @@ func (a *githubAuth) GetUser(ctx context.Context, state string, code string) (*U
 	return convertGithubUser(user, authTypeGithub), nil
 }
 
-func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string) *User {
+func convertGithubUser(githubUser *GithubOauthUserData, authTypeYandexId string) *ExternalUser {
 
-	u := User{
+	u := ExternalUser{
 		AuthType:   authTypeYandexId,
 		ExternalId: strconv.Itoa(githubUser.ID),
 		Email:      NullString{},

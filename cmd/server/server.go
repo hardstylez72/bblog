@@ -8,25 +8,24 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	article2 "github.com/hardstylez72/bblog/internal/api/controller/article"
-	"github.com/hardstylez72/bblog/internal/api/controller/auth"
 	objectstorage2 "github.com/hardstylez72/bblog/internal/api/controller/objectstorage"
 	user2 "github.com/hardstylez72/bblog/internal/api/controller/user"
-	usermw "github.com/hardstylez72/bblog/internal/auth"
+	"github.com/hardstylez72/bblog/internal/auth"
 	"github.com/hardstylez72/bblog/internal/logger"
 	"github.com/hardstylez72/bblog/internal/objectstorage"
 	"github.com/hardstylez72/bblog/internal/storage"
 	"github.com/hardstylez72/bblog/internal/storage/article"
 	"github.com/hardstylez72/bblog/internal/storage/user"
 	"github.com/hardstylez72/bblog/internal/tracer"
-	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"go.uber.org/zap"
 	"log"
 	"net/http"
 	"time"
 )
 
 type Server struct {
-	log      *logrus.Logger
+	log      *zap.SugaredLogger
 	router   chi.Router
 	services *Services
 }
@@ -38,10 +37,15 @@ type Services struct {
 }
 
 func main() {
+
+	log, err := logger.New()
+	errCheck(err, "can't load config")
+	defer log.Sync()
+
 	configPath := flag.String("config", "cmd/server/config.yaml", "path to config file")
 	flag.Parse()
 
-	err := Load(*configPath)
+	err = Load(*configPath)
 	errCheck(err, "can't load config")
 	err = tracer.New(viper.GetString("tracer.jaeger.collectorEndpoint"), viper.GetString("tracer.jaeger.serviceName"))
 	errCheck(err, "can't load config")
@@ -49,7 +53,7 @@ func main() {
 	services, err := initServices()
 	errCheck(err, "can't init internal services")
 
-	err = NewServer(services).Run()
+	err = NewServer(services, log).Run()
 	errCheck(err, "can't run server")
 }
 
@@ -114,10 +118,10 @@ func resolveDefaultAdminUser(userStorage user.Storage) error {
 	return nil
 }
 
-func NewServer(services *Services) *Server {
+func NewServer(services *Services, log *zap.SugaredLogger) *Server {
 	return &Server{
 		router:   chi.NewRouter(),
-		log:      logger.New(),
+		log:      log,
 		services: services,
 	}
 }
@@ -150,7 +154,8 @@ func (s *Server) Handler() chi.Router {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Timeout(60 * time.Second))
-	r.Use(usermw.InjectUserIdFromCookies)
+	r.Use(auth.GuestSession)
+	r.Use(auth.GetUser)
 	r.Mount(apiPathPrefix, r)
 
 	s.log.Info("app is successfully running")

@@ -19,9 +19,12 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/lib/pq v1.2.0 // indirect
 	github.com/minio/minio-go/v7 v7.0.4
+	github.com/pkg/errors v0.8.1
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5 // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/viper v1.7.1
+	github.com/stretchr/testify v1.4.0
 	go.opencensus.io v0.22.1
+	go.uber.org/zap v1.10.0
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 )

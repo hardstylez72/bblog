@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-type User struct {
+type ExternalUser struct {
 	AuthType   string `json:"authType"`
 	ExternalId string `json:"externalId"`
 
@@ -20,6 +20,12 @@ type NullString struct {
 	String string
 }
 
+type OAuth2 interface {
+	GetUser(ctx context.Context, state string, code string) (*ExternalUser, error)
+	HandleLogin(w http.ResponseWriter, r *http.Request)
+	HandleCallback(w http.ResponseWriter, r *http.Request)
+}
+
 func (t *NullString) UnmarshalJSON(data []byte) error {
 
 	t.String = string(data)
@@ -29,10 +35,4 @@ func (t *NullString) UnmarshalJSON(data []byte) error {
 	}
 
 	return nil
-}
-
-type OAuth2 interface {
-	GetUser(ctx context.Context, state string, code string) (*User, error)
-	HandleLogin(w http.ResponseWriter, r *http.Request)
-	HandleCallback(w http.ResponseWriter, r *http.Request)
 }

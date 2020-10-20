@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hardstylez72/bblog/internal/api/controller/auth"
+	"github.com/hardstylez72/bblog/internal/auth"
 	"github.com/hardstylez72/bblog/internal/objectstorage"
 	"github.com/spf13/viper"
 )

@@ -12,6 +12,7 @@ oauth:
     max_age: 300
     same_site: 1
     secure: false
+    secret: i1MjGcbuMX7DFEDLfewfewf
   google:
     userRedirects:
       onSuccess: "http://localhost:8080/home"
