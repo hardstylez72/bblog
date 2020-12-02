@@ -10,7 +10,7 @@ create table if not exists ad.groups (
 
 INSERT INTO ad.groups (id, description) VALUES ('ADMIN', 'allowed to use all methods') on conflict do nothing;
 INSERT INTO ad.groups (id, description) VALUES ('GUEST', 'allowed to use some GET methods') on conflict do nothing;
-INSERT INTO ad.groups (id, description) VALUES ('USER', 'allowed to use some methods related to itself') on conflict do nothing;
+INSERT INTO ad.groups (id, description) VALUES ('USER', 'allowed to use some methods') on conflict do nothing;
 
 -- +goose Down
 

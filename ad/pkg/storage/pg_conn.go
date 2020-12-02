@@ -3,6 +3,7 @@ package storage
 import (
 	"contrib.go.opencensus.io/integrations/ocsql"
 	"database/sql"
+	_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
 	"time"
 )

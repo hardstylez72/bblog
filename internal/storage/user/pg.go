@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 	"database/sql"
-	_ "github.com/jackc/pgx/stdlib"
+	//_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
 )
 

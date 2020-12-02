@@ -17,8 +17,11 @@ import (
 	"github.com/hardstylez72/bblog/internal/storage/article"
 	"github.com/hardstylez72/bblog/internal/storage/user"
 	"github.com/hardstylez72/bblog/internal/tracer"
+	ad "github.com/hardstylez72/bblog/pkg/ad/storage"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 	"log"
 	"net/http"
 	"time"
@@ -70,11 +73,23 @@ func initServices() (*Services, error) {
 	if err != nil {
 		return nil, err
 	}
-	userStorage := user.NewPGStorage(pgConn)
+
+	pgUpgraded, err := storage.WrapPgConnWithSqlx(pgConn)
+	if err != nil {
+		return nil, err
+	}
+	userStorage := user.NewPGStorage(pgUpgraded)
+
+	adConn, err := gorm.Open(postgres.New(postgres.Config{Conn: pgConn}), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+
+	err = ad.NewStorage(adConn).Init()
 
 	//resolveDefaultAdminUser()
 
-	articleStorage := article.NewPgStorage(pgConn)
+	articleStorage := article.NewPgStorage(pgUpgraded)
 
 	minioClient, err := objectstorage.NewMinioClient(objectstorage.Config{
 		Host:            viper.GetString("objectStorage.minio.host"),
@@ -151,8 +166,7 @@ func (s *Server) Handler() chi.Router {
 	r.Use(c)
 
 	r.Use(middleware.RequestID)
-	r.Use(middleware.RealIP)
-	r.Use(middleware.Logger)
+	r.Use(logger.Inject(s.log))
 	r.Use(middleware.Timeout(60 * time.Second))
 	r.Use(auth.GuestSession)
 	r.Use(auth.GetUser)
