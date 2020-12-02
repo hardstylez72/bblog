@@ -1,25 +1,29 @@
 package group
 
-type insertGroupRequest struct {
+type insertRequest struct {
 	Code        string `json:"code"`
 	Description string `json:"description"`
 }
 
-func insertGroupRequestConvert(r *insertGroupRequest) *Group {
+func insertRequestConvert(r *insertRequest) *Group {
 	return &Group{
 		Code:        r.Code,
 		Description: r.Description,
 	}
 }
 
-type insertGroupResponse Group
+type insertResponse Group
 
-func newInsertGroupResponse(group *Group) *insertGroupResponse {
-	return (*insertGroupResponse)(group)
+func newInsertResponse(group *Group) *insertResponse {
+	return (*insertResponse)(group)
 }
 
-type getGroupsResponse []Group
+type listResponse []Group
 
-func newGetGroupsResponse(groups []Group) getGroupsResponse {
+func newListResponse(groups []Group) listResponse {
 	return groups
+}
+
+type deleteRequest struct {
+	Id int `json:"id"`
 }

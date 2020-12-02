@@ -1,4 +1,4 @@
-package group
+package route
 
 import (
 	"context"
@@ -13,35 +13,38 @@ func NewRepository(conn *sqlx.DB) *repository {
 	return &repository{conn: conn}
 }
 
-func (r *repository) Insert(ctx context.Context, group *Group) (*Group, error) {
+func (r *repository) Insert(ctx context.Context, route *Route) (*Route, error) {
 	query := `
-insert into ad.groups (
-                       code,
+insert into ad.routes (
+                       route,
+                       method,
                        description,
                        created_at,
                        updated_at,
                        deleted_at
                        )
                    values (
-                       :code,
+                       :route,
+                       :method,
                        :description,
                        now(),
                        null,
                        null
                    ) returning id,
-                               code,
+                               route,
+                       		   method,
                                description,
                                created_at,
                                updated_at,
                                deleted_at;
 `
 
-	rows, err := r.conn.NamedQueryContext(ctx, query, group)
+	rows, err := r.conn.NamedQueryContext(ctx, query, route)
 	if err != nil {
 		return nil, err
 	}
 
-	var g Group
+	var g Route
 	for rows.Next() {
 		err = rows.StructScan(&g)
 		if err != nil {
@@ -52,18 +55,19 @@ insert into ad.groups (
 	return &g, nil
 }
 
-func (r *repository) List(ctx context.Context) ([]Group, error) {
+func (r *repository) List(ctx context.Context) ([]Route, error) {
 	query := `
 		select id,
-			   code,
+			   route,
+		       method,
 			   description,
 			   created_at,
 			   updated_at,
 			   deleted_at
-		from ad.groups
+		from ad.routes
 	   where deleted_at is null;
 `
-	groups := make([]Group, 0)
+	groups := make([]Route, 0)
 	err := r.conn.SelectContext(ctx, &groups, query)
 	if err != nil {
 		return nil, err

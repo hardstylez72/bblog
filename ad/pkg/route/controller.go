@@ -1,4 +1,4 @@
-package group
+package route
 
 import (
 	"context"
@@ -9,8 +9,8 @@ import (
 )
 
 type Repository interface {
-	List(ctx context.Context) ([]Group, error)
-	Insert(ctx context.Context, group *Group) (*Group, error)
+	List(ctx context.Context) ([]Route, error)
+	Insert(ctx context.Context, group *Route) (*Route, error)
 	Delete(ctx context.Context, id int) error
 }
 
@@ -72,7 +72,7 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *controller) Mount(r chi.Router) {
-	r.Post("/v1/group/list", c.list)
-	r.Post("/v1/group/create", c.create)
-	r.Post("/v1/group/delete", c.delete)
+	r.Post("/v1/route/list", c.list)
+	r.Post("/v1/route/create", c.create)
+	r.Post("/v1/route/delete", c.delete)
 }
