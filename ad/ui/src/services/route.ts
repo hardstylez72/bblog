@@ -1,7 +1,8 @@
-import {makeRequest, Request} from './requester'
-import {Method} from "axios";
+import { Method } from 'axios';
+import { makeRequest, Request } from './requester';
+import Service from './service';
 
-interface Route {
+export interface Route {
   id: number;
   route: string;
   method: string;
@@ -9,53 +10,57 @@ interface Route {
 }
 
 interface Options {
-  host: string
-  baseUrl: string
+  host: string;
+  baseUrl: string;
 }
 
 export default class RouteService implements Service<Route> {
   private options: Options
+
   readonly methodPost: Method = 'POST'
+
+  private readonly baseUrl: string;
+
   constructor(options: Options) {
     this.options = options;
+    this.baseUrl = `${this.options.host}${this.options.baseUrl}`;
   }
 
   Create(t: Route): Promise<Route> {
-
     const req: Request = {
       data: t,
       method: this.methodPost,
-      url: `${this.options.baseUrl}/create`
-    }
-    return makeRequest(req)
+      url: `${this.baseUrl}/create`,
+    };
+    return makeRequest(req);
   }
 
   Delete(id: number): Promise<void> {
     const req: Request = {
-      data: {id: id},
+      data: { id },
       method: this.methodPost,
-      url: `${this.options.baseUrl}/delete`
-    }
-    return makeRequest(req)
+      url: `${this.baseUrl}/delete`,
+    };
+    return makeRequest(req);
   }
 
   GetList(): Promise<Route[]> {
     const req: Request = {
       data: {},
       method: this.methodPost,
-      url: `${this.options.baseUrl}/list`
-    }
-    return makeRequest(req)
+      url: `${this.baseUrl}/list`,
+    };
+    return makeRequest(req);
   }
 
   Update(t: Route): Promise<Route> {
     // todo: implement@!!!
     const req: Route = {
       description: '',
-      id:1,
+      id: 1,
       method: this.methodPost,
-      route: ''
-    }
+      route: '',
+    };
     return Promise.resolve(req);
   }
 }

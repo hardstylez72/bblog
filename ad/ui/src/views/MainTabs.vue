@@ -5,19 +5,6 @@
       dark
       flat
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Your Dashboard</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
 
       <template v-slot:extension>
         <v-tabs
@@ -41,6 +28,9 @@
         v-for="item in items"
         :key="item"
       >
+        <div v-if="item === 'Routes'">
+          <routes-tab></routes-tab>
+        </div>
         <v-card flat>
           <v-card-text v-text="text"></v-card-text>
         </v-card>
@@ -51,17 +41,21 @@
 
 <script lang="ts">
 import {
-  Component, Prop, Vue, Provide,
+  Component, Prop, Vue,
 } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    'routes-tab': () => import('./RoutesTab.vue'),
+  },
+})
 export default class MainTabs extends Vue {
   @Prop() private msg!: string;
 
   tab: object| null = {};
 
   items: string[] = [
-    'web', 'shopping', 'videos', 'images', 'news',
+    'Routes', 'Groups', 'Users',
   ];
 
   text = 'bozdo text';
