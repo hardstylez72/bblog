@@ -1,7 +1,7 @@
 -- +goose Up
 
 create table if not exists ad.routes (
-   id int primary key,
+   id serial primary key,
    route varchar(1024) not null,
    method varchar(10) not null,
    description text not null,

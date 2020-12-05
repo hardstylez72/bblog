@@ -23,17 +23,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ad/pkg/route/controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/pkg/route/entity.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/pkg/route/repository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/pkg/route/transport.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/migrations/00002_table_users.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/migrations/00005_table_routes_groups.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/migrations/00006_table_users_routes.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/migrations/00007_table_users_groups.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/cmd/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00003_table_users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00005_table_users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00005_table_routes.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00003_table_routes.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/transport.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/transport.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/migrations/00002_table_groups.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00003_table_groups.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/migrations/00003_table_routes.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00004_table_routes.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/migrations/00004_table_users_groups.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/migrations/00005_table_users.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/migrations/00006_table_groups_routes.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,7 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ad/pkg" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ad/migrations" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="goland.project.structure" />
   </component>
@@ -143,7 +143,7 @@
       <recent name="$PROJECT_DIR$/ad/migrations" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server">
+  <component name="RunManager" selected="Docker.docker-compose.yml.minio: Compose Deployment">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="bblog" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -160,25 +160,6 @@
       <kind value="PACKAGE" />
       <filePath value="$PROJECT_DIR$/ad/cmd/server/main.go" />
       <package value="github.com/hardstylez72/bblog/ad/cmd/server" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build github.com/hardstylez72/bblog/cmd/server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="bblog" />
-      <working_directory value="$PROJECT_DIR$" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </EXTENSION>
-      <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/cmd/server/server.go" />
-      <package value="github.com/hardstylez72/bblog/cmd/server" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
@@ -228,20 +209,33 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.minio: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="minio" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/cmd/server" />
-      <item itemvalue="Go Test.TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" />
-      <item itemvalue="Go Test.TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" />
       <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
       <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server" />
+      <item itemvalue="Go Test.TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" />
+      <item itemvalue="Go Test.TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" />
+      <item itemvalue="Docker.docker-compose.yml.minio: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.minio: Compose Deployment" />
         <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server" />
         <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
         <item itemvalue="Go Test.TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" />
         <item itemvalue="Go Test.TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" />
-        <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/cmd/server" />
       </list>
     </recent_temporary>
   </component>
