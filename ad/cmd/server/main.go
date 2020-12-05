@@ -76,7 +76,7 @@ func (s *Server) Handler() chi.Router {
 	c := cors.Handler(cors.Options{
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
-		AllowedOrigins:   []string{"http://localhost:*"},
+		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
 		Debug:            true,
 	})

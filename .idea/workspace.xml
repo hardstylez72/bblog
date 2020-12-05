@@ -23,17 +23,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ad/migrations/00002_table_users.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/migrations/00005_table_routes_groups.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/migrations/00006_table_users_routes.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/migrations/00007_table_users_groups.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/plugins/vuetify.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/shims-vuetify.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/store/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/RoutesTab.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/vue.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00002_table_groups.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00003_table_groups.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00003_table_routes.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00004_table_routes.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00004_table_users_groups.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00005_table_users.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00006_table_groups_routes.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/services/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/services/service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/services/requester.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/services/requester.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/services/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/services/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/MainTabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/MainTabs.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +135,13 @@
     <property name="settings.editor.selected.configurable" value="goland.project.structure" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ad/migrations" />
+      <recent name="$PROJECT_DIR$/ad/pkg" />
+      <recent name="$PROJECT_DIR$/ad/pkg/logger" />
+      <recent name="$PROJECT_DIR$/ad/cmd/server" />
+      <recent name="$PROJECT_DIR$/ad/pkg/internal/group" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ad/pkg/group" />
       <recent name="$PROJECT_DIR$/ad/pkg/group/transport" />
@@ -135,15 +149,8 @@
       <recent name="$PROJECT_DIR$/ad/pkg" />
       <recent name="$PROJECT_DIR$/ad/pkg/util" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ad/pkg" />
-      <recent name="$PROJECT_DIR$/ad/pkg/logger" />
-      <recent name="$PROJECT_DIR$/ad/cmd/server" />
-      <recent name="$PROJECT_DIR$/ad/pkg/internal/group" />
-      <recent name="$PROJECT_DIR$/ad/migrations" />
-    </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.minio: Compose Deployment">
+  <component name="RunManager" selected="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="bblog" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -231,8 +238,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml.minio: Compose Deployment" />
         <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server" />
+        <item itemvalue="Docker.docker-compose.yml.minio: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
         <item itemvalue="Go Test.TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" />
         <item itemvalue="Go Test.TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" />
@@ -266,7 +273,8 @@
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Adds zap logger" />
     <MESSAGE value="Adds ad project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds ad project" />
+    <MESSAGE value="Updates migrations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates migrations" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -289,86 +297,86 @@
     </state>
     <state x="402" y="323" width="503" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1603706415540" />
     <state x="302" y="323" width="471" height="391" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601659314025" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1606941198119">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1607158576908">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="695" y="82" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038616894" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1606941198119" />
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1607158576908" />
     <state x="695" y="82" key="CommitChangelistDialog2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660517419" />
     <state width="803" height="485" key="DebuggerActiveHint" timestamp="1606941705580">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="996" height="485" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1603038512683" />
     <state width="803" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1606941705580" />
-    <state width="1233" height="263" key="GridCell.Tab.0.bottom" timestamp="1606942202245">
+    <state width="1233" height="263" key="GridCell.Tab.0.bottom" timestamp="1607171024360">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603038468941" />
-    <state width="1233" height="263" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202245" />
+    <state width="1233" height="263" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024360" />
     <state width="874" height="272" key="GridCell.Tab.0.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668147" />
     <state width="1480" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="263" key="GridCell.Tab.0.center" timestamp="1606942202245">
+    <state width="1233" height="263" key="GridCell.Tab.0.center" timestamp="1607171024359">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603038468941" />
-    <state width="1233" height="263" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202245" />
+    <state width="1233" height="263" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024359" />
     <state width="874" height="272" key="GridCell.Tab.0.center/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="263" key="GridCell.Tab.0.left" timestamp="1606942202245">
+    <state width="1233" height="263" key="GridCell.Tab.0.left" timestamp="1607171024359">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603038468941" />
-    <state width="1233" height="263" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202245" />
+    <state width="1233" height="263" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024359" />
     <state width="874" height="272" key="GridCell.Tab.0.left/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="263" key="GridCell.Tab.0.right" timestamp="1606942202245">
+    <state width="1233" height="263" key="GridCell.Tab.0.right" timestamp="1607171024360">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603038468941" />
-    <state width="1233" height="263" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202245" />
+    <state width="1233" height="263" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024360" />
     <state width="874" height="272" key="GridCell.Tab.0.right/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="263" key="GridCell.Tab.1.bottom" timestamp="1606942202246">
+    <state width="1233" height="263" key="GridCell.Tab.1.bottom" timestamp="1607171024294">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603038472677" />
-    <state width="1233" height="263" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202246" />
+    <state width="1233" height="263" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024294" />
     <state width="1233" height="263" key="GridCell.Tab.1.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509497" />
-    <state width="1233" height="263" key="GridCell.Tab.1.center" timestamp="1606942202246">
+    <state width="1233" height="263" key="GridCell.Tab.1.center" timestamp="1607171024294">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603038472677" />
-    <state width="1233" height="263" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202246" />
+    <state width="1233" height="263" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024294" />
     <state width="1233" height="263" key="GridCell.Tab.1.center/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="263" key="GridCell.Tab.1.left" timestamp="1606942202246">
+    <state width="1233" height="263" key="GridCell.Tab.1.left" timestamp="1607171024294">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603038472676" />
-    <state width="1233" height="263" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202246" />
+    <state width="1233" height="263" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024294" />
     <state width="1233" height="263" key="GridCell.Tab.1.left/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="263" key="GridCell.Tab.1.right" timestamp="1606942202246">
+    <state width="1233" height="263" key="GridCell.Tab.1.right" timestamp="1607171024294">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="456" height="263" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603038472677" />
-    <state width="1233" height="263" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1606942202246" />
+    <state width="1233" height="263" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1607171024294" />
     <state width="1233" height="263" key="GridCell.Tab.1.right/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1606941201337">
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1607158579875">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="806" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038626734" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1606941201337" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1607158579875" />
     <state x="806" y="257" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660521166" />
     <state width="960" height="520" key="XDebugger.FullValuePopup" timestamp="1603038386546">
       <screen x="0" y="0" width="1920" height="1040" />

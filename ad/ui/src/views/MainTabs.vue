@@ -31,9 +31,7 @@
         <div v-if="item === 'Routes'">
           <routes-tab></routes-tab>
         </div>
-        <v-card flat>
-          <v-card-text v-text="text"></v-card-text>
-        </v-card>
+
       </v-tab-item>
     </v-tabs-items>
   </v-card>
@@ -65,7 +63,7 @@ export default class MainTabs extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h3 {
-  margin: 40px 0 0;
+  margin: 10px 0 0;
 }
 ul {
   list-style-type: none;
@@ -77,5 +75,9 @@ li {
 }
 a {
   color: #42b983;
+}
+routes-tab {
+  display: flex;
+  flex-direction: column;
 }
 </style>
