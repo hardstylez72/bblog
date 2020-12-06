@@ -5,13 +5,12 @@
       dark
       flat
     >
-
       <template v-slot:extension>
         <v-tabs
           v-model="tab"
           align-with-title
         >
-          <v-tabs-slider color="yellow"></v-tabs-slider>
+          <v-tabs-slider color="yellow" />
 
           <v-tab
             v-for="item in items"
@@ -29,9 +28,11 @@
         :key="item"
       >
         <div v-if="item === 'Routes'">
-          <routes-tab></routes-tab>
+          <routes-tab />
         </div>
-
+        <div v-if="item === 'Groups'">
+          <groups-tab />
+        </div>
       </v-tab-item>
     </v-tabs-items>
   </v-card>
@@ -44,7 +45,8 @@ import {
 
 @Component({
   components: {
-    'routes-tab': () => import('./RoutesTab.vue'),
+    'routes-tab': () => import('./route/tab-table.vue'),
+    'groups-tab': () => import('./group/tap-table.vue'),
   },
 })
 export default class MainTabs extends Vue {

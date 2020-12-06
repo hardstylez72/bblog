@@ -4,25 +4,22 @@
       app
       color="primary"
       dark
-    >
-
-    </v-app-bar>
+    />
 
     <v-main>
-      <MainTabs/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import MainTabs from '@/views/MainTabs.vue';
+import MainTabs from '@/views/main-page-tabs.vue';
 
 export default Vue.extend({
   name: 'App',
 
   components: {
-    MainTabs,
 
   },
 

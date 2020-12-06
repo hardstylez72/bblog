@@ -51,6 +51,17 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 
 	render.JSON(w, r, newListResponse(list))
 }
+func (c *controller) routes(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	list, err := c.rep.List(ctx)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	render.JSON(w, r, newListResponse(list))
+}
 
 func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -73,6 +84,8 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 
 func (c *controller) Mount(r chi.Router) {
 	r.Post("/v1/group/list", c.list)
+	r.Post("/v1/group/routes", c.routes)
 	r.Post("/v1/group/create", c.create)
 	r.Post("/v1/group/delete", c.delete)
+
 }

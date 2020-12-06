@@ -1,12 +1,12 @@
 <template>
-<div>
-  <MainTabs/>
-</div>
+  <div>
+    <MainTabs />
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import MainTabs from '@/views/MainTabs.vue'; // @ is an alias to /src
+import MainTabs from '@/views/main-page-tabs.vue'; // @ is an alias to /src
 
 @Component({
   components: {

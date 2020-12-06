@@ -1,0 +1,144 @@
+<template>
+  <c-dialog
+    v-model="show"
+  >
+    <template v-slot:activator="props">
+      <v-btn
+        color="primary"
+
+        class="mb-2"
+        v-bind="props"
+        v-on="props.on"
+      >
+        Новая группа
+      </v-btn>
+    </template>
+
+    <v-card>
+      <v-card-title class="headline grey lighten-2">
+        Создание группы
+      </v-card-title>
+      <v-card-text>
+        <v-form
+          ref="create-group-form"
+          v-model="valid"
+          lazy-validation
+        >
+          <v-row>
+            <v-col
+              cols="12"
+              sm="4"
+              md="4"
+            >
+              <v-text-field
+                v-model="group.code"
+                required
+                :rules="codeRules"
+                label="Код"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              sm="10"
+              md="10"
+            >
+              <v-textarea
+                v-model="group.description"
+                outlined
+                required
+                :rules="descriptionRules"
+                label="Описание"
+              />
+            </v-col>
+          </v-row>
+        </v-form>
+
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="close"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="createGroup"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card-text>
+    </v-card>
+  </c-dialog>
+</template>
+
+<script lang="ts">
+import {
+  Component, Vue,
+} from 'vue-property-decorator';
+import { Route } from '@/services/route';
+import { Group } from '@/services/group';
+
+@Component({
+  components: {
+    'c-dialog': () => import('../dialog.vue'),
+  },
+  watch: {
+    match: 'validate',
+    max: 'validate',
+    model: 'validate',
+  },
+
+})
+export default class CreateRouteDialog extends Vue {
+  show = false
+
+  valid = false
+
+  group: Group = {
+    description: '',
+    id: -1,
+    code: '',
+  }
+
+  validate() {
+    this.$refs['create-group-form'].validate();
+  }
+
+  rules = [
+    (v) => !!v || 'Обязательное поле',
+]
+
+  codeRules = this.rules
+
+  descriptionRules = this.rules
+
+  async createGroup() {
+    this.validate();
+    if (!this.valid) {
+      return;
+    }
+
+    if (!this.group.code) {
+      return;
+    }
+    if (!this.group.description) {
+      return;
+    }
+
+    await this.$store.direct.dispatch.group.Create(this.group);
+    this.show = false;
+  }
+
+  close() {
+    this.show = false;
+  }
+}
+</script>
+
+<style scoped lang="scss">
+
+</style>

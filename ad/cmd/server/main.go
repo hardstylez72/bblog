@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/hardstylez72/bblog/ad/pkg/group"
+	grouproute "github.com/hardstylez72/bblog/ad/pkg/group/route"
 	"github.com/hardstylez72/bblog/ad/pkg/logger"
 	"github.com/hardstylez72/bblog/ad/pkg/route"
 	"github.com/hardstylez72/bblog/ad/pkg/storage"
@@ -109,13 +110,16 @@ func Start(r chi.Router) error {
 
 	var groupRepository group.Repository
 	var routeRepository route.Repository
+	var groupRouteRepository grouproute.Repository
 	{
 		groupRepository = group.NewRepository(pgx)
 		routeRepository = route.NewRepository(pgx)
+		groupRouteRepository = grouproute.NewRepository(pgx)
 	}
 
 	group.NewController(groupRepository).Mount(r)
 	route.NewController(routeRepository).Mount(r)
+	grouproute.NewController(groupRouteRepository).Mount(r)
 
 	return nil
 }

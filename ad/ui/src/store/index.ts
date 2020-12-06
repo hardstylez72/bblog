@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { createDirectStore } from 'direct-vuex';
 import routeModule from './route';
+import groupModule from './group';
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ const {
   },
   modules: {
     route: routeModule,
+    group: groupModule,
   },
 });
 

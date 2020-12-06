@@ -78,7 +78,7 @@ func (r *repository) List(ctx context.Context) ([]Route, error) {
 
 func (r *repository) Delete(ctx context.Context, id int) error {
 	query := `
-		update ad.groups 
+		update ad.routes 
 			set deleted_at = now()
 		where id = $1;
 `
