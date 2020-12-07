@@ -1,15 +1,14 @@
 package route
 
-type insertRequest []insertParams
+type insertRequest []params
 
-func insertRequestConvert(r insertRequest) []insertParams {
+func insertRequestConvert(r insertRequest) []params {
 	return r
 }
 
-type insertResponse []Route
-
 type listRequest struct {
-	GroupId int `json:"id"`
+	GroupId       int  `json:"groupId" validate:"required"`
+	BelongToGroup bool `json:"belongToGroup"`
 }
 
 type listResponse []Route
@@ -19,5 +18,5 @@ func newListResponse(routes []Route) listResponse {
 }
 
 type deleteRequest struct {
-	Id int `json:"id"`
+	Params []params `json:"groupId" validate:"dive"`
 }

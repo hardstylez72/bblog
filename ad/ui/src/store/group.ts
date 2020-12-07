@@ -52,7 +52,7 @@ const actions = defineActions({
 });
 
 const getters = defineGetters<State<Group>>()({
-  getEntities(state) {
+  getEntities(state): Group[] {
     return state.entities;
   },
 });

@@ -68,7 +68,7 @@ import { Group } from '@/services/group';
     'create-group-dialog': () => import('./create-dialog.vue'),
     'delete-route-dialog': () => import('./delete-dialog.vue'),
   },
-  computed: {
+    computed: {
     routes(): Group[] {
       return this.$store.direct.getters.group.getEntities;
     },

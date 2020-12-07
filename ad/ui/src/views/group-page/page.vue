@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-routes />
+    <routes-table-select-delete />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import {
 
 @Component({
   components: {
-    'page-routes': () => import('./page-routes.vue'),
+    'routes-table-select-delete': () => import('../group/routes-table-select-delete.vue'),
   },
   computed: {
 

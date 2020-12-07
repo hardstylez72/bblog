@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig, Route } from 'vue-router';
 import Home from '../views/main-page.vue';
-import Group from '../views/group/page.vue';
+import Group from '../views/group-page/page.vue';
 
 Vue.use(VueRouter);
 export const generateItemPageProps = (route: Route) => ({
