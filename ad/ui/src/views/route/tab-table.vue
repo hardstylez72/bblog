@@ -52,7 +52,7 @@
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { Route } from '@/services/route';
+import { Service } from '@/views/route/service';
 
 @Component({
   components: {
@@ -60,7 +60,7 @@ import { Route } from '@/services/route';
     'delete-route-dialog': () => import('./delete-dialog.vue'),
   },
   computed: {
-    routes(): Route[] {
+    routes(): Service[] {
       return this.$store.direct.getters.route.getRoutes;
     },
   },
@@ -109,7 +109,7 @@ export default class RoutesTab extends Vue {
     console.log(item);
   }
 
-  protected deleteItem(item: Route): void {
+  protected deleteItem(item: Service): void {
     this.showDeleteDialog = true;
    this.routeIdToDelete = item.id;
   }

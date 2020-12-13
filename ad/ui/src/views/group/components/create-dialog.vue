@@ -10,44 +10,31 @@
         v-bind="props"
         v-on="props.on"
       >
-        Новый маршрут
+        Новая группа
       </v-btn>
     </template>
 
     <v-card>
       <v-card-title class="headline grey lighten-2">
-        Создание маршрута
+        Создание группы
       </v-card-title>
       <v-card-text>
         <v-form
-          ref="form"
+          ref="create-group-form"
           v-model="valid"
           lazy-validation
         >
           <v-row>
             <v-col
               cols="12"
-              sm="10"
-              md="10"
+              sm="4"
+              md="4"
             >
               <v-text-field
-                v-model="route.route"
+                v-model="group.code"
                 required
-                :rules="routeRules"
-                label="Маршрут"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              sm="2"
-              md="2"
-            >
-              <v-select
-                v-model="route.method"
-                required
-                :rules="methodRules"
-                :items="httpMethodList"
-                label="Метод"
+                :rules="codeRules"
+                label="Код"
               />
             </v-col>
             <v-col
@@ -56,7 +43,7 @@
               md="10"
             >
               <v-textarea
-                v-model="route.description"
+                v-model="group.description"
                 outlined
                 required
                 :rules="descriptionRules"
@@ -78,7 +65,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="createRoute"
+            @click="createGroup"
           >
             Save
           </v-btn>
@@ -93,57 +80,56 @@ import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { Service } from '@/views/route/service';
+import { Group } from '@/views/group/service';
 
 @Component({
   components: {
-    'c-dialog': () => import('../base/components/dialog.vue'),
+    'c-dialog': () => import('../../base/components/dialog.vue'),
   },
+  watch: {
+    match: 'validate',
+    max: 'validate',
+    model: 'validate',
+  },
+
 })
 export default class CreateRouteDialog extends Vue {
   show = false
 
-  valid = true
+  valid = false
 
-  route: Service = {
+  group: Group = {
     description: '',
     id: -1,
-    method: '',
-    route: '',
+    code: '',
   }
-
-  httpMethodList = ['GET', 'POST', 'PUT', 'DELETE']
 
   validate() {
-    this.$refs.form.validate();
+    this.$refs['create-group-form'].validate();
   }
 
-  routeRules = [
+  rules = [
     (v) => !!v || 'Обязательное поле',
 ]
 
-  methodRules = this.routeRules
+  codeRules = this.rules
 
-  descriptionRules = this.routeRules
+  descriptionRules = this.rules
 
-  async createRoute() {
+  async createGroup() {
     this.validate();
     if (!this.valid) {
       return;
     }
 
-    if (!this.route.description) {
+    if (!this.group.code) {
+      return;
+    }
+    if (!this.group.description) {
       return;
     }
 
-    if (!this.route.method) {
-      return;
-    }
-
-    if (!this.route.route) {
-      return;
-    }
-
-    await this.$store.direct.dispatch.route.Create(this.$data.route);
+    await this.$store.direct.dispatch.group.Create(this.group);
     this.show = false;
   }
 

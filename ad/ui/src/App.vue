@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import MainTabs from '@/views/main-page-tabs.vue';
+import MainTabs from '@/views/base/components/main-page-tabs.vue';
 
 export default Vue.extend({
   name: 'App',

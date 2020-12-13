@@ -1,0 +1,90 @@
+<template>
+  <v-card>
+    <v-toolbar
+      color="cyan"
+      dark
+      flat
+    >
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          align-with-title
+        >
+          <v-tabs-slider color="yellow" />
+
+          <v-tab
+            v-for="item in items"
+            :key="item"
+          >
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+      </template>
+    </v-toolbar>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
+        <div v-if="item === 'Routes'">
+          <routes-tab />
+        </div>
+        <div v-if="item === 'Groups'">
+          <groups-tab />
+        </div>
+        <div v-if="item === 'Users'">
+          <user-tab />
+        </div>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-card>
+</template>
+
+<script lang="ts">
+import {
+  Component, Prop, Vue,
+} from 'vue-property-decorator';
+import { User } from '@/views/user/service';
+
+@Component({
+  components: {
+    'routes-tab': () => import('../../route/tab-table.vue'),
+    'groups-tab': () => import('../../group/components/tap-table.vue'),
+    'user-tab': () => import('../../user/components/tap-table.vue'),
+  },
+})
+export default class MainTabs extends Vue {
+  @Prop() private msg!: string;
+
+  tab: object| null = {};
+
+  items: string[] = [
+    'Routes', 'Groups', 'Users',
+  ];
+
+  text = 'bozdo text';
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+h3 {
+  margin: 10px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+routes-tab {
+  display: flex;
+  flex-direction: column;
+}
+</style>

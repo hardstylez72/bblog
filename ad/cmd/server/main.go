@@ -6,10 +6,11 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/hardstylez72/bblog/ad/pkg/group"
-	grouproute "github.com/hardstylez72/bblog/ad/pkg/group/route"
-	"github.com/hardstylez72/bblog/ad/pkg/logger"
+	"github.com/hardstylez72/bblog/ad/pkg/grouproute"
+	"github.com/hardstylez72/bblog/ad/pkg/infra/logger"
+	"github.com/hardstylez72/bblog/ad/pkg/infra/storage"
 	"github.com/hardstylez72/bblog/ad/pkg/route"
-	"github.com/hardstylez72/bblog/ad/pkg/storage"
+	"github.com/hardstylez72/bblog/ad/pkg/user"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"log"
@@ -108,18 +109,10 @@ func Start(r chi.Router) error {
 		return err
 	}
 
-	var groupRepository group.Repository
-	var routeRepository route.Repository
-	var groupRouteRepository grouproute.Repository
-	{
-		groupRepository = group.NewRepository(pgx)
-		routeRepository = route.NewRepository(pgx)
-		groupRouteRepository = grouproute.NewRepository(pgx)
-	}
-
-	group.NewController(groupRepository).Mount(r)
-	route.NewController(routeRepository).Mount(r)
-	grouproute.NewController(groupRouteRepository).Mount(r)
+	group.NewController(group.NewRepository(pgx)).Mount(r)
+	route.NewController(route.NewRepository(pgx)).Mount(r)
+	grouproute.NewController(grouproute.NewRepository(pgx)).Mount(r)
+	user.NewController(user.NewRepository(pgx)).Mount(r)
 
 	return nil
 }

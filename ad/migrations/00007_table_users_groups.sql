@@ -7,4 +7,4 @@ create table if not exists ad.users_groups (
 
 -- +goose Down
 
-drop table if exists ad.users_routes;
+drop table if exists ad.users_groups;

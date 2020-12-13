@@ -5,62 +5,35 @@
     <template v-slot:activator="props">
       <v-btn
         color="primary"
-
         class="mb-2"
         v-bind="props"
         v-on="props.on"
       >
-        Новый маршрут
+        Новый пользователь
       </v-btn>
     </template>
 
     <v-card>
       <v-card-title class="headline grey lighten-2">
-        Создание маршрута
+        Создание пользователя
       </v-card-title>
       <v-card-text>
         <v-form
-          ref="form"
+          ref="create-user-form"
           v-model="valid"
           lazy-validation
         >
           <v-row>
             <v-col
               cols="12"
-              sm="10"
-              md="10"
+              sm="4"
+              md="4"
             >
               <v-text-field
-                v-model="route.route"
+                v-model="user.externalId"
                 required
-                :rules="routeRules"
-                label="Маршрут"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              sm="2"
-              md="2"
-            >
-              <v-select
-                v-model="route.method"
-                required
-                :rules="methodRules"
-                :items="httpMethodList"
-                label="Метод"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              sm="10"
-              md="10"
-            >
-              <v-textarea
-                v-model="route.description"
-                outlined
-                required
-                :rules="descriptionRules"
-                label="Описание"
+                :rules="externalIdRules"
+                label="Идентфикатор"
               />
             </v-col>
           </v-row>
@@ -78,7 +51,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="createRoute"
+            @click="create"
           >
             Save
           </v-btn>
@@ -93,57 +66,47 @@ import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { Service } from '@/views/route/service';
+import { Group } from '@/views/group/service';
+import { User } from '@/views/user/service';
 
 @Component({
   components: {
-    'c-dialog': () => import('../base/components/dialog.vue'),
+    'c-dialog': () => import('../../base/components/dialog.vue'),
   },
 })
 export default class CreateRouteDialog extends Vue {
   show = false
 
-  valid = true
+  valid = false
 
-  route: Service = {
+  user: User = {
     description: '',
     id: -1,
-    method: '',
-    route: '',
+    externalId: '',
+    isSystem: false,
   }
-
-  httpMethodList = ['GET', 'POST', 'PUT', 'DELETE']
 
   validate() {
-    this.$refs.form.validate();
+    this.$refs['create-user-form'].validate();
   }
 
-  routeRules = [
+  rules = [
     (v) => !!v || 'Обязательное поле',
 ]
 
-  methodRules = this.routeRules
+  externalIdRules = this.rules
 
-  descriptionRules = this.routeRules
-
-  async createRoute() {
+  async create() {
     this.validate();
     if (!this.valid) {
       return;
     }
 
-    if (!this.route.description) {
+    if (!this.user.externalId) {
       return;
     }
 
-    if (!this.route.method) {
-      return;
-    }
-
-    if (!this.route.route) {
-      return;
-    }
-
-    await this.$store.direct.dispatch.route.Create(this.$data.route);
+    await this.$store.direct.dispatch.user.Create(this.user);
     this.show = false;
   }
 
