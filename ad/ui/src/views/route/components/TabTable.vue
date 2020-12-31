@@ -57,8 +57,8 @@ import DictTable from '@/views/base/components/tap-table.vue';
 
 @Component({
   components: {
-    createRouteDialog: () => import('./create-dialog.vue'),
-    deleteRouteDialog: () => import('./delete-dialog.vue'),
+    createDialog: () => import('./CreateDialog.vue'),
+    deleteDialog: () => import('./DeleteDialog.vue'),
   },
   computed: {
     routes(): readonly Route[] {

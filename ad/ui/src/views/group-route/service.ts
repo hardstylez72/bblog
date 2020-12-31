@@ -1,6 +1,5 @@
 import { Method } from 'axios';
-import { Service } from '@/views/route/service';
-import DefaultService from '../base/services/default';
+import { Route } from '@/views/route/service';
 
 import { makeRequest, Request } from '../base/services/utils/requester';
 
@@ -26,7 +25,7 @@ export default class GroupRouteService {
     this.baseUrl = `${this.options.host}${this.options.baseUrl}`;
   }
 
-  Create(t: GroupRoute[]): Promise<Service[]> {
+  Create(t: GroupRoute[]): Promise<Route[]> {
     const req: Request = {
       data: t,
       method: this.methodPost,
@@ -44,7 +43,7 @@ export default class GroupRouteService {
     return makeRequest(req);
   }
 
-  GetList(groupId: number, belongToGroup: boolean): Promise<Service[]> {
+  GetList(groupId: number, belongToGroup: boolean): Promise<Route[]> {
     const req: Request = {
       data: { groupId, belongToGroup },
       method: this.methodPost,

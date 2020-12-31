@@ -25,10 +25,7 @@
               Удалить выбранные маршруты
             </v-btn>
           </div>
-
-          <routes-table-select-add-dialog
-            :group-id="groupId"
-          />
+          <routes-table-select-add-dialog :group-id="groupIdC" />
         </v-toolbar>
       </template>
     </routes-table>
@@ -43,8 +40,8 @@ import { Route } from '@/views/route/service';
 
 @Component({
   components: {
-    'routes-table': () => import('../components/routes-table.vue'),
-    routesTableSelectAddDialog: () => import('../components/routes-table-select-add-dialog.vue'),
+    'routes-table': () => import('../components/RoutesTable.vue'),
+    routesTableSelectAddDialog: () => import('../../group-route/components/GroupRouteTable.vue'),
   },
 })
 export default class RoutesTab extends Vue {
@@ -52,14 +49,17 @@ export default class RoutesTab extends Vue {
     title: `Маршруты группы ${this.$route.params.id}`,
   }
 
-  groupId: number | undefined
+  get groupIdC(): number {
+    return this.groupId;
+  }
+
+  groupId = Number(this.$route.params.id);
 
   mounted() {
-    console.log(this.$route.params.id);
     this.$store.direct.dispatch.groupRoute.GetList({ groupId: this.groupId, belongToGroup: true });
   }
 
-  get routes(): Route[] {
+  get routes(): readonly Route[] {
     return this.$store.direct.getters.groupRoute.getEntities;
   }
 

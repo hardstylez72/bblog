@@ -5,7 +5,7 @@
   >
     <v-card>
       <v-card-title>
-        Вы уверены что хотите удлить группу?
+        Вы уверены что хотите удлить маршрут?
       </v-card-title>
       <v-card-actions>
         <v-spacer />
@@ -19,7 +19,7 @@
         <v-btn
           color="blue darken-1"
           text
-          @click="deleteGroup"
+          @click="deleteRoute"
         >
           OK
         </v-btn>
@@ -36,13 +36,13 @@ import {
 
 @Component({
   components: {
-    'c-dialog': () => import('../../base/components/dialog.vue'),
+    'c-dialog': () => import('../../base/components/Dialog.vue'),
   },
 })
 export default class DeleteRouteDialog extends Vue {
   show = false
 
-  @Prop() id: number
+  @Prop() routeId: number
 
   @Model('change', { default: false, type: Boolean })
   readonly value!: boolean
@@ -57,8 +57,8 @@ export default class DeleteRouteDialog extends Vue {
     this.show = false;
   }
 
-  async deleteGroup() {
-    await this.$store.direct.dispatch.group.Delete(this.id);
+  async deleteRoute() {
+    await this.$store.direct.dispatch.route.Delete(this.routeId);
     this.$emit('change', false);
   }
 }

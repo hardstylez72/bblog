@@ -9,18 +9,16 @@ import { Route } from '@/views/route/service';
 import { moduleActionContext } from '../base/store';
 
 export interface State{
-  Route: GroupRouteService;
+  service: GroupRouteService;
   entities: Route[];
   routesNotBelongToGroup: Route[];
-  entitiesMap: Map<number, Route>;
   groupId: number;
 }
 
 const state1 = {
-  Route: new GroupRouteService({ host: '', baseUrl: '/api/v1/group/route' }),
+  service: new GroupRouteService({ host: '', baseUrl: '/api/v1/group/route' }),
   entities: [],
   routesNotBelongToGroup: [],
-  entitiesMap: new Map(),
   groupId: -1,
 } as State;
 
@@ -59,14 +57,14 @@ const actions = defineActions({
 
   async GetListNotBelongToGroup(context, groupId: number): Promise<Route[]> {
     const { state, commit } = actionContext(context);
-    const entities = await state.Route.GetList(groupId, false);
+    const entities = await state.service.GetList(groupId, false);
     commit.setRoutesNotBelongToGroup(entities);
     commit.setGroupId(groupId);
     return entities;
   },
   async GetList(context, payload: {groupId: number; belongToGroup: boolean}): Promise<Route[]> {
     const { state, commit } = actionContext(context);
-    const entities = await state.Route.GetList(payload.groupId, payload.belongToGroup);
+    const entities = await state.service.GetList(payload.groupId, payload.belongToGroup);
 
     if (payload.belongToGroup) {
       commit.setEntities(entities);
@@ -77,14 +75,14 @@ const actions = defineActions({
   },
   async Create(context, pairs: GroupRoute[]): Promise<Route[]> {
     const { state, commit } = actionContext(context);
-    const createdEntity = await state.Route.Create(pairs);
+    const createdEntity = await state.service.Create(pairs);
     commit.addEntity(createdEntity);
     commit.deleteRoutesNotBelongToGroup(pairs);
     return createdEntity;
   },
   async Delete(context, pairs: GroupRoute[]): Promise<void> {
     const { state, commit } = actionContext(context);
-    await state.Route.Delete(pairs);
+    await state.service.Delete(pairs);
     commit.deleteEntity(pairs);
     commit.addRoutesNotBelongToGroup(pairs);
   },

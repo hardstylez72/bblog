@@ -1,5 +1,5 @@
 <template>
-  <c-dialog
+  <Dialog
     v-model="show"
   >
     <template v-slot:activator="props">
@@ -58,20 +58,18 @@
         </v-card-actions>
       </v-card-text>
     </v-card>
-  </c-dialog>
+  </Dialog>
 </template>
 
 <script lang="ts">
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
-import { Group } from '@/views/group/service';
 import { User } from '@/views/user/service';
 
 @Component({
   components: {
-    'c-dialog': () => import('../../base/components/dialog.vue'),
+    Dialog: () => import('../../base/components/Dialog.vue'),
   },
 })
 export default class CreateRouteDialog extends Vue {

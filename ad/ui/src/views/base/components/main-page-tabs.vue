@@ -51,8 +51,8 @@ import {
 
 @Component({
   components: {
-    routesTab: () => import('@/views/route/tab-table.vue'),
-    groupsTab: () => import('@/views/group/components/tap-table.vue'),
+    routesTab: () => import('@/views/route/components/TabTable.vue'),
+    groupsTab: () => import('@/views/group/components/TapTable.vue'),
     userTab: () => import('@/views/user/components/tap-table.vue'),
   },
 

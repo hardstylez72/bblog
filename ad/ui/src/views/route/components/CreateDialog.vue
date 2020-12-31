@@ -96,7 +96,7 @@ import { Route } from '@/views/route/service';
 
 @Component({
   components: {
-    'c-dialog': () => import('../base/components/dialog.vue'),
+    'c-dialog': () => import('../../base/components/Dialog.vue'),
   },
 })
 export default class CreateRouteDialog extends Vue {

@@ -64,8 +64,8 @@ import DictTable from '../../base/components/tap-table.vue';
 
 @Component({
   components: {
-    createDialog: () => import('./create-dialog.vue'),
-    deleteDialog: () => import('./delete-dialog.vue'),
+    createDialog: () => import('./CreateDialog.vue'),
+    deleteDialog: () => import('./DeleteDialog.vue'),
   },
 })
 export default class RoutesTab extends DictTable<Group> {
