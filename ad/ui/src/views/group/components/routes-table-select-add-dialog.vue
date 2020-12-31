@@ -61,7 +61,7 @@
 import {
   Component, Vue, Prop,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
+import { Route } from '@/views/route/service';
 
 @Component({
   components: {
@@ -75,15 +75,15 @@ export default class RoutesTableSelectAddDialog extends Vue {
   @Prop({ type: Number, default: -1 })
   private readonly groupId!: number
 
-  entities: Service[] =[]
+  entities: Route[] =[]
 
-  selected: Service[] =[]
+  selected: Route[] =[]
 
   mounted() {
     this.$store.direct.dispatch.groupRoute.GetListNotBelongToGroup(this.groupId);
   }
 
-  get routes(): readonly Service[] {
+  get routes(): readonly Route[] {
     return this.$store.direct.getters.groupRoute.getRoutesNotBelongToGroup;
   }
 

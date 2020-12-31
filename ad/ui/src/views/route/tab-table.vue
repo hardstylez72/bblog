@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-data-table
-      :headers="headers"
       :items="routes"
+      :headers="headers"
       sort-by="calories"
       class="elevation-1"
     >
@@ -14,14 +14,14 @@
         <v-toolbar
           flat
         >
-          <v-toolbar-title>Маршруты</v-toolbar-title>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-divider
             class="mx-4"
             inset
             vertical
           />
           <v-spacer />
-          <create-route-dialog />
+          <create-dialog />
         </v-toolbar>
       </template>
 
@@ -29,21 +29,21 @@
         <v-icon
           small
           class="mr-2"
-          @click="editItem(item)"
+          @click="edit(item)"
         >
           mdi-pencil
         </v-icon>
         <v-icon
           small
-          @click="deleteItem(item)"
+          @click="remove(item)"
         >
           mdi-delete
         </v-icon>
       </template>
     </v-data-table>
-    <delete-route-dialog
+    <delete-dialog
+      :id="activeItemId"
       v-model="showDeleteDialog"
-      :route-id="routeIdToDelete"
     />
   </div>
 </template>
@@ -52,15 +52,16 @@
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
+import { Route } from '@/views/route/service';
+import DictTable from '@/views/base/components/tap-table.vue';
 
 @Component({
   components: {
-    'create-route-dialog': () => import('./create-dialog.vue'),
-    'delete-route-dialog': () => import('./delete-dialog.vue'),
+    createRouteDialog: () => import('./create-dialog.vue'),
+    deleteRouteDialog: () => import('./delete-dialog.vue'),
   },
   computed: {
-    routes(): Service[] {
+    routes(): readonly Route[] {
       return this.$store.direct.getters.route.getRoutes;
     },
   },
@@ -68,16 +69,18 @@ import { Service } from '@/views/route/service';
     this.$store.direct.dispatch.route.GetList();
   },
 })
-export default class RoutesTab extends Vue {
-  protected showCreateDialog = false
+export default class RoutesTab extends DictTable<Route> {
+  readonly title = 'Маршруты'
 
-  protected showDeleteDialog = false
+  mounted() {
+    this.$store.direct.dispatch.route.GetList();
+  }
 
-  routeIdToDelete = -1
+  get routes(): readonly Route[] {
+    return this.$store.direct.getters.route.getRoutes;
+  }
 
   methods = ['GET', 'POST', 'PUT', 'DELETE']
-
-  editedIndex = -1
 
   readonly headers = [
     {
@@ -98,21 +101,6 @@ export default class RoutesTab extends Vue {
     },
     { text: 'Actions', value: 'actions', sortable: false },
   ]
-
-  protected createRoute(): void {
-    this.showCreateDialog = true;
-  }
-
-  protected editItem(item: any): void {
-    // todo: create
-    this.createRoute();
-    console.log(item);
-  }
-
-  protected deleteItem(item: Service): void {
-    this.showDeleteDialog = true;
-   this.routeIdToDelete = item.id;
-  }
 }
 </script>
 

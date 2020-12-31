@@ -23,24 +23,24 @@
 import {
   Component, Model, Prop, Vue, Watch,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
+import { Route } from '@/views/route/service';
 
 @Component
 export default class RoutesTab extends Vue {
-  @Prop({ default: () => ([]), type: Array }) items: Array<Service>
+  @Prop({ default: () => ([]), type: Array }) items: Array<Route>
 
-  selected: Service[] = []
+  selected: Route[] = []
 
   @Model('change', { default: () => ([]), type: Array })
   readonly value!: []
 
   @Watch('value')
-  protected onChangeValue(value: Service[]): void {
+  protected onChangeValue(value: Route[]): void {
     this.selected = value;
   }
 
   @Watch('selected')
-  protected onChangeIsShowDialog(selected: Service[]): void {
+  protected onChangeIsShowDialog(selected: Route[]): void {
       this.$emit('change', selected);
   }
 

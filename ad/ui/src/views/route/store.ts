@@ -3,12 +3,12 @@
 
 import { defineModule } from 'direct-vuex';
 import { moduleActionContext } from '../base/store';
-import Service from '../base/services/default';
-import RouteService, { Service } from './service';
+import DefaultService from '../base/services/default';
+import RouteService, { Route } from './service';
 
 export interface State {
-  service: Service<Service>;
-  routes: Service[];
+  service: DefaultService<Route>;
+  routes: Route[];
 }
 
 const module = defineModule({
@@ -23,24 +23,24 @@ const module = defineModule({
     },
   },
   mutations: {
-    setRoutes(state, routes: Service[]) {
+    setRoutes(state, routes: Route[]) {
       state.routes = routes;
     },
     deleteRoute(state, id: number) {
       state.routes = state.routes.filter((route) => route.id !== id);
     },
-    addRoute(state, routes: Service) {
+    addRoute(state, routes: Route) {
       state.routes.push(routes);
     },
   },
   actions: {
-    async GetList(context): Promise<Service[]> {
+    async GetList(context): Promise<Route[]> {
       const { state, commit } = actionContext(context);
       const routes = await state.service.GetList();
       commit.setRoutes(routes);
       return routes;
     },
-    async Create(context, route: Service): Promise<Service> {
+    async Create(context, route: Route): Promise<Route> {
       const { state, commit } = actionContext(context);
       const createdRoute = await state.service.Create(route);
       commit.addRoute(createdRoute);

@@ -23,53 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ad/pkg/user/controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/pkg/user/entity.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/pkg/user/repository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/pkg/user/transport.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/components/tap-table-template.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/group/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/route/service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/create-dialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/delete-dialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/routes-table-select-add-dialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/routes-table.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/tap-table.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/entity.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/cmd/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00002_table_users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00002_table_users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00007_table_users_groups.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00007_table_users_groups.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/route/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/grouproute/controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/route/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/grouproute/entity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/route/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/grouproute/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/route/transport.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/grouproute/transport.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/logger/zap.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/infra/logger/zap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/storage/pg_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/infra/storage/pg_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/util/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/util/utils.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/services/group.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/services/groupRoute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group-route/service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/services/route.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/store/group.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/store/groupRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group-route/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/store/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/components/dialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group-page/page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group-route/pages/page.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/create-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/create-dialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/delete-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/delete-dialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/routes-table-select-add-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/routes-table-select-add-dialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/routes-table-select-delete.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/pages/routes-table-select-delete.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/routes-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/routes-table.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/tap-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/tap-table.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/main-page-tabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/components/main-page-tabs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/main-page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/main-page.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/create-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/create-dialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/delete-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/delete-dialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/tab-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/tab-table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/tap-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/tap-table.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +114,7 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ad/pkg" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../gitlab.services.mts.ru/3click/core2" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -197,17 +152,6 @@
       <filePath value="$PROJECT_DIR$/ad/cmd/server/main.go" />
       <package value="github.com/hardstylez72/bblog/ad/cmd/server" />
       <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="bblog" />
-      <working_directory value="$PROJECT_DIR$/internal/api/controller/auth" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/hardstylez72/bblog/internal/api/controller/auth" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestAuthTokenOK$" />
       <method v="2" />
     </configuration>
     <configuration name="TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -258,20 +202,33 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.minio: Compose Deployment" />
       <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server" />
-      <item itemvalue="Go Test.TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" />
       <item itemvalue="Go Test.TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" />
+      <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server" />
+        <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.minio: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.dev.yml.minio: Compose Deployment" />
         <item itemvalue="Go Test.TestSessionToken in github.com/hardstylez72/bblog/internal/api/controller/auth" />
-        <item itemvalue="Go Test.TestAuthTokenOK in github.com/hardstylez72/bblog/internal/api/controller/auth" />
       </list>
     </recent_temporary>
   </component>
@@ -338,6 +295,10 @@
     </state>
     <state width="996" height="485" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1603038512683" />
     <state width="803" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1607872344755" />
+    <state x="422" y="277" width="424" height="482" key="FileChooserDialogImpl" timestamp="1608189535502">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="422" y="277" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1608189535502" />
     <state width="1233" height="355" key="GridCell.Tab.0.bottom" timestamp="1607872772694">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

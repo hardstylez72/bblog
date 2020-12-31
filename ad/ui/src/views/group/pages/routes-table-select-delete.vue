@@ -39,24 +39,12 @@
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
+import { Route } from '@/views/route/service';
 
 @Component({
   components: {
     'routes-table': () => import('../components/routes-table.vue'),
-    'routes-table-select-add-dialog': () => import('../components/routes-table-select-add-dialog.vue'),
-  },
-  computed: {
-    routes(): Service[] {
-      return this.$store.direct.getters.groupRoute.getEntities;
-    },
-    showDeleteBtn(): boolean {
-      return this.selected.length > 0;
-    },
-  },
-  mounted() {
-    this.groupId = Number(this.$route.params.id);
-    this.$store.direct.dispatch.groupRoute.GetList({ groupId: this.groupId, belongToGroup: true });
+    routesTableSelectAddDialog: () => import('../components/routes-table-select-add-dialog.vue'),
   },
 })
 export default class RoutesTab extends Vue {
@@ -64,11 +52,24 @@ export default class RoutesTab extends Vue {
     title: `Маршруты группы ${this.$route.params.id}`,
   }
 
-  groupId: number
+  groupId: number | undefined
 
-  selected: Service[] = []
+  mounted() {
+    console.log(this.$route.params.id);
+    this.$store.direct.dispatch.groupRoute.GetList({ groupId: this.groupId, belongToGroup: true });
+  }
 
-  entities: Service[] = []
+  get routes(): Route[] {
+    return this.$store.direct.getters.groupRoute.getEntities;
+  }
+
+  get showDeleteBtn(): boolean {
+    return this.selected.length > 0;
+  }
+
+  selected: Route[] = []
+
+  entities: Route[] = []
 
   valid = true
 

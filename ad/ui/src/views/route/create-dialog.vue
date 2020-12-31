@@ -92,7 +92,7 @@
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
+import { Route } from '@/views/route/service';
 
 @Component({
   components: {
@@ -104,7 +104,7 @@ export default class CreateRouteDialog extends Vue {
 
   valid = true
 
-  route: Service = {
+  route: Route = {
     description: '',
     id: -1,
     method: '',

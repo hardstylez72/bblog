@@ -9,11 +9,12 @@
         <v-tabs
           v-model="tab"
           align-with-title
+          @change="tabChanged"
         >
           <v-tabs-slider color="yellow" />
 
           <v-tab
-            v-for="item in items"
+            v-for="item in tabs"
             :key="item"
           >
             {{ item }}
@@ -22,18 +23,20 @@
       </template>
     </v-toolbar>
 
-    <v-tabs-items v-model="tab">
+    <v-tabs-items
+      v-model="tab"
+    >
       <v-tab-item
-        v-for="item in items"
+        v-for="item in tabs"
         :key="item"
       >
-        <div v-if="item === 'Routes'">
+        <div v-if="item === tabs[0]">
           <routes-tab />
         </div>
-        <div v-if="item === 'Groups'">
+        <div v-if="item === tabs[1]">
           <groups-tab />
         </div>
-        <div v-if="item === 'Users'">
+        <div v-if="item === tabs[2]">
           <user-tab />
         </div>
       </v-tab-item>
@@ -43,27 +46,66 @@
 
 <script lang="ts">
 import {
-  Component, Prop, Vue,
+  Component, Prop, Vue, Watch,
 } from 'vue-property-decorator';
-import { User } from '@/views/user/service';
 
 @Component({
   components: {
-    'routes-tab': () => import('../../route/tab-table.vue'),
-    'groups-tab': () => import('../../group/components/tap-table.vue'),
-    'user-tab': () => import('../../user/components/tap-table.vue'),
+    routesTab: () => import('@/views/route/tab-table.vue'),
+    groupsTab: () => import('@/views/group/components/tap-table.vue'),
+    userTab: () => import('@/views/user/components/tap-table.vue'),
   },
+
 })
 export default class MainTabs extends Vue {
   @Prop() private msg!: string;
 
-  tab: object| null = {};
+  tab = 0;
 
-  items: string[] = [
-    'Routes', 'Groups', 'Users',
+  tabs: string[] = [
+    'routes', 'groups', 'users',
   ];
 
-  text = 'bozdo text';
+  @Watch('$route')
+  RouteUpdate() {
+    const tabNumber = this.getTabNumberFromUrlQueryParams();
+    if (this.tab !== tabNumber) {
+      this.tab = tabNumber;
+    }
+  }
+
+  mounted() {
+    const tabNumber = this.getTabNumberFromUrlQueryParams();
+    if (this.tab !== tabNumber) {
+      this.tab = tabNumber;
+    }
+
+    const { tab } = this.$route.query;
+    if (tab !== this.tabs[tabNumber]) {
+      this.$router.push({ query: { tab: this.tabs[tabNumber] } });
+    }
+  }
+
+  tabChanged(tabNumber: number) {
+    if (tabNumber !== this.getTabNumberFromUrlQueryParams()) {
+      this.$router.push({ query: { tab: this.tabs[tabNumber] } });
+    }
+  }
+
+  getTabNumberFromUrlQueryParams(): number {
+    const { tab } = this.$route.query;
+    let tabNumber = 0;
+    if (tab) {
+      this.tabs.some((itemTabName: string, itemTabNumber: number) => {
+        if (itemTabName === tab) {
+          tabNumber = itemTabNumber;
+          return true;
+        }
+        return false;
+      });
+    }
+    return tabNumber;
+  }
 }
 </script>
 

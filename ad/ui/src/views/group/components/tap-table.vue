@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-data-table
-      :items="routes"
+      :items="groups"
       :headers="headers"
       sort-by="calories"
       class="elevation-1"
@@ -64,8 +64,8 @@ import DictTable from '../../base/components/tap-table.vue';
 
 @Component({
   components: {
-    'create-group-dialog': () => import('./create-dialog.vue'),
-    'delete-route-dialog': () => import('./delete-dialog.vue'),
+    createDialog: () => import('./create-dialog.vue'),
+    deleteDialog: () => import('./delete-dialog.vue'),
   },
 })
 export default class RoutesTab extends DictTable<Group> {
@@ -82,7 +82,7 @@ export default class RoutesTab extends DictTable<Group> {
     this.$store.direct.dispatch.group.GetList();
   }
 
- get routes(): Group[] {
+ get groups(): readonly Group[] {
     return this.$store.direct.getters.group.getEntities;
   }
 

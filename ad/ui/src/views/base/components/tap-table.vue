@@ -56,15 +56,14 @@
 
 <script lang="ts">
 import {
-  Component, Vue, Prop, Inject,
+  Component, Vue,
 } from 'vue-property-decorator';
 import { DataTableHeader } from 'vuetify';
-import { User } from '@/views/user/service';
 
 @Component({
   components: {
-    'create-dialog': () => import('../../user/components/create-dialog.vue'),
-    'delete-dialog': () => import('../../user/components/delete-dialog.vue'),
+    createDialog: () => import('../../user/components/create-dialog.vue'),
+    deleteDialog: () => import('../../user/components/delete-dialog.vue'),
   },
 })
 export default class DictTable<T> extends Vue {
