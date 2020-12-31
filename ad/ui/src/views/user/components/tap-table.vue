@@ -62,7 +62,7 @@ import {
 
 import { DataTableHeader } from 'vuetify';
 import { User } from '../service';
-import DictTable from '../../base/components/tap-table.vue';
+import DictTable from '../../base/components/DictTable.vue';
 
 @Component
 export default class UserDictTable extends DictTable<User> {

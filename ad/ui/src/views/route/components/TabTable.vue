@@ -53,7 +53,7 @@ import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
-import DictTable from '@/views/base/components/tap-table.vue';
+import DictTable from '@/views/base/components/DictTable.vue';
 
 @Component({
   components: {

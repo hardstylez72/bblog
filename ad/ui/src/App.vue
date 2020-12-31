@@ -14,27 +14,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import MainTabs from '@/views/base/components/main-page-tabs.vue';
+import MainTabs from '@/views/base/MainPage.vue';
 
 export default Vue.extend({
   name: 'App',
-
-  components: {
-
-  },
-
-  data: () => ({
-    //
-  }),
 });
 </script>
 
 <style scoped lang="css">
-v-main {
-  height: 100%;
-}
 
 v-main {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }

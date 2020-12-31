@@ -4,20 +4,20 @@
 import {
   defineActions, defineModule, defineMutations, defineGetters,
 } from 'direct-vuex';
-import GroupRouteService, { GroupRoute } from '@/views/group-route/service';
+import GroupRouteService, { GroupRoute } from '@/views/group/services/grouproute';
 import { Route } from '@/views/route/service';
-import { moduleActionContext } from '../base/store';
+import { moduleActionContext } from '../../base/store';
 
 export interface State{
   service: GroupRouteService;
-  entities: Route[];
+  routesBelongToGroup: Route[];
   routesNotBelongToGroup: Route[];
   groupId: number;
 }
 
 const state1 = {
   service: new GroupRouteService({ host: '', baseUrl: '/api/v1/group/route' }),
-  entities: [],
+  routesBelongToGroup: [],
   routesNotBelongToGroup: [],
   groupId: -1,
 } as State;
@@ -27,11 +27,11 @@ const mutations = defineMutations < State >()({
   setGroupId(state, groupId: number) {
     state.groupId = groupId;
   },
-  setEntities(state, entities: Route[]) {
-    state.entities = entities;
+  setRoutesBelongToGroup(state, entities: Route[]) {
+    state.routesBelongToGroup = entities;
   },
-  deleteEntity(state, pairs: GroupRoute[]) {
-    state.entities = state.entities.filter((r: Route) => {
+  deleteRoutesBelongToGroup(state, pairs: GroupRoute[]) {
+    state.routesBelongToGroup = state.routesBelongToGroup.filter((r: Route) => {
       const exist = pairs.some((pair) => pair.routeId === r.id);
       return !exist;
     });
@@ -45,8 +45,8 @@ const mutations = defineMutations < State >()({
       return !exist;
     });
   },
-  addEntity(state, entities) {
-    state.entities.push(...entities);
+  addRoutesBelongToGroup(state, entities) {
+    state.routesBelongToGroup.push(...entities);
   },
   addRoutesNotBelongToGroup(state, entities) {
     state.routesNotBelongToGroup.push(...entities);
@@ -62,35 +62,31 @@ const actions = defineActions({
     commit.setGroupId(groupId);
     return entities;
   },
-  async GetList(context, payload: {groupId: number; belongToGroup: boolean}): Promise<Route[]> {
+  async GetListBelongToGroup(context, groupId: number): Promise<Route[]> {
     const { state, commit } = actionContext(context);
-    const entities = await state.service.GetList(payload.groupId, payload.belongToGroup);
-
-    if (payload.belongToGroup) {
-      commit.setEntities(entities);
-      commit.setGroupId(payload.groupId);
-    }
-
+    const entities = await state.service.GetList(groupId, true);
+    commit.setRoutesBelongToGroup(entities);
+    commit.setGroupId(groupId);
     return entities;
   },
   async Create(context, pairs: GroupRoute[]): Promise<Route[]> {
     const { state, commit } = actionContext(context);
     const createdEntity = await state.service.Create(pairs);
-    commit.addEntity(createdEntity);
+    commit.addRoutesBelongToGroup(createdEntity);
     commit.deleteRoutesNotBelongToGroup(pairs);
     return createdEntity;
   },
   async Delete(context, pairs: GroupRoute[]): Promise<void> {
     const { state, commit } = actionContext(context);
     await state.service.Delete(pairs);
-    commit.deleteEntity(pairs);
+    commit.deleteRoutesBelongToGroup(pairs);
     commit.addRoutesNotBelongToGroup(pairs);
   },
 });
 
 const getters = defineGetters<State>()({
-  getEntities(state): Route[] {
-    return state.entities;
+  getRoutesBelongToGroup(state): Route[] {
+    return state.routesBelongToGroup;
   },
   getRoutesNotBelongToGroup(state): Route[] {
     return state.routesNotBelongToGroup;

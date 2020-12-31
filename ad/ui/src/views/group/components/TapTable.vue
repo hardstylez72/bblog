@@ -57,10 +57,10 @@
 
 <script lang="ts">
 import {
-  Component, Vue,
+  Component,
 } from 'vue-property-decorator';
-import { Group } from '@/views/group/service';
-import DictTable from '../../base/components/tap-table.vue';
+import { Group } from '@/views/group/services/service';
+import DictTable from '../../base/components/DictTable.vue';
 
 @Component({
   components: {
@@ -86,8 +86,8 @@ export default class RoutesTab extends DictTable<Group> {
     return this.$store.direct.getters.group.getEntities;
   }
 
- async view(group: Group) {
-    await this.$router.push({ name: 'Group', params: { id: group.id.toString() } });
+  view(group: Group) {
+    return this.$router.push({ name: 'Group', params: { id: group.id.toString() } });
   }
 }
 </script>

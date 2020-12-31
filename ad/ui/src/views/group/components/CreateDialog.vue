@@ -79,7 +79,7 @@
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { Group } from '@/views/group/service';
+import { Group } from '@/views/group/services/service';
 
 @Component({
   components: {

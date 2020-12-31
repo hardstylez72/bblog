@@ -4,9 +4,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { createDirectStore } from 'direct-vuex';
 import routeModule from '../route/store';
-import groupModule from '../group/store';
+import groupModule from '../group/store/group';
 import userModule from '../user/store';
-import groupRouteModule from '../group-route/store';
+import groupRouteModule from '../group/store/grouproute';
 
 Vue.use(Vuex);
 

@@ -66,7 +66,7 @@ import { Route } from '@/views/route/service';
 @Component({
   components: {
     'c-dialog': () => import('../../base/components/Dialog.vue'),
-    'routes-table': () => import('../../group/components/RoutesTable.vue'),
+    'routes-table': () => import('./RoutesTable.vue'),
   },
 })
 export default class RoutesTableSelectAddDialog extends Vue {

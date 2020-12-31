@@ -4,9 +4,9 @@
 import {
   defineActions, defineModule, defineMutations, defineGetters,
 } from 'direct-vuex';
-import { moduleActionContext } from '../base/store';
-import Service from '../base/services/default';
-import GroupService, { Group } from './service';
+import { moduleActionContext } from '../../base/store';
+import Service from '../../base/services/default';
+import GroupService, { Group } from '../services/service';
 
 export interface State<T>{
   service: Service<T>;

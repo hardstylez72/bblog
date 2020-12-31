@@ -41,7 +41,7 @@ import { Route } from '@/views/route/service';
 @Component({
   components: {
     'routes-table': () => import('../components/RoutesTable.vue'),
-    routesTableSelectAddDialog: () => import('../../group-route/components/GroupRouteTable.vue'),
+    routesTableSelectAddDialog: () => import('../components/GroupRouteTable.vue'),
   },
 })
 export default class RoutesTab extends Vue {
@@ -56,11 +56,11 @@ export default class RoutesTab extends Vue {
   groupId = Number(this.$route.params.id);
 
   mounted() {
-    this.$store.direct.dispatch.groupRoute.GetList({ groupId: this.groupId, belongToGroup: true });
+    this.$store.direct.dispatch.groupRoute.GetListBelongToGroup(this.groupId);
   }
 
   get routes(): readonly Route[] {
-    return this.$store.direct.getters.groupRoute.getEntities;
+    return this.$store.direct.getters.groupRoute.getRoutesBelongToGroup;
   }
 
   get showDeleteBtn(): boolean {

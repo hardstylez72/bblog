@@ -25,7 +25,7 @@ const mutations = defineMutations < State < User >>()({
   deleteEntity(state, id: number) {
     state.entities = state.entities.filter((route) => route.id !== id);
   },
-  addEntity(state, entities) {
+  addRoutesBelongToGroup(state, entities) {
     state.entities.push(entities);
   },
 });
