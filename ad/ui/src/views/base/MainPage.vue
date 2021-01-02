@@ -1,35 +1,12 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="cyan"
-      dark
-      flat
-    >
-      <template v-slot:extension>
-        <v-tabs
-          v-model="tab"
-          align-with-title
-          @change="tabChanged"
-        >
-          <v-tabs-slider color="yellow" />
+    <v-tabs v-model="tab" align-with-title @change="tabChanged">
+      <v-tabs-slider/>
+      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
+    </v-tabs>
 
-          <v-tab
-            v-for="item in tabs"
-            :key="item"
-          >
-            {{ item }}
-          </v-tab>
-        </v-tabs>
-      </template>
-    </v-toolbar>
-
-    <v-tabs-items
-      v-model="tab"
-    >
-      <v-tab-item
-        v-for="item in tabs"
-        :key="item"
-      >
+    <v-tabs-items v-model="tab">
+      <v-tab-item v-for="item in tabs" :key="item">
         <div v-if="item === tabs[0]">
           <routes-tab />
         </div>
@@ -41,6 +18,7 @@
         </div>
       </v-tab-item>
     </v-tabs-items>
+
   </v-card>
 </template>
 

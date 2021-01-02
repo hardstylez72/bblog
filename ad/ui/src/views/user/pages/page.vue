@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Пользователь {{userC.externalId}}</h2>
     <UserGroupsSelectableTable v-model="selectedGroups" :items="groups">
       <template v-slot:top>
         <v-toolbar flat>
@@ -50,6 +51,7 @@ import {
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
 import { Route } from '@/views/route/service';
+import { User } from '@/views/user/services/user';
 import UserGroupsSelectableTable from '../components/UserGroupsSelectableTable.vue';
 import UserRoutesSelectableTable from '../components/UserRoutesSelectableTable.vue';
 import AddGroupsButton from '../components/AddGroupsButton.vue';
@@ -66,6 +68,13 @@ import AddRoutesButton from '../components/AddRoutesButton.vue';
 export default class UserPage extends Vue {
   userId = Number(this.$route.params.id);
 
+  user: User = {
+    externalId: 'Не найден',
+    isSystem: false,
+    description: '',
+    id: -1,
+  }
+
   titleGroup = 'Группы'
 
   titleRoute = 'Маршруты'
@@ -74,9 +83,16 @@ export default class UserPage extends Vue {
 
   selectedRoutes: Route[] = []
 
-  mounted() {
+ async mounted() {
     this.$store.direct.dispatch.userGroup.GetListBelongToGroup(this.userId);
     this.$store.direct.dispatch.userRoute.GetListBelongToGroup(this.userId);
+    this.$store.direct.dispatch.user.GetById(this.userId).then((user) => {
+       this.user = user;
+     });
+  }
+
+  get userC(): User {
+    return this.user;
   }
 
   get userIdC(): number {

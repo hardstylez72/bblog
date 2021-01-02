@@ -5,11 +5,10 @@ import {
   defineActions, defineModule, defineMutations, defineGetters,
 } from 'direct-vuex';
 import { moduleActionContext } from '@/views/base/store';
-import Service from '@/views/base/services/default';
 import UserService, { User } from '../services/user';
 
 export interface State<T>{
-  service: Service<T>;
+  service: UserService;
   entities: T[];
 }
 
@@ -31,6 +30,10 @@ const mutations = defineMutations < State < User >>()({
 });
 
 const actions = defineActions({
+  async GetById(context, id: number): Promise<User> {
+    const { state } = actionContext(context);
+    return state.service.GetById(id);
+  },
   async GetList(context): Promise<User[]> {
     const { state, commit } = actionContext(context);
     const entities = await state.service.GetList();

@@ -18,7 +18,7 @@ export default class DefaultService<T> implements Service<T> {
 
   readonly methodPost: Method = 'POST'
 
-  private readonly baseUrl: string;
+  readonly baseUrl: string;
 
   constructor(options: Options) {
     this.options = options;

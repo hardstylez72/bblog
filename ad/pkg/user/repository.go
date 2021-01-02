@@ -64,6 +64,31 @@ insert into ad.users (
 	return &g, nil
 }
 
+func (r *repository) GetById(ctx context.Context, id int) (*User, error) {
+	query := `
+		select id,
+			   external_id,
+			   is_system,
+			   name,
+			   description,
+			   email,
+			   phone,
+		       created_at,
+			   updated_at,
+			   deleted_at
+		from ad.users
+	   where deleted_at is null
+ 		 and id = $1
+`
+	var user User
+	err := r.conn.GetContext(ctx, &user, query, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
 func (r *repository) List(ctx context.Context) ([]User, error) {
 	query := `
 		select id,

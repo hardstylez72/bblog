@@ -25,5 +25,8 @@ func newListResponse(groups []User) listResponse {
 }
 
 type deleteRequest struct {
-	Id int `json:"id"`
+	Id int `json:"id" validate:"required"`
+}
+type getRequest struct {
+	Id int `json:"id" validate:"required"`
 }
