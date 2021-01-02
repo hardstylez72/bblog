@@ -23,8 +23,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ad/pkg/usergroup/controller.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/pkg/usergroup/entity.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/pkg/usergroup/repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/pkg/usergroup/transport.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/pkg/util/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/SelectableRoutesBelongGroupTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/UserGroupsSelectableTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/services/usergroup.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/store/usergroup.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/tap-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/tap-table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/util/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/util/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/DictTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/DictTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/SelectableTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/SelectableTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/CreateDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/CreateGroupDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/DeleteDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/DeleteGroupDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/GroupRouteTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/GroupsNotBelongUserDialogButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/RoutesTable.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/TapTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/TapGroupTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/pages/groupDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/pages/details.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/services/grouproute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/services/grouproute.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/services/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/services/group.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/store/group.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/store/group.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/create-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/CreateUserDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/delete-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/DeleteUserDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/routes-table-select-add-dialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/RoutesNotBelongGroupDialogButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/routes-table.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/tap-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/tap-table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/pages/page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/pages/page.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/services/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/store/store.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,24 +146,24 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../gitlab.services.mts.ru/3click/core2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ad/pkg" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ad/pkg/internal" />
-      <recent name="$PROJECT_DIR$/ad/pkg" />
-      <recent name="$PROJECT_DIR$/ad/pkg/group" />
-      <recent name="$PROJECT_DIR$/ad/pkg/group/transport" />
-      <recent name="$PROJECT_DIR$/ad/pkg/storage" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ad/pkg" />
       <recent name="$PROJECT_DIR$/ad/pkg/group/route" />
       <recent name="$PROJECT_DIR$/ad/migrations" />
       <recent name="$PROJECT_DIR$/ad/pkg/logger" />
       <recent name="$PROJECT_DIR$/ad/cmd/server" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ad/pkg/internal" />
+      <recent name="$PROJECT_DIR$/ad/pkg" />
+      <recent name="$PROJECT_DIR$/ad/pkg/group" />
+      <recent name="$PROJECT_DIR$/ad/pkg/group/transport" />
+      <recent name="$PROJECT_DIR$/ad/pkg/storage" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build github.com/hardstylez72/bblog/ad/cmd/server">
@@ -275,10 +307,6 @@
     <proxy>direct</proxy>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2302" y="275" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599217387844">
-      <screen x="0" y="0" width="3840" height="1040" />
-    </state>
-    <state x="2302" y="275" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1599217387844" />
     <state x="402" y="323" width="503" height="391" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603706415540">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -290,76 +318,76 @@
     <state x="695" y="82" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038616894" />
     <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1607358327814" />
     <state x="695" y="82" key="CommitChangelistDialog2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660517419" />
-    <state width="803" height="485" key="DebuggerActiveHint" timestamp="1607872344755">
+    <state width="803" height="485" key="DebuggerActiveHint" timestamp="1609586436131">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="996" height="485" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1603038512683" />
-    <state width="803" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1607872344755" />
+    <state width="803" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1609586436131" />
     <state x="422" y="277" width="424" height="482" key="FileChooserDialogImpl" timestamp="1608189535502">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="422" y="277" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1608189535502" />
-    <state width="1233" height="355" key="GridCell.Tab.0.bottom" timestamp="1607872772694">
+    <state width="1213" height="355" key="GridCell.Tab.0.bottom" timestamp="1609585108915">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511546" />
-    <state width="1233" height="355" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772694" />
+    <state width="1213" height="355" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1609585108915" />
     <state width="874" height="272" key="GridCell.Tab.0.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668147" />
     <state width="1480" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="355" key="GridCell.Tab.0.center" timestamp="1607872772693">
+    <state width="1213" height="355" key="GridCell.Tab.0.center" timestamp="1609585108915">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511546" />
-    <state width="1233" height="355" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772693" />
+    <state width="1213" height="355" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1609585108915" />
     <state width="874" height="272" key="GridCell.Tab.0.center/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="355" key="GridCell.Tab.0.left" timestamp="1607872772693">
+    <state width="1213" height="355" key="GridCell.Tab.0.left" timestamp="1609585108914">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511545" />
-    <state width="1233" height="355" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772693" />
+    <state width="1213" height="355" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1609585108914" />
     <state width="874" height="272" key="GridCell.Tab.0.left/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="355" key="GridCell.Tab.0.right" timestamp="1607872772694">
+    <state width="1213" height="355" key="GridCell.Tab.0.right" timestamp="1609585108915">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511546" />
-    <state width="1233" height="355" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772694" />
+    <state width="1213" height="355" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1609585108915" />
     <state width="874" height="272" key="GridCell.Tab.0.right/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="355" key="GridCell.Tab.1.bottom" timestamp="1607872772636">
+    <state width="1213" height="355" key="GridCell.Tab.1.bottom" timestamp="1609585112751">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772636" />
+    <state width="1213" height="355" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1609585112751" />
     <state width="1233" height="263" key="GridCell.Tab.1.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509497" />
-    <state width="1233" height="355" key="GridCell.Tab.1.center" timestamp="1607872772636">
+    <state width="1213" height="355" key="GridCell.Tab.1.center" timestamp="1609585112750">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772636" />
+    <state width="1213" height="355" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1609585112750" />
     <state width="1233" height="263" key="GridCell.Tab.1.center/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="355" key="GridCell.Tab.1.left" timestamp="1607872772636">
+    <state width="1213" height="355" key="GridCell.Tab.1.left" timestamp="1609585112749">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772636" />
+    <state width="1213" height="355" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1609585112749" />
     <state width="1233" height="263" key="GridCell.Tab.1.left/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="355" key="GridCell.Tab.1.right" timestamp="1607872772636">
+    <state width="1213" height="355" key="GridCell.Tab.1.right" timestamp="1609585112751">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1607872772636" />
+    <state width="1213" height="355" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1609585112751" />
     <state width="1233" height="263" key="GridCell.Tab.1.right/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
@@ -453,6 +481,16 @@
           <url>file://$PROJECT_DIR$/ad/pkg/group/controller.go</url>
           <line>56</line>
           <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/ad/pkg/usergroup/repository.go</url>
+          <line>68</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/ad/pkg/usergroup/controller.go</url>
+          <line>40</line>
+          <option name="timeStamp" value="118" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

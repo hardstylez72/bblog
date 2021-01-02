@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig, Route } from 'vue-router';
 import Home from '../../main-page.vue';
-import Group from '../../group/pages/groupDetails.vue';
+import Group from '../../group/pages/details.vue';
 import User from '../../user/pages/page.vue';
 
 Vue.use(VueRouter);

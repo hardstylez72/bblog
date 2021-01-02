@@ -20,7 +20,7 @@
         Добавление маршрутов к группе
       </v-card-title>
 
-      <routes-table
+      <GroupRoutesSelectableTable
         v-model="selected"
         :items="routes"
       >
@@ -41,7 +41,7 @@
             </div>
           </v-toolbar>
         </template>
-      </routes-table>
+      </GroupRoutesSelectableTable>
       <v-card-actions>
         <v-spacer />
         <v-btn
@@ -61,12 +61,13 @@
 import {
   Component, Vue, Prop,
 } from 'vue-property-decorator';
-import { Service } from '@/views/route/service';
+import { Route } from '@/views/route/service';
+import GroupRoutesSelectableTable from './GroupRoutesSelectableTable.vue';
 
 @Component({
   components: {
     'c-dialog': () => import('../../base/components/Dialog.vue'),
-    'routes-table': () => import('./routes-table.vue'),
+    GroupRoutesSelectableTable,
   },
 })
 export default class RoutesTableSelectAddDialog extends Vue {
@@ -75,15 +76,15 @@ export default class RoutesTableSelectAddDialog extends Vue {
   @Prop({ type: Number, default: -1 })
   private readonly groupId!: number
 
-  entities: Service[] =[]
+  entities: Route[] =[]
 
-  selected: Service[] =[]
+  selected: Route[] =[]
 
   mounted() {
     this.$store.direct.dispatch.groupRoute.GetListNotBelongToGroup(this.groupId);
   }
 
-  get routes(): readonly Service[] {
+  get routes(): readonly Route[] {
     return this.$store.direct.getters.groupRoute.getRoutesNotBelongToGroup;
   }
 

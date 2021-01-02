@@ -52,7 +52,7 @@ import {
 @Component({
   components: {
     routesTab: () => import('@/views/route/components/TabTable.vue'),
-    groupsTab: () => import('@/views/group/components/TapTable.vue'),
+    groupsTab: () => import('@/views/group/components/TapGroupTable.vue'),
     userTab: () => import('@/views/user/components/tap-table.vue'),
   },
 

@@ -6,7 +6,7 @@ import {
 } from 'direct-vuex';
 import { moduleActionContext } from '../../base/store';
 import Service from '../../base/services/default';
-import GroupService, { Group } from '../services/service';
+import GroupService, { Group } from '../services/group';
 
 export interface State<T>{
   service: Service<T>;

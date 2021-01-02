@@ -6,7 +6,7 @@ import {
 } from 'direct-vuex';
 import { moduleActionContext } from '@/views/base/store';
 import Service from '@/views/base/services/default';
-import UserService, { User } from './service';
+import UserService, { User } from '../services/user';
 
 export interface State<T>{
   service: Service<T>;
@@ -25,7 +25,7 @@ const mutations = defineMutations < State < User >>()({
   deleteEntity(state, id: number) {
     state.entities = state.entities.filter((route) => route.id !== id);
   },
-  addRoutesBelongToGroup(state, entities) {
+  addEntity(state, entities) {
     state.entities.push(entities);
   },
 });

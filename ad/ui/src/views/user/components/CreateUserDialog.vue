@@ -65,7 +65,7 @@
 import {
   Component, Vue,
 } from 'vue-property-decorator';
-import { User } from '@/views/user/service';
+import { User } from '@/views/user/services/user';
 
 @Component({
   components: {

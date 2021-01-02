@@ -62,8 +62,8 @@ import { DataTableHeader } from 'vuetify';
 
 @Component({
   components: {
-    createDialog: () => import('../../user/components/create-dialog.vue'),
-    deleteDialog: () => import('../../user/components/delete-dialog.vue'),
+    createDialog: () => import('../../user/components/CreateUserDialog.vue'),
+    deleteDialog: () => import('../../user/components/DeleteUserDialog.vue'),
   },
 })
 export default class DictTable<T> extends Vue {

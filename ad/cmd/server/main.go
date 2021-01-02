@@ -11,6 +11,7 @@ import (
 	"github.com/hardstylez72/bblog/ad/pkg/infra/storage"
 	"github.com/hardstylez72/bblog/ad/pkg/route"
 	"github.com/hardstylez72/bblog/ad/pkg/user"
+	"github.com/hardstylez72/bblog/ad/pkg/usergroup"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"log"
@@ -109,10 +110,11 @@ func Start(r chi.Router) error {
 		return err
 	}
 
-	group.NewController(group.NewRepository(pgx)).Mount(r)
 	route.NewController(route.NewRepository(pgx)).Mount(r)
+	group.NewController(group.NewRepository(pgx)).Mount(r)
 	grouproute.NewController(grouproute.NewRepository(pgx)).Mount(r)
 	user.NewController(user.NewRepository(pgx)).Mount(r)
+	usergroup.NewController(usergroup.NewRepository(pgx)).Mount(r)
 
 	return nil
 }

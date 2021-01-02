@@ -59,13 +59,13 @@
 import {
   Component,
 } from 'vue-property-decorator';
-import { Group } from '@/views/group/services/service';
+import { Group } from '@/views/group/services/group';
 import DictTable from '../../base/components/DictTable.vue';
 
 @Component({
   components: {
-    createDialog: () => import('./CreateDialog.vue'),
-    deleteDialog: () => import('./DeleteDialog.vue'),
+    createDialog: () => import('./CreateGroupDialog.vue'),
+    deleteDialog: () => import('./DeleteGroupDialog.vue'),
   },
 })
 export default class RoutesTab extends DictTable<Group> {

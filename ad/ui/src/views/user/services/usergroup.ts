@@ -1,11 +1,11 @@
 import { Method } from 'axios';
-import { Route } from '@/views/route/service';
 
+import { Group } from '@/views/group/services/group';
 import { makeRequest, Request } from '../../base/services/utils/requester';
 
-export interface GroupRoute {
+export interface UserGroup {
   groupId: number;
-  routeId: number;
+  userId: number;
 }
 
 interface Options {
@@ -13,7 +13,7 @@ interface Options {
   baseUrl: string;
 }
 
-export default class GroupRouteService {
+export default class UserGroupService {
   private options: Options
 
   private readonly methodPost: Method = 'POST'
@@ -25,7 +25,7 @@ export default class GroupRouteService {
     this.baseUrl = `${this.options.host}${this.options.baseUrl}`;
   }
 
-  Create(t: GroupRoute[]): Promise<Route[]> {
+  Create(t: UserGroup[]): Promise<Group[]> {
     const req: Request = {
       data: t,
       method: this.methodPost,
@@ -34,7 +34,7 @@ export default class GroupRouteService {
     return makeRequest(req);
   }
 
-  Delete(t: GroupRoute[]): Promise<void> {
+  Delete(t: UserGroup[]): Promise<void> {
     const req: Request = {
       data: t,
       method: this.methodPost,
@@ -43,9 +43,9 @@ export default class GroupRouteService {
     return makeRequest(req);
   }
 
-  GetList(groupId: number, belongToGroup: boolean): Promise<Route[]> {
+  GetList(userId: number, belongToUser: boolean): Promise<Group[]> {
     const req: Request = {
-      data: { groupId, belongToGroup },
+      data: { userId, belongToUser },
       method: this.methodPost,
       url: `${this.baseUrl}/list`,
     };

@@ -15,6 +15,13 @@
       <template v-slot:top>
         <slot name="top" />
       </template>
+
+      <template v-slot:item.actions="{ item }">
+        <slot
+          name="item.actions"
+          :prop="item"
+        />
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -23,11 +30,11 @@
 import {
   Component, Model, Prop, Vue, Watch,
 } from 'vue-property-decorator';
-import { Route } from '@/views/route/service';
+import { DataTableHeader } from 'vuetify';
 
 @Component
 export default class SelectableTable<T> extends Vue {
-  @Prop({ default: () => ([]), type: Array }) items: Array<T>
+  @Prop({ default: () => ([]), type: Array }) items!: Array<T>
 
   protected selected: T[] = []
 
@@ -35,16 +42,16 @@ export default class SelectableTable<T> extends Vue {
   readonly value!: []
 
   @Watch('value')
-  protected onChangeValue(value: Route[]): void {
+  protected onChangeValue(value: T[]): void {
     this.selected = value;
   }
 
   @Watch('selected')
-  protected onChangeIsShowDialog(selected: Route[]): void {
+  protected onChangeIsShowDialog(selected: T[]): void {
       this.$emit('change', selected);
   }
 
-  protected headers = []
+  protected headers: DataTableHeader[] = []
 }
 </script>
 

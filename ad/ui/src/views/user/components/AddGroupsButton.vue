@@ -11,16 +11,16 @@
         v-bind="props"
         v-on="props.on"
       >
-        Добавить маршруты
+        Добавить группы
       </v-btn>
     </template>
 
     <v-card>
       <v-card-title class="headline grey lighten-2">
-        Добавление маршрутов к группе
+        Добавление групп к пользователю
       </v-card-title>
 
-      <routes-table
+      <UserGroupsSelectableTable
         v-model="selected"
         :items="routes"
       >
@@ -36,12 +36,12 @@
                 class="mb-2"
                 @click="addSelectedRoutes"
               >
-                Добавить выбранные маршруты
+                Добавить выбранные группы
               </v-btn>
             </div>
           </v-toolbar>
         </template>
-      </routes-table>
+      </UserGroupsSelectableTable>
       <v-card-actions>
         <v-spacer />
         <v-btn
@@ -61,30 +61,32 @@
 import {
   Component, Vue, Prop,
 } from 'vue-property-decorator';
-import { Route } from '@/views/route/service';
+import { Group } from '@/views/group/services/group';
+
+import UserGroupsSelectableTable from './UserGroupsSelectableTable.vue';
 
 @Component({
   components: {
     'c-dialog': () => import('../../base/components/Dialog.vue'),
-    'routes-table': () => import('./RoutesTable.vue'),
+    UserGroupsSelectableTable,
   },
 })
 export default class RoutesTableSelectAddDialog extends Vue {
   show = false
 
   @Prop({ type: Number, default: -1 })
-  private readonly groupId!: number
+  private readonly userId!: number
 
-  entities: Route[] =[]
+  entities: Group[] =[]
 
-  selected: Route[] =[]
+  selected: Group[] =[]
 
   mounted() {
-    this.$store.direct.dispatch.groupRoute.GetListNotBelongToGroup(this.groupId);
+    this.$store.direct.dispatch.userGroup.GetListNotBelongToGroup(this.userId);
   }
 
-  get routes(): readonly Route[] {
-    return this.$store.direct.getters.groupRoute.getRoutesNotBelongToGroup;
+  get routes(): readonly Group[] {
+    return this.$store.direct.getters.userGroup.getRoutesNotBelongToGroup;
   }
 
   get showAddBtn(): boolean {
@@ -92,13 +94,13 @@ export default class RoutesTableSelectAddDialog extends Vue {
   }
 
   async addSelectedRoutes() {
-    const routes = this.selected;
-    const params = routes.map((route) => ({
-      groupId: this.groupId,
-      routeId: route.id,
+    const groups = this.selected;
+    const params = groups.map((group) => ({
+      userId: this.userId,
+      groupId: group.id,
     }));
 
-    await this.$store.direct.dispatch.groupRoute.Create(params);
+    await this.$store.direct.dispatch.userGroup.Create(params);
     this.selected = [];
     this.show = false;
   }

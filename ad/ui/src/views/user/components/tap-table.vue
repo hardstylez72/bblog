@@ -61,7 +61,7 @@ import {
 } from 'vue-property-decorator';
 
 import { DataTableHeader } from 'vuetify';
-import { User } from '../service';
+import { User } from '../services/user';
 import DictTable from '../../base/components/DictTable.vue';
 
 @Component

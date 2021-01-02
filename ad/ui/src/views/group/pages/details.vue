@@ -40,8 +40,8 @@ import { Route } from '@/views/route/service';
 
 @Component({
   components: {
-    'routes-table': () => import('../components/RoutesTable.vue'),
-    routesTableSelectAddDialog: () => import('../components/GroupRouteTable.vue'),
+    'routes-table': () => import('../components/GroupRoutesSelectableTable.vue'),
+    routesTableSelectAddDialog: () => import('../components/RoutesNotBelongGroupDialogButton.vue'),
   },
 })
 export default class RoutesTab extends Vue {
