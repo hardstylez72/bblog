@@ -14,38 +14,18 @@
           flat
         >
           <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          />
+          <v-divider class="mx-4" inset vertical/>
           <v-spacer />
-          <create-dialog />
+          <create-dialog/>
         </v-toolbar>
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="edit(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          @click="remove(item)"
-        >
-          mdi-delete
-        </v-icon>
-        <v-icon
-          small
-          class="mr-2"
-          @click="view(item)"
-        >
-          mdi-eye
-        </v-icon>
+        <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
+        <v-icon small @click="remove(item)">mdi-delete</v-icon>
+        <v-icon small class="mr-2" @click="view(item)">mdi-eye</v-icon>
       </template>
+
     </v-data-table>
     <delete-dialog
       :id="activeItemId"

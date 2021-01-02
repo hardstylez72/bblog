@@ -17,11 +17,9 @@
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <slot
-          name="item.actions"
-          :prop="item"
-        />
+        <slot name="item.actions" :prop="item"/>
       </template>
+
     </v-data-table>
   </div>
 </template>

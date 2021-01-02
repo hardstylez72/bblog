@@ -1,28 +1,13 @@
 <template>
-  <c-dialog
-    v-model="show"
-    max-width="450px"
-  >
+  <c-dialog v-model="show" max-width="450px">
     <v-card>
       <v-card-title>
         Вы уверены что хотите удлить пользователя?
       </v-card-title>
       <v-card-actions>
         <v-spacer />
-        <v-btn
-          color="blue darken-1"
-          text
-          @click="close"
-        >
-          Отмена
-        </v-btn>
-        <v-btn
-          color="blue darken-1"
-          text
-          @click="remove"
-        >
-          Да
-        </v-btn>
+        <v-btn color="blue darken-1" text @click="close">Отмена</v-btn>
+        <v-btn color="blue darken-1" text @click="remove">Да</v-btn>
         <v-spacer />
       </v-card-actions>
     </v-card>

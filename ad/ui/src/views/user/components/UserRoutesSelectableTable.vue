@@ -35,11 +35,11 @@ import { DataTableHeader } from 'vuetify';
 @Component
 export default class GroupsBelongUserSelectableTable extends SelectableTable<Group> {
   readonly headers: DataTableHeader[] = [
-    { text: 'ID', value: 'id' },
-    { text: 'Код', value: 'code' },
-    { text: 'Описание', value: 'description' },
-    { text: 'Actions', value: 'actions' },
-  ]
+      { text: 'ID', value: 'id' },
+      { text: 'Маршрут', value: 'route' },
+      { text: 'Метод', value: 'method' },
+      { text: 'Описание', value: 'description' },
+    ]
 
   view(group: Group) {
     return this.$router.push({ name: 'Group', params: { id: group.id.toString() } });

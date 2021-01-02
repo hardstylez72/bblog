@@ -7,20 +7,13 @@
     v-on="$listeners"
   >
     <template v-slot:activator="props">
-      <slot
-        name="activator"
-        v-bind="props"
-      />
+      <slot name="activator" v-bind="props"/>
     </template>
-    <template
-      v-if="isShowDialogContent"
-      v-slot:default
-    >
-      <slot
-        name="default"
-        v-bind="{ hideDialog }"
-      />
+
+    <template v-if="isShowDialogContent" v-slot:default>
+      <slot name="default" v-bind="{ hideDialog }"/>
     </template>
+
   </v-dialog>
 </template>
 

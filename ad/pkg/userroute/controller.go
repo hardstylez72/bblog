@@ -1,4 +1,4 @@
-package usergroup
+package userroute
 
 import (
 	"context"
@@ -11,14 +11,14 @@ import (
 )
 
 type params struct {
-	GroupId int `json:"groupId" validate:"required"`
+	RouteId int `json:"routeId" validate:"required"`
 	UserId  int `json:"userId" validate:"required"`
 }
 
 type Repository interface {
-	List(ctx context.Context, groupId int) ([]Group, error)
-	ListNotInGroup(ctx context.Context, groupId int) ([]Group, error)
-	Insert(ctx context.Context, params []params) ([]Group, error)
+	List(ctx context.Context, groupId int) ([]Route, error)
+	ListNotInGroup(ctx context.Context, groupId int) ([]Route, error)
+	Insert(ctx context.Context, params []params) ([]Route, error)
 	Delete(ctx context.Context, params []params) error
 }
 
@@ -68,7 +68,7 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var list []Group
+	var list []Route
 	var err error
 
 	if req.BelongToUser {
@@ -112,7 +112,7 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *controller) Mount(r chi.Router) {
-	r.Post("/v1/user/group/list", c.list)
-	r.Post("/v1/user/group/create", c.create)
-	r.Post("/v1/user/group/delete", c.delete)
+	r.Post("/v1/user/route/list", c.list)
+	r.Post("/v1/user/route/create", c.create)
+	r.Post("/v1/user/route/delete", c.delete)
 }

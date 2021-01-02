@@ -85,7 +85,7 @@ const actions = defineActions({
 });
 
 const getters = defineGetters<State>()({
-  getRoutesBelongToGroup(state): Route[] {
+  getRoutesBelongToUser(state): Route[] {
     return state.routesBelongToGroup;
   },
   getRoutesNotBelongToGroup(state): Route[] {

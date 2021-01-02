@@ -8,6 +8,7 @@ import groupModule from '../group/store/group';
 import userModule from '../user/store/store';
 import groupRouteModule from '../group/store/grouproute';
 import userGroupModule from '../user/store/usergroup';
+import userRouteModule from '../user/store/userroute';
 
 Vue.use(Vuex);
 
@@ -19,14 +20,14 @@ const {
   moduleGetterContext,
 } = createDirectStore({
 
-  actions: {
-  },
+  actions: {},
   modules: {
     route: routeModule,
     group: groupModule,
     groupRoute: groupRouteModule,
     user: userModule,
     userGroup: userGroupModule,
+    userRoute: userRouteModule,
   },
 });
 

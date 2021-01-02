@@ -11,16 +11,16 @@
         v-bind="props"
         v-on="props.on"
       >
-        Добавить группы
+        Добавить маршруты
       </v-btn>
     </template>
 
     <v-card>
       <v-card-title class="headline grey lighten-2">
-        Добавление групп к пользователю
+        Добавление маршрутов к пользователю
       </v-card-title>
 
-      <UserGroupsSelectableTable
+      <UserRoutesSelectableTable
         v-model="selected"
         :items="routes"
       >
@@ -34,14 +34,14 @@
                 v-if="showAddBtn"
                 color="primary"
                 class="mb-2"
-                @click="addSelectedGroups"
+                @click="addSelectedRoutes"
               >
-                Добавить выбранные группы
+                Добавить выбранные маршруты
               </v-btn>
             </div>
           </v-toolbar>
         </template>
-      </UserGroupsSelectableTable>
+      </UserRoutesSelectableTable>
       <v-card-actions>
         <v-spacer />
         <v-btn
@@ -63,12 +63,13 @@ import {
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
 
-import UserGroupsSelectableTable from './UserGroupsSelectableTable.vue';
+import { Route } from '@/views/route/service';
+import UserRoutesSelectableTable from './UserRoutesSelectableTable.vue';
 
 @Component({
   components: {
     'c-dialog': () => import('../../base/components/Dialog.vue'),
-    UserGroupsSelectableTable,
+    UserRoutesSelectableTable,
   },
 })
 export default class RoutesTableSelectAddDialog extends Vue {
@@ -82,25 +83,25 @@ export default class RoutesTableSelectAddDialog extends Vue {
   selected: Group[] =[]
 
   mounted() {
-    this.$store.direct.dispatch.userGroup.GetListNotBelongToGroup(this.userId);
+    this.$store.direct.dispatch.userRoute.GetListNotBelongToGroup(this.userId);
   }
 
-  get routes(): readonly Group[] {
-    return this.$store.direct.getters.userGroup.getGroupsNotBelongToUser;
+  get routes(): readonly Route[] {
+    return this.$store.direct.getters.userRoute.getRoutesNotBelongToGroup;
   }
 
   get showAddBtn(): boolean {
     return this.selected.length > 0;
   }
 
-  async addSelectedGroups() {
-    const groups = this.selected;
-    const params = groups.map((group) => ({
+  async addSelectedRoutes() {
+    const routes = this.selected;
+    const params = routes.map((route) => ({
       userId: this.userId,
-      groupId: group.id,
+      routeId: route.id,
     }));
 
-    await this.$store.direct.dispatch.userGroup.Create(params);
+    await this.$store.direct.dispatch.userRoute.Create(params);
     this.selected = [];
     this.show = false;
   }
