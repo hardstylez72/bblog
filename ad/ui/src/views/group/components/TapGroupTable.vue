@@ -11,44 +11,21 @@
       </template>
 
       <template v-slot:top>
-        <v-toolbar
-          flat
-        >
+        <v-toolbar flat>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          />
-          <v-spacer />
-          <create-dialog />
+          <v-divider class="mx-4" inset vertical/>
+          <v-spacer/>
+          <CreateGroupDialog/>
         </v-toolbar>
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="edit(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          @click="remove(item)"
-        >
-          mdi-delete
-        </v-icon>
-        <v-icon
-          small
-          class="mr-2"
-          @click="view(item)"
-        >
-          mdi-eye
-        </v-icon>
+        <v-icon small class="mr-2" @click="view(item)">mdi-eye</v-icon>
+        <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
+        <v-icon small @click="remove(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
-    <delete-dialog
+    <DeleteGroupDialog
       :id="activeItemId"
       v-model="showDeleteDialog"
     />
@@ -60,21 +37,24 @@ import {
   Component,
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
+import { DataTableHeader } from 'vuetify';
 import DictTable from '../../base/components/DictTable.vue';
+import CreateGroupDialog from './CreateGroupDialog.vue';
+import DeleteGroupDialog from './DeleteGroupDialog.vue';
 
 @Component({
   components: {
-    createDialog: () => import('./CreateGroupDialog.vue'),
-    deleteDialog: () => import('./DeleteGroupDialog.vue'),
+    CreateGroupDialog,
+    DeleteGroupDialog,
   },
 })
-export default class RoutesTab extends DictTable<Group> {
+export default class TapGroupTable extends DictTable<Group> {
   readonly title = 'Группы'
 
-  readonly headers = [
-    { text: 'ID', value: 'id' },
-    { text: 'Код', value: 'code' },
-    { text: 'Описание', value: 'description' },
+  readonly headers: DataTableHeader[] = [
+    { text: 'ID', value: 'id', width: '3%' },
+    { text: 'Код', value: 'code', width: '15%' },
+    { text: 'Описание', value: 'description', width: '70%' },
     { text: 'Actions', value: 'actions', sortable: false },
   ]
 

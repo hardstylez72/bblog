@@ -9,7 +9,7 @@ import Service from '../../base/services/default';
 import GroupService, { Group } from '../services/group';
 
 export interface State<T>{
-  service: Service<T>;
+  service: GroupService;
   entities: T[];
 }
 
@@ -31,6 +31,10 @@ const mutations = defineMutations < State < Group >>()({
 });
 
 const actions = defineActions({
+  async GetById(context, id: number): Promise<Group> {
+    const { state } = actionContext(context);
+    return state.service.GetById(id);
+  },
   async GetList(context): Promise<Group[]> {
     const { state, commit } = actionContext(context);
     const entities = await state.service.GetList();

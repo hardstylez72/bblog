@@ -11,44 +11,21 @@
       </template>
 
       <template v-slot:top>
-        <v-toolbar
-          flat
-        >
+        <v-toolbar flat>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          />
-          <v-spacer />
-          <create-dialog />
+          <v-divider class="mx-4" inset vertical/>
+          <v-spacer/>
+          <CreateUserDialog/>
         </v-toolbar>
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="view(item)"
-        >
-          mdi-eye
-        </v-icon>
-        <v-icon
-          small
-          class="mr-2"
-          @click="edit(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          @click="remove(item)"
-        >
-          mdi-delete
-        </v-icon>
+        <v-icon small class="mr-2" @click="view(item)">mdi-eye</v-icon>
+        <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
+        <v-icon small @click="remove(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
-    <delete-dialog
+    <DeleteUserDialog
       :id="activeItemId"
       v-model="showDeleteDialog"
     />
@@ -63,9 +40,16 @@ import {
 import { DataTableHeader } from 'vuetify';
 import { User } from '../services/user';
 import DictTable from '../../base/components/DictTable.vue';
+import CreateUserDialog from './CreateUserDialog.vue';
+import DeleteUserDialog from './DeleteUserDialog.vue';
 
-@Component
-export default class UserDictTable extends DictTable<User> {
+@Component({
+  components: {
+    CreateUserDialog,
+    DeleteUserDialog,
+  },
+})
+export default class TapUserTable extends DictTable<User> {
   protected title = 'Пользователи'
 
   get users(): readonly User[] {
@@ -76,7 +60,7 @@ export default class UserDictTable extends DictTable<User> {
     this.$store.direct.dispatch.user.GetList();
   }
 
-  protected view(item: T): void {
+  protected view(item: User): void {
      this.$router.push({ name: 'User', params: { id: item.id.toString() } });
   }
 

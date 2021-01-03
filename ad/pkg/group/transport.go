@@ -1,8 +1,8 @@
 package group
 
 type insertRequest struct {
-	Code        string `json:"code"`
-	Description string `json:"description"`
+	Code        string `json:"code" validate:"required"`
+	Description string `json:"description" validate:"required"`
 }
 
 func insertRequestConvert(r *insertRequest) *Group {
@@ -25,5 +25,9 @@ func newListResponse(groups []Group) listResponse {
 }
 
 type deleteRequest struct {
-	Id int `json:"id"`
+	Id int `json:"id" validate:"required"`
+}
+
+type getRequest struct {
+	Id int `json:"id" validate:"required"`
 }

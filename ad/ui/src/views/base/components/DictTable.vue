@@ -16,7 +16,6 @@
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical/>
           <v-spacer />
-          <create-dialog/>
         </v-toolbar>
       </template>
 
@@ -27,10 +26,6 @@
       </template>
 
     </v-data-table>
-    <delete-dialog
-      :id="activeItemId"
-      v-model="showDeleteDialog"
-    />
   </div>
 </template>
 
@@ -40,12 +35,7 @@ import {
 } from 'vue-property-decorator';
 import { DataTableHeader } from 'vuetify';
 
-@Component({
-  components: {
-    createDialog: () => import('../../user/components/CreateUserDialog.vue'),
-    deleteDialog: () => import('../../user/components/DeleteUserDialog.vue'),
-  },
-})
+@Component
 export default class DictTable<T> extends Vue {
   protected items: T[] = []
 

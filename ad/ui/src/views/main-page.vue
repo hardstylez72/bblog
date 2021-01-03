@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import MainTabs from '@/views/base/MainPage.vue'; // @ is an alias to /src
+import MainTabs from '@/views/base/pages/Main.vue'; // @ is an alias to /src
 
 @Component({
   components: {

@@ -8,13 +8,13 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="item in tabs" :key="item">
         <div v-if="item === tabs[0]">
-          <routes-tab />
+          <TabRouteTable/>
         </div>
         <div v-if="item === tabs[1]">
-          <groups-tab />
+          <TapGroupTable/>
         </div>
         <div v-if="item === tabs[2]">
-          <user-tab />
+          <TapUserTable/>
         </div>
       </v-tab-item>
     </v-tabs-items>
@@ -27,11 +27,15 @@ import {
   Component, Prop, Vue, Watch,
 } from 'vue-property-decorator';
 
+import TabRouteTable from '@/views/route/components/TabRouteTable.vue';
+import TapGroupTable from '@/views/group/components/TapGroupTable.vue';
+import TapUserTable from '@/views/user/components/TapUserTable.vue';
+
 @Component({
   components: {
-    routesTab: () => import('@/views/route/components/TabTable.vue'),
-    groupsTab: () => import('@/views/group/components/TapGroupTable.vue'),
-    userTab: () => import('@/views/user/components/TapUserTable.vue'),
+    TabRouteTable,
+    TapGroupTable,
+    TapUserTable,
   },
 
 })
@@ -88,23 +92,6 @@ export default class MainTabs extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 10px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-routes-tab {
-  display: flex;
-  flex-direction: column;
-}
+<style  lang="scss">
+
 </style>

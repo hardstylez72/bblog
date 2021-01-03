@@ -21,7 +21,7 @@
             vertical
           />
           <v-spacer />
-          <create-dialog />
+          <CreateRouteDialog/>
         </v-toolbar>
       </template>
 
@@ -41,7 +41,7 @@
         </v-icon>
       </template>
     </v-data-table>
-    <delete-dialog
+    <DeleteRouteDialog
       :id="activeItemId"
       v-model="showDeleteDialog"
     />
@@ -54,22 +54,16 @@ import {
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import DictTable from '@/views/base/components/DictTable.vue';
+import CreateRouteDialog from './CreateRouteDialog.vue';
+import DeleteRouteDialog from './DeleteRouteDialog.vue';
 
 @Component({
   components: {
-    createDialog: () => import('./CreateDialog.vue'),
-    deleteDialog: () => import('./DeleteDialog.vue'),
-  },
-  computed: {
-    routes(): readonly Route[] {
-      return this.$store.direct.getters.route.getRoutes;
-    },
-  },
-  mounted() {
-    this.$store.direct.dispatch.route.GetList();
+    CreateRouteDialog,
+    DeleteRouteDialog,
   },
 })
-export default class RoutesTab extends DictTable<Route> {
+export default class TabRouteTable extends DictTable<Route> {
   readonly title = 'Маршруты'
 
   mounted() {

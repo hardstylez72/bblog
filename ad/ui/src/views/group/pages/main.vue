@@ -1,6 +1,7 @@
 <template>
   <div>
-    <routes-table
+    <h2>Группа {{groupC.code}}</h2>
+    <GroupRoutesSelectableTable
       v-model="selected"
       :items="routes"
     >
@@ -25,10 +26,10 @@
               Удалить выбранные маршруты
             </v-btn>
           </div>
-          <routes-table-select-add-dialog :group-id="groupIdC" />
+          <AddRoutesButton :group-id="groupIdC" />
         </v-toolbar>
       </template>
-    </routes-table>
+    </GroupRoutesSelectableTable>
   </div>
 </template>
 
@@ -37,26 +38,42 @@ import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
+import { Group } from '@/views/group/services/group';
+import GroupRoutesSelectableTable from '../components/GroupRoutesSelectableTable.vue';
+import AddRoutesButton from '../components/AddRoutesButton.vue';
 
 @Component({
   components: {
-    'routes-table': () => import('../components/GroupRoutesSelectableTable.vue'),
-    routesTableSelectAddDialog: () => import('../components/RoutesNotBelongGroupDialogButton.vue'),
+    GroupRoutesSelectableTable,
+    AddRoutesButton,
   },
 })
 export default class RoutesTab extends Vue {
   dict = {
-    title: `Маршруты группы ${this.$route.params.id}`,
+    title: 'Маршруты',
+  }
+
+  group?: Group = {
+    id: -1,
+    description: 'не известный',
+    code: 'Не определена',
   }
 
   get groupIdC(): number {
     return this.groupId;
   }
 
+  get groupC(): Group {
+    return this.group;
+  }
+
   groupId = Number(this.$route.params.id);
 
   mounted() {
     this.$store.direct.dispatch.groupRoute.GetListBelongToGroup(this.groupId);
+    this.$store.direct.dispatch.group.GetById(this.groupId).then((group) => {
+      this.group = group;
+    });
   }
 
   get routes(): readonly Route[] {

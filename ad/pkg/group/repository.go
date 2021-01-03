@@ -52,6 +52,27 @@ insert into ad.groups (
 	return &g, nil
 }
 
+func (r *repository) GetById(ctx context.Context, id int) (*Group, error) {
+	query := `
+		select id,
+			   code,
+			   description,
+			   created_at,
+			   updated_at,
+			   deleted_at
+		from ad.groups
+	   where deleted_at is null
+		 and id = $1
+`
+	var group Group
+	err := r.conn.GetContext(ctx, &group, query, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &group, nil
+}
+
 func (r *repository) List(ctx context.Context) ([]Group, error) {
 	query := `
 		select id,

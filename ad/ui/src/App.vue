@@ -1,11 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    />
-
+    <v-app-bar app color="primary" dark><h1>BZDACS</h1></v-app-bar>
     <v-main>
       <router-view />
     </v-main>
@@ -14,7 +9,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import MainTabs from '@/views/base/MainPage.vue';
+import MainTabs from '@/views/base/pages/Main.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -22,10 +17,16 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="css">
+.v-main {
+  font-family: "Lobster";
+  width: 99%;
+  margin-left: 0.5%;
+  margin-top: 0.5%;
+}
 
-v-main {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+@font-face {
+  font-family: "Lobster";
+  src: local("Lobster"),
+  url(./assets/fonts/lobster.ttf) format("truetype");
 }
 </style>

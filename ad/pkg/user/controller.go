@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/go-chi/chi"
-	"github.com/go-chi/render"
 	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"net/http"
 )
@@ -29,17 +28,17 @@ func (c *controller) create(w http.ResponseWriter, r *http.Request) {
 	var req insertRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
 		return
 	}
 
 	group, err := c.rep.Insert(ctx, insertRequestConvert(&req))
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
 		return
 	}
 
-	render.JSON(w, r, newInsertResponse(group))
+	util.NewResponse(w).WithStatus(http.StatusOK).WithJson(group).Send()
 }
 
 func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
@@ -65,11 +64,11 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 
 	list, err := c.rep.List(ctx)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
 		return
 	}
 
-	render.JSON(w, r, newListResponse(list))
+	util.NewResponse(w).WithJson(list).WithStatus(http.StatusOK).Send()
 }
 
 func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
@@ -78,17 +77,17 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 	var req deleteRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
 		return
 	}
 
 	err := c.rep.Delete(ctx, req.Id)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	util.NewResponse(w).WithStatus(http.StatusOK).Send()
 }
 
 func (c *controller) Mount(r chi.Router) {

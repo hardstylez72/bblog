@@ -12,6 +12,12 @@ export default class GroupRoutesSelectableTable extends SelectableTable<Route> {
     { text: 'Описание', value: 'description' },
   ]
 }
+
+/*
+*
+*     { text: 'ID', value: 'id', width: '3%' },
+    { text: 'Код', value: 'code', width: '15%' },
+    { text: 'Описание', value: 'description', width: '74%' }, */
 </script>
 
 <style scoped lang="scss">
