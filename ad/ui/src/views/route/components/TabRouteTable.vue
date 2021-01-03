@@ -11,40 +11,20 @@
       </template>
 
       <template v-slot:top>
-        <v-toolbar
-          flat
-        >
+        <v-toolbar flat>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          />
+          <v-divider class="mx-4" inset vertical/>
           <v-spacer />
           <CreateRouteDialog/>
         </v-toolbar>
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="edit(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          @click="remove(item)"
-        >
-          mdi-delete
-        </v-icon>
+        <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
+        <v-icon small @click="remove(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
-    <DeleteRouteDialog
-      :id="activeItemId"
-      v-model="showDeleteDialog"
-    />
+    <DeleteRouteDialog :route-id="activeItemId" v-model="showDeleteDialog"/>
   </div>
 </template>
 
@@ -54,6 +34,7 @@ import {
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import DictTable from '@/views/base/components/DictTable.vue';
+import { DataTableHeader } from 'vuetify';
 import CreateRouteDialog from './CreateRouteDialog.vue';
 import DeleteRouteDialog from './DeleteRouteDialog.vue';
 
@@ -76,23 +57,11 @@ export default class TabRouteTable extends DictTable<Route> {
 
   methods = ['GET', 'POST', 'PUT', 'DELETE']
 
-  readonly headers = [
-    {
-      text: 'ID',
-      value: 'id',
-    },
-    {
-      text: 'Маршруты',
-      value: 'route',
-    },
-    {
-      text: 'Метод',
-      value: 'method',
-    },
-    {
-      text: 'Описание',
-      value: 'description',
-    },
+  readonly headers: DataTableHeader[] = [
+    { text: 'ID', value: 'id' },
+    { text: 'Маршруты', value: 'route' },
+    { text: 'Метод', value: 'method' },
+    { text: 'Описание', value: 'description' },
     { text: 'Actions', value: 'actions', sortable: false },
   ]
 }

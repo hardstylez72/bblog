@@ -28,16 +28,16 @@ func (c *controller) create(w http.ResponseWriter, r *http.Request) {
 	var req insertRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}
 
 	group, err := c.rep.Insert(ctx, insertRequestConvert(&req))
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
-	util.NewResponse(w).WithStatus(http.StatusOK).WithJson(newInsertResponse(group)).Send()
+	util.NewResp(w).Status(http.StatusOK).Json(newInsertResponse(group)).Send()
 }
 
 func (c *controller) list(w http.ResponseWriter, r *http.Request) {
@@ -45,10 +45,10 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 
 	list, err := c.rep.List(ctx)
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
-	util.NewResponse(w).WithStatus(http.StatusOK).WithJson(newListResponse(list)).Send()
+	util.NewResp(w).Status(http.StatusOK).Json(newListResponse(list)).Send()
 }
 func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -56,17 +56,17 @@ func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
 	var req getRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}
 
 	group, err := c.rep.GetById(ctx, req.Id)
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResponse(w).WithStatus(http.StatusOK).WithJson(group).Send()
+	util.NewResp(w).Status(http.StatusOK).Json(group).Send()
 }
 
 func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
@@ -75,17 +75,17 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 	var req deleteRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}
 
 	err := c.rep.Delete(ctx, req.Id)
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResponse(w).WithStatus(http.StatusOK).Send()
+	util.NewResp(w).Status(http.StatusOK).Send()
 }
 
 func (c *controller) Mount(r chi.Router) {

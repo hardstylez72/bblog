@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/go-chi/chi"
+	"github.com/go-playground/validator/v10"
 	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"net/http"
 )
@@ -16,11 +17,12 @@ type Repository interface {
 }
 
 type controller struct {
-	rep Repository
+	rep       Repository
+	validator *validator.Validate
 }
 
 func NewController(rep Repository) *controller {
-	return &controller{rep: rep}
+	return &controller{rep: rep, validator: validator.New()}
 }
 
 func (c *controller) create(w http.ResponseWriter, r *http.Request) {
@@ -28,17 +30,22 @@ func (c *controller) create(w http.ResponseWriter, r *http.Request) {
 	var req insertRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}
 
 	group, err := c.rep.Insert(ctx, insertRequestConvert(&req))
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResponse(w).WithStatus(http.StatusOK).WithJson(group).Send()
+	util.NewResp(w).Status(http.StatusOK).Json(newInsertResponse(group)).Send()
 }
 
 func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
@@ -46,17 +53,22 @@ func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
 	var req getRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}
 
 	user, err := c.rep.GetById(ctx, req.Id)
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResponse(w).WithJson(user).WithStatus(http.StatusOK).Send()
+	util.NewResp(w).Json(user).Status(http.StatusOK).Send()
 }
 
 func (c *controller) list(w http.ResponseWriter, r *http.Request) {
@@ -64,11 +76,11 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 
 	list, err := c.rep.List(ctx)
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResponse(w).WithJson(list).WithStatus(http.StatusOK).Send()
+	util.NewResp(w).Json(newListResponse(list)).Status(http.StatusOK).Send()
 }
 
 func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
@@ -77,17 +89,22 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 	var req deleteRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}
 
 	err := c.rep.Delete(ctx, req.Id)
 	if err != nil {
-		util.NewResponse(w).WithError(err).WithStatus(http.StatusInternalServerError).Send()
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResponse(w).WithStatus(http.StatusOK).Send()
+	util.NewResp(w).Status(http.StatusOK).Send()
 }
 
 func (c *controller) Mount(r chi.Router) {

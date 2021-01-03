@@ -1,17 +1,7 @@
 <template>
-  <c-dialog
-    v-model="show"
-  >
+  <c-dialog v-model="show">
     <template v-slot:activator="props">
-      <v-btn
-        color="primary"
-
-        class="mb-2"
-        v-bind="props"
-        v-on="props.on"
-      >
-        Новый маршрут
-      </v-btn>
+      <v-btn color="primary" class="mb-2" v-bind="props" v-on="props.on">Новый маршрут</v-btn>
     </template>
 
     <v-card>
@@ -19,17 +9,9 @@
         Создание маршрута
       </v-card-title>
       <v-card-text>
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-        >
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-row>
-            <v-col
-              cols="12"
-              sm="10"
-              md="10"
-            >
+            <v-col cols="12" sm="10" md="10">
               <v-text-field
                 v-model="route.route"
                 required
@@ -37,11 +19,7 @@
                 label="Маршрут"
               />
             </v-col>
-            <v-col
-              cols="12"
-              sm="2"
-              md="2"
-            >
+            <v-col cols="12" sm="2" md="2">
               <v-select
                 v-model="route.method"
                 required
@@ -50,11 +28,7 @@
                 label="Метод"
               />
             </v-col>
-            <v-col
-              cols="12"
-              sm="10"
-              md="10"
-            >
+            <v-col cols="12" sm="10" md="10">
               <v-textarea
                 v-model="route.description"
                 outlined
@@ -68,20 +42,8 @@
 
         <v-card-actions>
           <v-spacer />
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="close"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="createRoute"
-          >
-            Save
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+          <v-btn color="blue darken-1" text @click="createRoute">Save</v-btn>
         </v-card-actions>
       </v-card-text>
     </v-card>
@@ -108,22 +70,46 @@ export default class CreateRouteDialog extends Vue {
     description: '',
     id: -1,
     method: '',
-    route: '',
+    route: '/',
   }
 
   httpMethodList = ['GET', 'POST', 'PUT', 'DELETE']
 
   validate() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     this.$refs.form.validate();
   }
 
   routeRules = [
-    (v) => !!v || 'Обязательное поле',
+    (v: string) => !!v || 'Обязательное поле',
+    (v: string) => {
+      if (v) {
+        if (v.length) {
+          if (v[0] !== '/') {
+            return 'Маршрут должен начинаться со знака `/`';
+          }
+        }
+      }
+      return true;
+    },
+    (v: string) => {
+      if (v) {
+        if (v.length) {
+          if (v.includes('//')) {
+            return 'Маршрут не должен содержать повторяющиеся знаки типа //';
+          }
+        }
+      }
+      return true;
+    },
 ]
 
-  methodRules = this.routeRules
+  methodRules = [
+    (v: string) => !!v || 'Обязательное поле',
+  ]
 
-  descriptionRules = this.routeRules
+  descriptionRules = this.methodRules
 
   async createRoute() {
     this.validate();

@@ -85,11 +85,13 @@ export default class CreateRouteDialog extends Vue {
   }
 
   validate() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     this.$refs['create-user-form'].validate();
   }
 
   rules = [
-    (v) => !!v || 'Обязательное поле',
+    (v: string) => !!v || 'Обязательное поле',
 ]
 
   externalIdRules = this.rules

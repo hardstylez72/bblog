@@ -1,9 +1,9 @@
 package route
 
 type insertRequest struct {
-	Route       string `json:"route"`
-	Description string `json:"description"`
-	Method      string `json:"method"`
+	Route       string `json:"route" validate:"required"`
+	Description string `json:"description" validate:"required"`
+	Method      string `json:"method" validate:"required"`
 }
 
 func insertRequestConvert(r *insertRequest) *Route {
@@ -27,5 +27,5 @@ func newListResponse(groups []Route) listResponse {
 }
 
 type deleteRequest struct {
-	Id int `json:"id"`
+	Id int `json:"id" validate:"required"`
 }

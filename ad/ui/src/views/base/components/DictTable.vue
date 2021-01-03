@@ -34,9 +34,10 @@ import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { DataTableHeader } from 'vuetify';
+import { Entity } from '@/views/base/services/entity';
 
 @Component
-export default class DictTable<T> extends Vue {
+export default class DictTable<T extends Entity> extends Vue {
   protected items: T[] = []
 
   protected title = ''

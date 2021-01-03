@@ -1,7 +1,8 @@
 import { makeRequest, Request } from '@/views/base/services/utils/requester';
-import DefaultService, { T } from '../../base/services/default';
+import { Entity } from '@/views/base/services/entity';
+import DefaultService from '@/views/base/services/default';
 
-export interface User {
+export interface User extends Entity {
   id: number;
   externalId: string;
   isSystem: boolean;

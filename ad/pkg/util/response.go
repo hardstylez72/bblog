@@ -9,27 +9,27 @@ type jsonRes struct {
 	w                http.ResponseWriter
 	err              error
 	errorDescription string
-	body interface{}
-	statusCode int
+	body             interface{}
+	statusCode       int
 }
 
-func NewResponse(w http.ResponseWriter) *jsonRes {
+func NewResp(w http.ResponseWriter) *jsonRes {
 	return &jsonRes{
 		w: w,
 	}
 }
 
-func (r *jsonRes) WithError(err error) *jsonRes {
+func (r *jsonRes) Error(err error) *jsonRes {
 	r.err = err
 	return r
 }
 
-func (r *jsonRes) WithStatus(statusCode int) *jsonRes {
+func (r *jsonRes) Status(statusCode int) *jsonRes {
 	r.statusCode = statusCode
 	return r
 }
 
-func (r *jsonRes) WithJson(body interface{}) *jsonRes {
+func (r *jsonRes) Json(body interface{}) *jsonRes {
 	r.body = body
 	return r
 }

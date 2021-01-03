@@ -53,7 +53,7 @@ export default class RoutesTab extends Vue {
     title: 'Маршруты',
   }
 
-  group?: Group = {
+  group: Group = {
     id: -1,
     description: 'не известный',
     code: 'Не определена',

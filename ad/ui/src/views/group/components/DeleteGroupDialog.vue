@@ -42,7 +42,7 @@ import {
 export default class DeleteRouteDialog extends Vue {
   show = false
 
-  @Prop() id: number
+  @Prop() id!: number
 
   @Model('change', { default: false, type: Boolean })
   readonly value!: boolean

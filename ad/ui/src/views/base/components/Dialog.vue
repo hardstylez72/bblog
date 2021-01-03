@@ -28,7 +28,7 @@ export default class RoutesTab extends Vue {
 
   protected isShowDialogContent = false;
 
-  @Prop({ type: String, default: '800px' }) readonly maxWidth: string
+  @Prop({ type: String, default: '800px' }) readonly maxWidth?: string
 
   @Model('change', { default: false, type: Boolean })
   readonly value!: boolean
