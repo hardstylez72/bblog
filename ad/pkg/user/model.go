@@ -15,7 +15,7 @@ type User struct {
 	Email       util.JsonNullString `json:"email" db:"email"`
 	Phone       util.JsonNullString `json:"hone" db:"phone"`
 
-	CreatedAt   time.Time         `json:"createdAt" db:"created_at"`
-	UpdatedAt   util.JsonNullTime `json:"updatedAt" db:"updated_at"`
-	DeletedAt   util.JsonNullTime `json:"deletedAt" db:"deleted_at"`
+	CreatedAt time.Time         `json:"createdAt" db:"created_at"`
+	UpdatedAt util.JsonNullTime `json:"updatedAt" db:"updated_at"`
+	DeletedAt util.JsonNullTime `json:"deletedAt" db:"deleted_at"`
 }

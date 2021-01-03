@@ -27,6 +27,6 @@ export default Vue.extend({
 @font-face {
   font-family: "Lobster";
   src: local("Lobster"),
-  url(./assets/fonts/lobster.ttf) format("truetype");
+  url(../public/fonts/lobster.ttf) format("truetype");
 }
 </style>

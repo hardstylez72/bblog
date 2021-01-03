@@ -1,6 +1,6 @@
 -- +goose Up
 
-create table if not exists ad.routes_groups (
+create table if not exists ad.groups_routes (
    route_id int  references ad.routes (id) not null,
    group_id int references ad.groups (id) not null,
    UNIQUE  (route_id, group_id)
@@ -8,4 +8,4 @@ create table if not exists ad.routes_groups (
 
 -- +goose Down
 
-drop table if exists ad.routes_groups;
+drop table if exists ad.groups_routes;

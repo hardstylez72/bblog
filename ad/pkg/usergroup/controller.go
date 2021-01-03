@@ -64,7 +64,6 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 
 	if err := c.validator.Struct(req); err != nil {
 		util.NewResponse(w).WithError(err).WithStatus(http.StatusBadRequest).Send()
-		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 

@@ -14,7 +14,7 @@ func NewRepository(conn *sqlx.DB) *repository {
 }
 
 func (r *repository) deletePair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) error {
-	query := `delete from ad.routes_groups where route_id = $1 and group_id = $2`
+	query := `delete from ad.groups_routes where route_id = $1 and group_id = $2`
 
 	_, err := tx.ExecContext(ctx, query, routeId, groupId)
 	if err != nil {
@@ -48,7 +48,7 @@ func (r *repository) Delete(ctx context.Context, params []params) error {
 func (r *repository) insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route, error) {
 	query := `
 		with insert_row as (
-			insert into ad.routes_groups (
+			insert into ad.groups_routes (
 					   route_id,
 					   group_id
 					   )
@@ -111,8 +111,8 @@ func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Route, 
 			   r.updated_at,
 			   r.deleted_at
 		from ad.routes r
-    left join ad.routes_groups rg on rg.route_id = r.id
-        where r.id not in (select route_id from ad.routes_groups where group_id = $1)
+    left join ad.groups_routes rg on rg.route_id = r.id
+        where r.id not in (select route_id from ad.groups_routes where group_id = $1)
           and deleted_at is null
 `
 	routes := make([]Route, 0)
@@ -134,7 +134,7 @@ func (r *repository) List(ctx context.Context, groupId int) ([]Route, error) {
 			   r.updated_at,
 			   r.deleted_at
 		from ad.routes r
-    left join ad.routes_groups rg on rg.route_id = r.id
+    left join ad.groups_routes rg on rg.route_id = r.id
         where rg.group_id = $1 
           and deleted_at is null
 `

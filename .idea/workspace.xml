@@ -23,31 +23,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/assets/fonts/lobster.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/group/transport.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/transport.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/user/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/user/controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/group/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/group/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/grouproute/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/grouproute/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/route/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/route/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/user/entity.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/user/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/usergroup/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/usergroup/controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/android-chrome-192x192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/android-chrome-512x512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/android-chrome-maskable-192x192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/android-chrome-maskable-512x512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/apple-touch-icon-120x120.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/apple-touch-icon-152x152.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/apple-touch-icon-180x180.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/apple-touch-icon-60x60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/apple-touch-icon-76x76.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/apple-touch-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/favicon-16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/favicon-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/msapplication-icon-144x144.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/mstile-150x150.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/img/icons/safari-pinned-tab.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ad/ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/plugins/vuetify.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/plugins/vuetify.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/pages/Main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/DictTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/DictTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/GroupRoutesSelectableTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/GroupRoutesSelectableTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/RoutesNotBelongGroupDialogButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/AddRoutesButton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/TapGroupTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/TapGroupTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/pages/details.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/pages/main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/services/group.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/services/group.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/store/group.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/store/group.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/store/grouproute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/store/grouproute.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/main-page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/main-page.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/components/CreateDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/CreateRouteDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/components/DeleteDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/DeleteRouteDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/components/TabTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/TabRouteTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/TapUserTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/TapUserTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/services/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/pages/page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/pages/main.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/assets/fonts/lobster.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/public/fonts/lobster.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/assets/logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,11 +304,11 @@
     </state>
     <state x="402" y="323" width="503" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1603706415540" />
     <state x="302" y="323" width="471" height="391" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601659314025" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1609611949460">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1609667202573">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="695" y="82" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038616894" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1609611949460" />
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1609667202573" />
     <state x="695" y="82" key="CommitChangelistDialog2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660517419" />
     <state width="803" height="485" key="DebuggerActiveHint" timestamp="1609666140654">
       <screen x="0" y="0" width="2560" height="1040" />
@@ -386,11 +387,11 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="138" y="153" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1607868881689" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1609611952674">
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1609667205456">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="806" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038626734" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1609611952674" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1609667205456" />
     <state x="806" y="257" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660521166" />
     <state width="960" height="520" key="XDebugger.FullValuePopup" timestamp="1603038386546">
       <screen x="0" y="0" width="1920" height="1040" />
