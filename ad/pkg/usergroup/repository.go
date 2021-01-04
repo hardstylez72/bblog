@@ -109,7 +109,6 @@ func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Group, 
 			   r.updated_at,
 			   r.deleted_at
 		from ad.groups r
-    left join ad.users_groups rg on rg.group_id = r.id
         where r.id not in (select group_id from ad.users_groups where user_id = $1)
           and deleted_at is null
 `

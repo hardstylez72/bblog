@@ -52,6 +52,7 @@ import {
 import { Group } from '@/views/group/services/group';
 import { Route } from '@/views/route/service';
 import { User } from '@/views/user/services/user';
+import { RouteWithGroups } from '@/views/user/services/userroute';
 import UserGroupsSelectableTable from '../components/UserGroupsSelectableTable.vue';
 import UserRoutesSelectableTable from '../components/UserRoutesSelectableTable.vue';
 import AddGroupsButton from '../components/AddGroupsButton.vue';
@@ -83,9 +84,23 @@ export default class UserPage extends Vue {
 
   selectedRoutes: Route[] = []
 
- async mounted() {
+  routeWithGroups: RouteWithGroups[] = []
+
+  async mounted() {
     this.$store.direct.dispatch.userGroup.GetListBelongToGroup(this.userId);
-    this.$store.direct.dispatch.userRoute.GetListBelongToGroup(this.userId);
+    this.$store.direct.dispatch.userRoute.GetDetailedRouteList(this.userId).then((routes) => {
+      const rs: RouteWithGroups[] = routes.map((route) => {
+        const r = {
+          ...route,
+          groupCodes: route.groups.map((group) => group.code).join(', '),
+          // isSelectable: false,
+        };
+
+        return r;
+      });
+
+      this.routeWithGroups = rs;
+   });
     this.$store.direct.dispatch.user.GetById(this.userId).then((user) => {
        this.user = user;
      });
@@ -133,8 +148,8 @@ export default class UserPage extends Vue {
     return this.$store.direct.getters.userGroup.getGroupsBelongToUser;
   }
 
-  get routes(): readonly Route[] {
-    return this.$store.direct.getters.userRoute.getRoutesBelongToUser;
+  get routes(): readonly RouteWithGroups[] {
+    return this.routeWithGroups;
   }
 }
 </script>

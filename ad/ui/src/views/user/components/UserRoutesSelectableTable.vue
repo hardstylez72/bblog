@@ -7,6 +7,7 @@
       sort-by="calories"
       class="elevation-1"
       show-select
+
     >
       <template v-slot:no-data>
         Нет данных
@@ -39,6 +40,7 @@ export default class GroupsBelongUserSelectableTable extends SelectableTable<Gro
       { text: 'Маршрут', value: 'route' },
       { text: 'Метод', value: 'method' },
       { text: 'Описание', value: 'description' },
+      { text: 'Группы', value: 'groupCodes' },
     ]
 
   view(group: Group) {

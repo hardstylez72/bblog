@@ -4,7 +4,7 @@
 import {
   defineActions, defineModule, defineMutations, defineGetters,
 } from 'direct-vuex';
-import UserRouteService, { UserRoute } from '@/views/user/services/userroute';
+import UserRouteService, { RouteWithGroups, UserRoute } from '@/views/user/services/userroute';
 
 import { Route } from '@/views/route/service';
 import { moduleActionContext } from '../../base/store';
@@ -58,19 +58,28 @@ const mutations = defineMutations < State >()({
 
 const actions = defineActions({
 
-  async GetListNotBelongToGroup(context, groupId: number): Promise<Route[]> {
+  async GetDetailedRouteList(context, userId: number): Promise<RouteWithGroups[]> {
     const { state, commit } = actionContext(context);
-    const entities = await state.service.GetList(groupId, false);
-    commit.setRoutesNotBelongToGroup(entities);
-    commit.setUserId(groupId);
+    const entities = await state.service.GetList(userId, true);
+    // commit.setRoutesNotBelongToGroup(entities);
+    // commit.setUserId(groupId);
     return entities;
   },
+  async GetListNotBelongToGroup(context, groupId: number): Promise<Route[]> {
+    // const { state, commit } = actionContext(context);
+    // const entities = await state.service.GetList(groupId, false);
+    // commit.setRoutesNotBelongToGroup(entities);
+    // commit.setUserId(groupId);
+    // return entities;
+    return [];
+  },
   async GetListBelongToGroup(context, groupId: number): Promise<Route[]> {
-    const { state, commit } = actionContext(context);
-    const entities = await state.service.GetList(groupId, true);
-    commit.setRoutesBelongToGroup(entities);
-    commit.setUserId(groupId);
-    return entities;
+    // const { state, commit } = actionContext(context);
+    // const entities = await state.service.GetList(groupId, true);
+    // commit.setRoutesBelongToGroup(entities);
+    // commit.setUserId(groupId);
+    // return entities;
+    return [];
   },
   async Create(context, pairs: UserRoute[]): Promise<Route[]> {
     const { state, commit } = actionContext(context);

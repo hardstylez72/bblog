@@ -119,6 +119,10 @@ insert into ad.groups (
 }
 
 func (r *repository) GetById(ctx context.Context, id int) (*Group, error) {
+	return GetByIdDb(ctx, r.conn, id)
+}
+
+func GetByIdDb(ctx context.Context, conn *sqlx.DB, id int) (*Group, error) {
 	query := `
 		select id,
 			   code,
@@ -127,11 +131,10 @@ func (r *repository) GetById(ctx context.Context, id int) (*Group, error) {
 			   updated_at,
 			   deleted_at
 		from ad.groups
-	   where deleted_at is null
-		 and id = $1
+	   where id = $1
 `
 	var group Group
-	err := r.conn.GetContext(ctx, &group, query, id)
+	err := conn.GetContext(ctx, &group, query, id)
 	if err != nil {
 		return nil, err
 	}

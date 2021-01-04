@@ -16,8 +16,8 @@ type params struct {
 }
 
 type Repository interface {
-	List(ctx context.Context, groupId int) ([]Route, error)
-	ListNotInGroup(ctx context.Context, groupId int) ([]Route, error)
+	RoutesBelongUser(ctx context.Context, userId int) ([]RouteWithGroups, error)
+	RoutesNotBelongUser(ctx context.Context, userId int) ([]RouteWithGroups, error)
 	Insert(ctx context.Context, params []params) ([]Route, error)
 	Delete(ctx context.Context, params []params) error
 }
@@ -68,13 +68,13 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var list []Route
+	var list []RouteWithGroups
 	var err error
 
 	if req.BelongToUser {
-		list, err = c.rep.List(ctx, req.UserId)
+		list, err = c.rep.RoutesBelongUser(ctx, req.UserId)
 	} else {
-		list, err = c.rep.ListNotInGroup(ctx, req.UserId)
+		list, err = c.rep.RoutesNotBelongUser(ctx, req.UserId)
 	}
 
 	if err != nil {

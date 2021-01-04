@@ -9,6 +9,12 @@ export interface UserRoute {
   userId: number;
 }
 
+interface Groups {
+  groups: Group[];
+}
+
+export type RouteWithGroups = Route | Groups
+
 interface Options {
   host: string;
   baseUrl: string;
@@ -44,7 +50,7 @@ export default class UserGroupService {
     return makeRequest(req);
   }
 
-  GetList(userId: number, belongToUser: boolean): Promise<Route[]> {
+  GetList(userId: number, belongToUser: boolean): Promise<RouteWithGroups[]> {
     const req: Request = {
       data: { userId, belongToUser },
       method: this.methodPost,

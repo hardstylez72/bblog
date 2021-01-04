@@ -104,6 +104,17 @@ func insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route,
 	return &route, nil
 }
 
+func GetGroupIdsByRouteIdDb(ctx context.Context, conn *sqlx.DB, routeId int) ([]int, error) {
+	query := `select gr.group_id from ad.groups_routes gr where gr.route_id = $1`
+	groupIds := make([]int, 0)
+	err := conn.SelectContext(ctx, &groupIds, query, routeId)
+	if err != nil {
+		return nil, err
+	}
+
+	return groupIds, nil
+}
+
 func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Route, error) {
 	query := `
 		select r.id,
@@ -114,7 +125,6 @@ func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Route, 
 			   r.updated_at,
 			   r.deleted_at
 		from ad.routes r
-    left join ad.groups_routes rg on rg.route_id = r.id
         where r.id not in (select route_id from ad.groups_routes where group_id = $1)
           and deleted_at is null
 `

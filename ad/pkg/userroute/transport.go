@@ -11,9 +11,9 @@ type listRequest struct {
 	BelongToUser bool `json:"belongToUser"`
 }
 
-type listResponse []Route
+type listResponse []RouteWithGroups
 
-func newListResponse(routes []Route) listResponse {
+func newListResponse(routes []RouteWithGroups) listResponse {
 	return routes
 }
 
