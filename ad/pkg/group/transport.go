@@ -1,6 +1,7 @@
 package group
 
 type insertRequest struct {
+	BaseGroupId int    `json:"baseGroupId"`
 	Code        string `json:"code" validate:"required"`
 	Description string `json:"description" validate:"required"`
 }

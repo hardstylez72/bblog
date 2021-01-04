@@ -47,6 +47,12 @@ const actions = defineActions({
     commit.addEntity(createdEntity);
     return createdEntity;
   },
+  async CreateBasedOnAnother(context, payload: {group: Group; baseGroupId: number}): Promise<Group> {
+    const { state, commit } = actionContext(context);
+    const createdEntity = await state.service.CreateBasedOnAnother(payload.group, payload.baseGroupId);
+    commit.addEntity(createdEntity);
+    return createdEntity;
+  },
   async Delete(context, id: number): Promise<void> {
     const { state, commit } = actionContext(context);
 

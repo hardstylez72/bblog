@@ -2,6 +2,7 @@ package group
 
 import (
 	"context"
+	"github.com/hardstylez72/bblog/ad/pkg/grouproute"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -13,6 +14,71 @@ func NewRepository(conn *sqlx.DB) *repository {
 	return &repository{conn: conn}
 }
 
+func (r *repository) InsertGroupBasedOnAnother(ctx context.Context, g *Group, groupBaseId int) (*Group, error) {
+	routes, err := grouproute.ListDb(ctx, r.conn, groupBaseId)
+	if err != nil {
+		return nil, err
+	}
+
+	tx, err := r.conn.BeginTxx(ctx, nil)
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+		} else {
+			_ = tx.Commit()
+		}
+	}()
+
+	group, err := InsertTx(ctx, tx, g)
+	if err != nil {
+		return nil, err
+	}
+
+	groupRoutePairs := make([]grouproute.Pair, 0)
+	for i := range routes {
+		groupRoutePairs = append(groupRoutePairs, grouproute.Pair{
+			GroupId: group.Id,
+			RouteId: routes[i].Id,
+		})
+	}
+
+	_, err = grouproute.InsertTx(ctx, tx, groupRoutePairs)
+	if err != nil {
+		return nil, err
+	}
+
+	return group, nil
+}
+func InsertTx(ctx context.Context, tx *sqlx.Tx, group *Group) (*Group, error) {
+	query := `
+insert into ad.groups (
+                       code,
+                       description,
+                       created_at,
+                       updated_at,
+                       deleted_at
+                       )
+                   values (
+                       $1,
+                       $2,
+                       now(),
+                       null,
+                       null
+                   ) returning id,
+                               code,
+                               description,
+                               created_at,
+                               updated_at,
+                               deleted_at
+`
+	var g Group
+	err := tx.GetContext(ctx, &g, query, group.Code, group.Description)
+	if err != nil {
+		return nil, err
+	}
+
+	return &g, nil
+}
 func (r *repository) Insert(ctx context.Context, group *Group) (*Group, error) {
 	query := `
 insert into ad.groups (

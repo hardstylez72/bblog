@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/go-chi/chi"
+	"github.com/go-playground/validator/v10"
 	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"net/http"
 )
@@ -12,15 +13,20 @@ type Repository interface {
 	GetById(ctx context.Context, id int) (*Group, error)
 	List(ctx context.Context) ([]Group, error)
 	Insert(ctx context.Context, group *Group) (*Group, error)
+	InsertGroupBasedOnAnother(ctx context.Context, group *Group, groupBaseId int) (*Group, error)
 	Delete(ctx context.Context, id int) error
 }
 
 type controller struct {
-	rep Repository
+	rep       Repository
+	validator *validator.Validate
 }
 
 func NewController(rep Repository) *controller {
-	return &controller{rep: rep}
+	return &controller{
+		rep:       rep,
+		validator: validator.New(),
+	}
 }
 
 func (c *controller) create(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +38,19 @@ func (c *controller) create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	group, err := c.rep.Insert(ctx, insertRequestConvert(&req))
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+	var group *Group
+	var err error
+
+	if req.BaseGroupId != 0 {
+		group, err = c.rep.InsertGroupBasedOnAnother(ctx, insertRequestConvert(&req), req.BaseGroupId)
+	} else {
+		group, err = c.rep.Insert(ctx, insertRequestConvert(&req))
+	}
+
 	if err != nil {
 		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
@@ -56,6 +74,11 @@ func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
 	var req getRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
 		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
 		return
 	}

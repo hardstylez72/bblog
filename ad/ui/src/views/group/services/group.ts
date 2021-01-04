@@ -1,6 +1,6 @@
 import { makeRequest, Request } from '@/views/base/services/utils/requester';
 import { Entity } from '@/views/base/services/entity';
-import DefaultService from '../../base/services/default';
+import DefaultService, { T } from '../../base/services/default';
 
 export interface Group extends Entity {
   id: number;
@@ -14,6 +14,15 @@ export default class GroupService extends DefaultService<Group> {
       data: { id },
       method: this.methodPost,
       url: `${this.baseUrl}/get`,
+    };
+    return makeRequest(req);
+  }
+
+  CreateBasedOnAnother(t: T, baseGroupId: number): Promise<T> {
+    const req: Request = {
+      data: { ...t, baseGroupId },
+      method: this.methodPost,
+      url: `${this.baseUrl}/create`,
     };
     return makeRequest(req);
   }

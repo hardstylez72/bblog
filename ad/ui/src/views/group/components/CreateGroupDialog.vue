@@ -3,33 +3,15 @@
     v-model="show"
   >
     <template v-slot:activator="props">
-      <v-btn
-        color="primary"
-
-        class="mb-2"
-        v-bind="props"
-        v-on="props.on"
-      >
-        Новая группа
-      </v-btn>
+      <v-btn color="primary" class="mb-2" v-bind="props" v-on="props.on">Новая группа</v-btn>
     </template>
 
     <v-card>
-      <v-card-title class="headline grey lighten-2">
-        Создание группы
-      </v-card-title>
+      <v-card-title class="headline grey lighten-2">Создание группы</v-card-title>
       <v-card-text>
-        <v-form
-          ref="create-group-form"
-          v-model="valid"
-          lazy-validation
-        >
+        <v-form ref="create-group-form" v-model="valid" lazy-validation>
           <v-row>
-            <v-col
-              cols="12"
-              sm="4"
-              md="4"
-            >
+            <v-col cols="12" sm="4" md="4">
               <v-text-field
                 v-model="group.code"
                 required
@@ -37,11 +19,16 @@
                 label="Код"
               />
             </v-col>
-            <v-col
-              cols="12"
-              sm="10"
-              md="10"
-            >
+            <v-col cols="12" sm="4" md="4">
+              <v-select
+                :items="groups"
+                item-text="code"
+                item-value="id"
+                v-model="baseGroupId"
+                label="Код базовой группы"
+              />
+            </v-col>
+            <v-col cols="12" sm="10" md="10">
               <v-textarea
                 v-model="group.description"
                 outlined
@@ -55,20 +42,8 @@
 
         <v-card-actions>
           <v-spacer />
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="close"
-          >
-            Cancel
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="createGroup"
-          >
-            Save
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+          <v-btn color="blue darken-1" text @click="createGroup">Save</v-btn>
         </v-card-actions>
       </v-card-text>
     </v-card>
@@ -99,11 +74,17 @@ export default class CreateRouteDialog extends Vue {
 
   group: Group = {
     description: '',
-    id: -1,
+    id: 0,
     code: '',
   }
 
-  validate() {
+  baseGroupId = 0
+
+  get groups(): readonly Group[] {
+    return this.$store.direct.getters.group.getEntities;
+  }
+
+    validate() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     this.$refs['create-group-form'].validate();
@@ -130,7 +111,15 @@ export default class CreateRouteDialog extends Vue {
       return;
     }
 
-    await this.$store.direct.dispatch.group.Create(this.group);
+    if (this.baseGroupId === 0) {
+      await this.$store.direct.dispatch.group.Create(this.group);
+    } else {
+      await this.$store.direct.dispatch.group.CreateBasedOnAnother({
+        group: this.group,
+        baseGroupId: this.baseGroupId,
+      });
+    }
+
     this.show = false;
   }
 

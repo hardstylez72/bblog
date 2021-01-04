@@ -24,7 +24,7 @@ func (r *repository) deletePair(ctx context.Context, tx *sqlx.Tx, groupId, route
 	return nil
 }
 
-func (r *repository) Delete(ctx context.Context, params []params) error {
+func (r *repository) Delete(ctx context.Context, params []Pair) error {
 	tx, err := r.conn.BeginTxx(ctx, nil)
 	defer func() {
 		if err != nil {
@@ -45,7 +45,34 @@ func (r *repository) Delete(ctx context.Context, params []params) error {
 	return nil
 }
 
-func (r *repository) insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route, error) {
+func (r *repository) Insert(ctx context.Context, params []Pair) ([]Route, error) {
+	tx, err := r.conn.BeginTxx(ctx, nil)
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+		} else {
+			_ = tx.Commit()
+		}
+	}()
+	return InsertTx(ctx, tx, params)
+}
+
+func InsertTx(ctx context.Context, tx *sqlx.Tx, params []Pair) ([]Route, error) {
+
+	routes := make([]Route, 0)
+	for _, pair := range params {
+
+		route, err := insertPair(ctx, tx, pair.GroupId, pair.RouteId)
+		if err != nil {
+			return nil, err
+		}
+		routes = append(routes, *route)
+	}
+
+	return routes, nil
+}
+
+func insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route, error) {
 	query := `
 		with insert_row as (
 			insert into ad.groups_routes (
@@ -77,30 +104,6 @@ func (r *repository) insertPair(ctx context.Context, tx *sqlx.Tx, groupId, route
 	return &route, nil
 }
 
-func (r *repository) Insert(ctx context.Context, params []params) ([]Route, error) {
-
-	tx, err := r.conn.BeginTxx(ctx, nil)
-	defer func() {
-		if err != nil {
-			_ = tx.Rollback()
-		} else {
-			_ = tx.Commit()
-		}
-	}()
-
-	routes := make([]Route, 0)
-	for _, pair := range params {
-
-		route, err := r.insertPair(ctx, tx, pair.GroupId, pair.RouteId)
-		if err != nil {
-			return nil, err
-		}
-		routes = append(routes, *route)
-	}
-
-	return routes, nil
-}
-
 func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Route, error) {
 	query := `
 		select r.id,
@@ -125,6 +128,10 @@ func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Route, 
 }
 
 func (r *repository) List(ctx context.Context, groupId int) ([]Route, error) {
+	return ListDb(ctx, r.conn, groupId)
+}
+
+func ListDb(ctx context.Context, conn *sqlx.DB, groupId int) ([]Route, error) {
 	query := `
 		select rg.route_id as id,
 			   r.route,
@@ -139,7 +146,7 @@ func (r *repository) List(ctx context.Context, groupId int) ([]Route, error) {
           and deleted_at is null
 `
 	routes := make([]Route, 0)
-	err := r.conn.SelectContext(ctx, &routes, query, groupId)
+	err := conn.SelectContext(ctx, &routes, query, groupId)
 	if err != nil {
 		return nil, err
 	}
