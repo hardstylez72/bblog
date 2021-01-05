@@ -7,7 +7,7 @@ import DefaultService from '../base/services/default';
 import RouteService, { Route } from './service';
 
 export interface State {
-  service: DefaultService<Route>;
+  service: RouteService;
   routes: Route[];
 }
 
@@ -32,6 +32,14 @@ const module = defineModule({
     addRoute(state, routes: Route) {
       state.routes.push(routes);
     },
+    updateRoute(state, route: Route) {
+      state.routes = state.routes.map((r) => {
+        if (route.id === r.id) {
+          return route;
+        }
+        return r;
+      });
+    },
   },
   actions: {
     async GetList(context): Promise<Route[]> {
@@ -44,6 +52,12 @@ const module = defineModule({
       const { state, commit } = actionContext(context);
       const createdRoute = await state.service.Create(route);
       commit.addRoute(createdRoute);
+      return createdRoute;
+    },
+    async Update(context, route: Route): Promise<Route> {
+      const { state, commit } = actionContext(context);
+      const createdRoute = await state.service.Update(route);
+      commit.updateRoute(createdRoute);
       return createdRoute;
     },
     async Delete(context, id: number): Promise<void> {

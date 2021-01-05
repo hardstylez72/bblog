@@ -1,25 +1,19 @@
 <template>
   <Dialog v-model="show">
-    <template v-slot:activator="props">
-      <v-btn color="primary" class="mb-2" v-bind="props" v-on="props.on">Новый маршрут</v-btn>
-    </template>
-
     <v-card>
       <v-card-title class="headline grey lighten-2">
-        {{title}}
+        Редактирование маршрута
       </v-card-title>
       <v-card-text>
-
         <EditRouteForm v-model="route">
           <template v-slot:actions="{ref}">
             <v-card-actions>
               <v-spacer />
               <v-btn color="blue darken-1" text @click="close">Отмена</v-btn>
-              <v-btn color="blue darken-1" text @click="createRoute(ref)">Создать</v-btn>
+              <v-btn color="blue darken-1" text @click="updateRoute(ref)">Обновить</v-btn>
             </v-card-actions>
           </template>
         </EditRouteForm>
-
       </v-card-text>
     </v-card>
   </Dialog>
@@ -27,7 +21,7 @@
 
 <script lang="ts">
 import {
-  Component, Vue,
+  Component, Model, Prop, Vue, Watch,
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import Dialog from '@/views/base/components/Dialog.vue';
@@ -39,13 +33,20 @@ import EditRouteForm from './EditRouteForm.vue';
     EditRouteForm,
   },
 })
-
 export default class CreateRouteDialog extends Vue {
   show = false
 
   valid = true
 
-  title = 'Создание маршрута'
+  @Prop({ required: true }) item!: Route
+
+  @Model('change', { default: false, type: Boolean })
+  readonly value!: boolean
+
+  @Watch('value')
+  protected onChangeValue(value: boolean): void {
+    this.show = value;
+  }
 
   route: Route = {
     description: '',
@@ -54,9 +55,23 @@ export default class CreateRouteDialog extends Vue {
     route: '/',
   }
 
-  async createRoute(ref: any) {
+  @Watch('item', { deep: true })
+  protected onChangeItem(value: Route): void {
+    this.route = {
+      description: value.description,
+      id: value.id,
+      method: value.method,
+      route: value.route,
+    };
+  }
+
+  async updateRoute(ref: any) {
     if (ref) {
       ref.validate();
+    }
+
+    if (!this.route.id) {
+      return;
     }
     if (!this.route.description) {
       return;
@@ -69,17 +84,14 @@ export default class CreateRouteDialog extends Vue {
     if (!this.route.route) {
       return;
     }
-    await this.$store.direct.dispatch.route.Create(this.$data.route);
-    this.route = {
-      route: '',
-      method: 'POST',
-      description: '',
-      id: -1,
-    };
+
+    await this.$store.direct.dispatch.route.Update(this.$data.route);
+    this.$emit('change', false);
     this.show = false;
   }
 
   close() {
+    this.$emit('change', false);
     this.show = false;
   }
 }

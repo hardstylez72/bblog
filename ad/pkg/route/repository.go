@@ -13,6 +13,39 @@ func NewRepository(conn *sqlx.DB) *repository {
 	return &repository{conn: conn}
 }
 
+func (r *repository) Update(ctx context.Context, route *Route) (*Route, error) {
+	query := `
+	
+			update ad.routes
+			   set route = :route,
+				   method = :method,
+				   description = :description,
+				   updated_at = now()
+			where id = :id returning id,
+						   route,
+						   method,
+						   description,
+						   created_at,
+						   updated_at,
+						   deleted_at
+`
+
+	rows, err := r.conn.NamedQueryContext(ctx, query, route)
+	if err != nil {
+		return nil, err
+	}
+
+	var g Route
+	for rows.Next() {
+		err = rows.StructScan(&g)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &g, nil
+}
+
 func (r *repository) Insert(ctx context.Context, route *Route) (*Route, error) {
 	query := `
 insert into ad.routes (

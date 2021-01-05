@@ -6,8 +6,24 @@ type insertRequest struct {
 	Method      string `json:"method" validate:"required"`
 }
 
+type updateRequest struct {
+	Route       string `json:"route" validate:"required"`
+	Id          int    `json:"id" validate:"required"`
+	Description string `json:"description" validate:"required"`
+	Method      string `json:"method" validate:"required"`
+}
+
 func insertRequestConvert(r *insertRequest) *Route {
 	return &Route{
+		Route:       r.Route,
+		Description: r.Description,
+		Method:      r.Method,
+	}
+}
+
+func updateRequestConvert(r *updateRequest) *Route {
+	return &Route{
+		Id:          r.Id,
 		Route:       r.Route,
 		Description: r.Description,
 		Method:      r.Method,

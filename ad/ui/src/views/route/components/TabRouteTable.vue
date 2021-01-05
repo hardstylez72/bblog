@@ -25,6 +25,7 @@
       </template>
     </v-data-table>
     <DeleteRouteDialog :route-id="activeItemId" v-model="showDeleteDialog"/>
+    <UpdateRouteDialog :item="activeRoute" v-model="showEditDialog"/>
   </div>
 </template>
 
@@ -37,11 +38,13 @@ import DictTable from '@/views/base/components/DictTable.vue';
 import { DataTableHeader } from 'vuetify';
 import CreateRouteDialog from './CreateRouteDialog.vue';
 import DeleteRouteDialog from './DeleteRouteDialog.vue';
+import UpdateRouteDialog from './UpdateRouteDialog.vue';
 
 @Component({
   components: {
     CreateRouteDialog,
     DeleteRouteDialog,
+    UpdateRouteDialog,
   },
 })
 export default class TabRouteTable extends DictTable<Route> {
@@ -53,6 +56,10 @@ export default class TabRouteTable extends DictTable<Route> {
 
   get routes(): readonly Route[] {
     return this.$store.direct.getters.route.getRoutes;
+  }
+
+  get activeRoute(): Route {
+    return this.$store.direct.getters.route.getRoutes.filter(((route) => route.id === this.activeItemId))[0];
   }
 
   methods = ['GET', 'POST', 'PUT', 'DELETE']

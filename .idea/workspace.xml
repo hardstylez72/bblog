@@ -23,31 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36f48006-4c61-407f-a9df-e31253466f81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ad/pkg/userroute/repository_crud.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/DeleteRouteButton.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/OverwriteRouteButton.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/StatusIconRouteAccess.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/StatusIconRouteOverwritten.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/UpdateRouteButton.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/UserRoutesTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/EditRouteForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/UpdateRouteDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/migrations/00006_table_users_routes.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ad/migrations/00006_table_users_routes.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/grouproute/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/grouproute/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/userroute/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/userroute/controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/userroute/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/userroute/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/pkg/userroute/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/userroute/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/SelectableTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/SelectableTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/components/AddRoutesButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/components/AddRoutesButton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/pages/main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/pages/main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/group/store/grouproute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/group/store/grouproute.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/AddGroupsButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/AddGroupsButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/route/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/route/controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/route/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/route/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/pkg/route/transport.go" beforeDir="false" afterPath="$PROJECT_DIR$/ad/pkg/route/transport.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/base/components/DictTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/base/components/DictTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/components/CreateRouteDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/CreateRouteDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/components/TabRouteTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/components/TabRouteTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/route/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/route/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/AddRoutesButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/AddRoutesButton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/CreateUserDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/CreateUserDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/components/UserRoutesSelectableTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/components/UserRoutesSelectableTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/pages/main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/pages/main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/services/userroute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/services/userroute.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/store/usergroup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/store/usergroup.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ad/ui/src/views/user/store/userroute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ad/ui/src/views/user/store/userroute.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,17 +292,17 @@
     </state>
     <state x="402" y="323" width="503" height="391" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1040@0.0.2560.1040" timestamp="1603706415540" />
     <state x="302" y="323" width="471" height="391" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601659314025" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1609765099951">
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2" timestamp="1609868435707">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="695" y="82" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038616894" />
-    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1609765099951" />
+    <state x="926" y="82" width="1099" height="877" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1609868435707" />
     <state x="695" y="82" key="CommitChangelistDialog2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660517419" />
-    <state width="977" height="485" key="DebuggerActiveHint" timestamp="1609863127365">
+    <state width="1287" height="485" key="DebuggerActiveHint" timestamp="1609880087431">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="996" height="485" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1603038512683" />
-    <state width="977" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1609863127365" />
+    <state width="1287" height="485" key="DebuggerActiveHint/0.0.2560.1040@0.0.2560.1040" timestamp="1609880087431" />
     <state x="447" y="89" width="2048" height="860" key="DiffContextDialog" timestamp="1609745413378">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -324,67 +311,67 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="422" y="277" width="424" height="482" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1608189535502" />
-    <state width="1233" height="355" key="GridCell.Tab.0.bottom" timestamp="1609863589969">
+    <state width="1233" height="355" key="GridCell.Tab.0.bottom" timestamp="1609880243000">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511546" />
-    <state width="1233" height="355" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1609863589969" />
+    <state width="1233" height="355" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1609880243000" />
     <state width="874" height="272" key="GridCell.Tab.0.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668147" />
     <state width="1480" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="355" key="GridCell.Tab.0.center" timestamp="1609863589969">
+    <state width="1233" height="355" key="GridCell.Tab.0.center" timestamp="1609880242999">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511546" />
-    <state width="1233" height="355" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1609863589969" />
+    <state width="1233" height="355" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1609880242999" />
     <state width="874" height="272" key="GridCell.Tab.0.center/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="355" key="GridCell.Tab.0.left" timestamp="1609863589969">
+    <state width="1233" height="355" key="GridCell.Tab.0.left" timestamp="1609880242999">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511545" />
-    <state width="1233" height="355" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1609863589969" />
+    <state width="1233" height="355" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1609880242999" />
     <state width="874" height="272" key="GridCell.Tab.0.left/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="355" key="GridCell.Tab.0.right" timestamp="1609863589969">
+    <state width="1233" height="355" key="GridCell.Tab.0.right" timestamp="1609880243000">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511546" />
-    <state width="1233" height="355" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1609863589969" />
+    <state width="1233" height="355" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1609880243000" />
     <state width="874" height="272" key="GridCell.Tab.0.right/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668146" />
     <state width="1480" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509495" />
-    <state width="1233" height="355" key="GridCell.Tab.1.bottom" timestamp="1609863592240">
+    <state width="1233" height="355" key="GridCell.Tab.1.bottom" timestamp="1609880253930">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1609863592240" />
+    <state width="1233" height="355" key="GridCell.Tab.1.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1609880253930" />
     <state width="1233" height="263" key="GridCell.Tab.1.bottom/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509497" />
-    <state width="1233" height="355" key="GridCell.Tab.1.center" timestamp="1609863592239">
+    <state width="1233" height="355" key="GridCell.Tab.1.center" timestamp="1609880253930">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1609863592239" />
+    <state width="1233" height="355" key="GridCell.Tab.1.center/0.0.2560.1040@0.0.2560.1040" timestamp="1609880253930" />
     <state width="1233" height="263" key="GridCell.Tab.1.center/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="355" key="GridCell.Tab.1.left" timestamp="1609863592238">
+    <state width="1233" height="355" key="GridCell.Tab.1.left" timestamp="1609880253929">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1609863592238" />
+    <state width="1233" height="355" key="GridCell.Tab.1.left/0.0.2560.1040@0.0.2560.1040" timestamp="1609880253929" />
     <state width="1233" height="263" key="GridCell.Tab.1.left/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
-    <state width="1233" height="355" key="GridCell.Tab.1.right" timestamp="1609863592240">
+    <state width="1233" height="355" key="GridCell.Tab.1.right" timestamp="1609880253930">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state width="1223" height="263" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607335511470" />
-    <state width="1233" height="355" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1609863592240" />
+    <state width="1233" height="355" key="GridCell.Tab.1.right/0.0.2560.1040@0.0.2560.1040" timestamp="1609880253930" />
     <state width="1233" height="263" key="GridCell.Tab.1.right/0.0.3840.1040@0.0.3840.1040" timestamp="1604907668145" />
     <state width="1480" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601658727614" />
     <state width="1233" height="263" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1601655509496" />
@@ -392,11 +379,11 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="138" y="153" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1607868881689" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1609765103001">
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1609868438964">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="806" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603038626734" />
-    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1609765103001" />
+    <state x="1075" y="257" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1609868438964" />
     <state x="806" y="257" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1601660521166" />
     <state width="1280" height="520" key="XDebugger.FullValuePopup" timestamp="1609843522049">
       <screen x="0" y="0" width="2560" height="1040" />

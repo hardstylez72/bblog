@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import {
-  Component, Vue, Prop,
+  Component, Vue, Prop, Watch,
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
 
@@ -71,6 +71,12 @@ import UserRoutesSelectableTable from './UserRoutesSelectableTable.vue';
     'c-dialog': () => import('../../base/components/Dialog.vue'),
     UserRoutesSelectableTable,
   },
+  destroyed() {
+    console.log('destroyed');
+  },
+  updated() {
+    console.log('updated');
+  },
 })
 export default class RoutesTableSelectAddDialog extends Vue {
   show = false
@@ -78,13 +84,16 @@ export default class RoutesTableSelectAddDialog extends Vue {
   @Prop({ type: Number, default: -1 })
   private readonly userId!: number
 
+  @Watch('show')
+  change(value: boolean): void {
+    if (value) {
+      this.$store.direct.dispatch.userRoute.GetListNotBelongToUser(this.userId);
+    }
+  }
+
   entities: Group[] =[]
 
   selected: Group[] =[]
-
-  mounted() {
-    this.$store.direct.dispatch.userRoute.GetListNotBelongToUser(this.userId);
-  }
 
   get routes(): readonly Route[] {
     return this.$store.direct.getters.userRoute.getRoutesNotBelongToGroup;

@@ -48,7 +48,7 @@ export default class DictTable<T extends Entity> extends Vue {
 
   protected showEditDialog = false
 
-  private activeItemId = -1
+   activeItemId = -1
 
   protected get tableAttrs() {
     return {
