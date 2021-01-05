@@ -116,6 +116,7 @@ func GetGroupIdsByRouteIdDb(ctx context.Context, conn *sqlx.DB, routeId int) ([]
 }
 
 func (r *repository) ListNotInGroup(ctx context.Context, groupId int) ([]Route, error) {
+	// todo: fix add rg.is_excluded
 	query := `
 		select r.id,
 			   r.route,

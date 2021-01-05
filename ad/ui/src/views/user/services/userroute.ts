@@ -9,11 +9,27 @@ export interface UserRoute {
   userId: number;
 }
 
+export interface UpdateUserRoute {
+  routeId: number;
+  userId: number;
+  isExcluded: boolean;
+}
+export interface CreateUserRoute {
+  routeId: number;
+  userId: number;
+  isExcluded: boolean;
+}
 interface Groups {
   groups: Group[];
 }
 
-export type RouteWithGroups = Route | Groups
+export interface RouteExt extends Route {
+  isExcluded: boolean;
+  isOverwritten: boolean;
+  isIndependent: boolean;
+}
+
+export type RouteWithGroups = RouteExt & Groups
 
 interface Options {
   host: string;
@@ -32,7 +48,7 @@ export default class UserGroupService {
     this.baseUrl = `${this.options.host}${this.options.baseUrl}`;
   }
 
-  Create(t: UserRoute[]): Promise<Route[]> {
+  Create(t: CreateUserRoute[]): Promise<RouteExt[]> {
     const req: Request = {
       data: t,
       method: this.methodPost,
@@ -46,6 +62,15 @@ export default class UserGroupService {
       data: t,
       method: this.methodPost,
       url: `${this.baseUrl}/delete`,
+    };
+    return makeRequest(req);
+  }
+
+  Update(t: UpdateUserRoute): Promise<RouteExt> {
+    const req: Request = {
+      data: t,
+      method: this.methodPost,
+      url: `${this.baseUrl}/update`,
     };
     return makeRequest(req);
   }

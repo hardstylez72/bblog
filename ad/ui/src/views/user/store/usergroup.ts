@@ -57,14 +57,14 @@ const mutations = defineMutations < State >()({
 
 const actions = defineActions({
 
-  async GetListNotBelongToGroup(context, groupId: number): Promise<Group[]> {
+  async GetListNotBelongToUser(context, groupId: number): Promise<Group[]> {
     const { state, commit } = actionContext(context);
     const entities = await state.service.GetList(groupId, false);
     commit.setRoutesNotBelongToGroup(entities);
     commit.setUserId(groupId);
     return entities;
   },
-  async GetListBelongToGroup(context, groupId: number): Promise<Group[]> {
+  async GetListBelongToUser(context, groupId: number): Promise<Group[]> {
     const { state, commit } = actionContext(context);
     const entities = await state.service.GetList(groupId, true);
     commit.setRoutesBelongToGroup(entities);

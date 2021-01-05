@@ -70,7 +70,7 @@ export default class RoutesTab extends Vue {
   groupId = Number(this.$route.params.id);
 
   mounted() {
-    this.$store.direct.dispatch.groupRoute.GetListBelongToGroup(this.groupId);
+    this.$store.direct.dispatch.groupRoute.GetListBelongToUser(this.groupId);
     this.$store.direct.dispatch.group.GetById(this.groupId).then((group) => {
       this.group = group;
     });

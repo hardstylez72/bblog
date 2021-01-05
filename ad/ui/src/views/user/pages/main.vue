@@ -22,26 +22,32 @@
       </template>
     </UserGroupsSelectableTable>
 
-    <UserRoutesSelectableTable v-model="selectedRoutes" :items="routes" >
+    <UserRoutesTable :items="routes" >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ titleRoute }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical/>
           <v-spacer/>
-          <div>
-            <v-btn
-              v-if="showDeleteRouteButton"
-              color="primary"
-              class="mb-2"
-              @click="deleteSelectedRoutes"
-            >
-              Удалить выбранные группы
-            </v-btn>
-          </div>
           <AddRoutesButton :user-id="userIdC" />
         </v-toolbar>
       </template>
-    </UserRoutesSelectableTable>
+
+      <template v-slot:item.actions="{ item }">
+        <div class="d-flex">
+          <UpdateRouteButton :item="item" :user="userC"/>
+          <OverwriteRouteButton :item="item" :user="userC"/>
+          <DeleteRouteButton :item="item" :user="userC"/>
+        </div>
+      </template>
+
+      <template v-slot:item.statuses="{ item }" >
+        <div class="d-flex">
+          <StatusIconRouteAccess :item="item"/>
+          <StatusIconRouteOverwritten :item="item"/>
+        </div>
+      </template>
+
+    </UserRoutesTable>
   </div>
 </template>
 
@@ -50,13 +56,18 @@ import {
   Component, Vue,
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
-import { Route } from '@/views/route/service';
 import { User } from '@/views/user/services/user';
 import { RouteWithGroups } from '@/views/user/services/userroute';
 import UserGroupsSelectableTable from '../components/UserGroupsSelectableTable.vue';
 import UserRoutesSelectableTable from '../components/UserRoutesSelectableTable.vue';
 import AddGroupsButton from '../components/AddGroupsButton.vue';
 import AddRoutesButton from '../components/AddRoutesButton.vue';
+import UpdateRouteButton from '../components/UpdateRouteButton.vue';
+import StatusIconRouteOverwritten from '../components/StatusIconRouteOverwritten.vue';
+import StatusIconRouteAccess from '../components/StatusIconRouteAccess.vue';
+import OverwriteRouteButton from '../components/OverwriteRouteButton.vue';
+import DeleteRouteButton from '../components/DeleteRouteButton.vue';
+import UserRoutesTable from '../components/UserRoutesTable.vue';
 
 @Component({
   components: {
@@ -64,6 +75,12 @@ import AddRoutesButton from '../components/AddRoutesButton.vue';
     UserRoutesSelectableTable,
     AddGroupsButton,
     AddRoutesButton,
+    UpdateRouteButton,
+    StatusIconRouteOverwritten,
+    StatusIconRouteAccess,
+    OverwriteRouteButton,
+    DeleteRouteButton,
+    UserRoutesTable,
 },
 })
 export default class UserPage extends Vue {
@@ -82,25 +99,9 @@ export default class UserPage extends Vue {
 
   selectedGroups: Group[] = []
 
-  selectedRoutes: Route[] = []
-
-  routeWithGroups: RouteWithGroups[] = []
-
   async mounted() {
-    this.$store.direct.dispatch.userGroup.GetListBelongToGroup(this.userId);
-    this.$store.direct.dispatch.userRoute.GetDetailedRouteList(this.userId).then((routes) => {
-      const rs: RouteWithGroups[] = routes.map((route) => {
-        const r = {
-          ...route,
-          groupCodes: route.groups.map((group) => group.code).join(', '),
-          // isSelectable: false,
-        };
-
-        return r;
-      });
-
-      this.routeWithGroups = rs;
-   });
+    this.$store.direct.dispatch.userGroup.GetListBelongToUser(this.userId);
+    this.$store.direct.dispatch.userRoute.GetListBelongToUser(this.userId);
     this.$store.direct.dispatch.user.GetById(this.userId).then((user) => {
        this.user = user;
      });
@@ -118,21 +119,6 @@ export default class UserPage extends Vue {
     return this.selectedGroups.length > 0;
   }
 
-  get showDeleteRouteButton(): boolean {
-    return this.selectedRoutes.length > 0;
-  }
-
-  async deleteSelectedRoutes() {
-    const routes = this.selectedRoutes;
-    const params = routes.map((route) => ({
-      routeId: route.id,
-      userId: this.userId,
-    }));
-
-    await this.$store.direct.dispatch.userRoute.Delete(params);
-    this.selectedGroups = [];
-  }
-
   async deleteSelectedGroups() {
     const groups = this.selectedGroups;
     const params = groups.map((group) => ({
@@ -142,6 +128,8 @@ export default class UserPage extends Vue {
 
     await this.$store.direct.dispatch.userGroup.Delete(params);
     this.selectedGroups = [];
+    await this.$store.direct.dispatch.userRoute.GetListNotBelongToUser(this.userId);
+    await this.$store.direct.dispatch.userRoute.GetListBelongToUser(this.userId);
   }
 
   get groups(): readonly Group[] {
@@ -149,7 +137,7 @@ export default class UserPage extends Vue {
   }
 
   get routes(): readonly RouteWithGroups[] {
-    return this.routeWithGroups;
+    return this.$store.direct.getters.userRoute.getRoutesBelongToUser;
   }
 }
 </script>

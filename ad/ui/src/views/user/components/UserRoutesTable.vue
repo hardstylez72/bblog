@@ -6,7 +6,6 @@
       :items="items"
       sort-by="calories"
       class="elevation-1"
-      show-select
     >
       <template v-slot:no-data>
         Нет данных
@@ -35,13 +34,15 @@ import { Group } from '@/views/group/services/group';
 import { DataTableHeader } from 'vuetify';
 
 @Component
-export default class GroupsBelongUserSelectableTable extends SelectableTable<Group> {
+export default class UserRoutesTable extends SelectableTable<Group> {
   readonly headers: DataTableHeader[] = [
       { text: 'ID', value: 'id' },
       { text: 'Маршрут', value: 'route' },
       { text: 'Метод', value: 'method' },
       { text: 'Описание', value: 'description' },
       { text: 'Группы', value: 'groupCodes' },
+      { text: 'Действия', value: 'actions', width: '10%' },
+      { text: 'Статусы', value: 'statuses', width: '10%' },
     ]
 
   view(group: Group) {

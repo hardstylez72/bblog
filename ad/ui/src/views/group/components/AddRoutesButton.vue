@@ -81,7 +81,7 @@ export default class RoutesTableSelectAddDialog extends Vue {
   selected: Route[] =[]
 
   mounted() {
-    this.$store.direct.dispatch.groupRoute.GetListNotBelongToGroup(this.groupId);
+    this.$store.direct.dispatch.groupRoute.GetListNotBelongToUser(this.groupId);
   }
 
   get routes(): readonly Route[] {

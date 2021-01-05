@@ -17,7 +17,11 @@
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <slot name="item.actions" :prop="item"/>
+        <slot name="item.actions" v-bind="{ item }"/>
+      </template>
+
+      <template v-slot:item.statuses="{ item }">
+        <slot name="item.statuses" v-bind="{ item }"/>
       </template>
 
     </v-data-table>

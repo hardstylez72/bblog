@@ -11,8 +11,9 @@ import (
 )
 
 type params struct {
-	RouteId int `json:"routeId" validate:"required"`
-	UserId  int `json:"userId" validate:"required"`
+	RouteId    int  `json:"routeId" validate:"required"`
+	UserId     int  `json:"userId" validate:"required"`
+	IsExcluded bool `json:"isExcluded"`
 }
 
 type Repository interface {
@@ -20,6 +21,7 @@ type Repository interface {
 	RoutesNotBelongUser(ctx context.Context, userId int) ([]RouteWithGroups, error)
 	Insert(ctx context.Context, params []params) ([]Route, error)
 	Delete(ctx context.Context, params []params) error
+	Update(ctx context.Context, params params) (*Route, error)
 }
 
 type controller struct {
@@ -108,11 +110,36 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	util.NewResp(w).Status(http.StatusOK).Send()
+}
+
+func (c *controller) update(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var req params
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	route, err := c.rep.Update(ctx, req)
+	if err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
+		return
+	}
+
+	util.NewResp(w).Status(http.StatusOK).Json(route).Send()
 }
 
 func (c *controller) Mount(r chi.Router) {
 	r.Post("/v1/user/route/list", c.list)
 	r.Post("/v1/user/route/create", c.create)
 	r.Post("/v1/user/route/delete", c.delete)
+	r.Post("/v1/user/route/update", c.update)
 }

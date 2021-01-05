@@ -83,7 +83,7 @@ export default class RoutesTableSelectAddDialog extends Vue {
   selected: Group[] =[]
 
   mounted() {
-    this.$store.direct.dispatch.userRoute.GetListNotBelongToGroup(this.userId);
+    this.$store.direct.dispatch.userRoute.GetListNotBelongToUser(this.userId);
   }
 
   get routes(): readonly Route[] {
@@ -99,9 +99,11 @@ export default class RoutesTableSelectAddDialog extends Vue {
     const params = routes.map((route) => ({
       userId: this.userId,
       routeId: route.id,
+      isExcluded: false,
     }));
 
     await this.$store.direct.dispatch.userRoute.Create(params);
+    await this.$store.direct.dispatch.userRoute.GetListBelongToUser(this.userId);
     this.selected = [];
     this.show = false;
   }
