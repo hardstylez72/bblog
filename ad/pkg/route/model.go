@@ -17,5 +17,5 @@ type Route struct {
 
 type RouteWithTags struct {
 	Route
-	Tags []string `json:"route" `
+	Tags []string `json:"tags" `
 }

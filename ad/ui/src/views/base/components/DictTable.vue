@@ -25,6 +25,12 @@
         <v-icon small class="mr-2" @click="view(item)">mdi-eye</v-icon>
       </template>
 
+      <template v-slot:item.tags="{ item }">
+        <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
+        <v-icon small @click="remove(item)">mdi-delete</v-icon>
+        <v-icon small class="mr-2" @click="view(item)">mdi-eye</v-icon>
+      </template>
+
     </v-data-table>
   </div>
 </template>

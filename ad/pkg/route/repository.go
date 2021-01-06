@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/hardstylez72/bblog/ad/pkg/routetag"
+	"github.com/hardstylez72/bblog/ad/pkg/tag"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -160,8 +161,84 @@ insert into ad.routes (
 
 	return &g, nil
 }
+func (r *repository) GetById(ctx context.Context, id int) (*RouteWithTags, error) {
+	route, err := GetByIdDb(ctx, r.conn, id)
+	if err != nil {
+		return nil, err
+	}
 
-func (r *repository) List(ctx context.Context) ([]Route, error) {
+	tagNames, err := getTagsByRouteId(ctx, r.conn, route.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &RouteWithTags{
+		Route: *route,
+		Tags:  tagNames,
+	}, nil
+}
+
+func getTagsByRouteId(ctx context.Context, conn *sqlx.DB, id int) ([]string, error) {
+	tagIds, err := routetag.GetRouteTags(ctx, conn, id)
+	if err != nil {
+		return nil, err
+	}
+	tagNames := make([]string, 0)
+
+	for _, tagId := range tagIds {
+		t, err := tag.GetByIdDb(ctx, conn, tagId)
+		if err != nil {
+			return nil, err
+		}
+		tagNames = append(tagNames, t.Name)
+	}
+	return tagNames, nil
+}
+func (r *repository) List(ctx context.Context) ([]RouteWithTags, error) {
+	routes, err := ListDb(ctx, r.conn)
+	if err != nil {
+		return nil, err
+	}
+
+	routesWithTags := make([]RouteWithTags, 0)
+
+	for _, route := range routes {
+
+		tagNames, err := getTagsByRouteId(ctx, r.conn, route.Id)
+		if err != nil {
+			return nil, err
+		}
+		routesWithTags = append(routesWithTags, RouteWithTags{
+			Route: route,
+			Tags:  tagNames,
+		})
+	}
+	return routesWithTags, nil
+}
+
+func GetByIdDb(ctx context.Context, conn *sqlx.DB, id int) (*Route, error) {
+	query := `
+		select id,
+			   route,
+		       method,
+			   description,
+			   created_at,
+			   updated_at,
+			   deleted_at
+		from ad.routes
+	   where deleted_at is null
+  		 and id = $1
+`
+	var route Route
+	err := conn.GetContext(ctx, &route, query, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &route, nil
+}
+
+func ListDb(ctx context.Context, conn *sqlx.DB) ([]Route, error) {
 	query := `
 		select id,
 			   route,
@@ -174,7 +251,7 @@ func (r *repository) List(ctx context.Context) ([]Route, error) {
 	   where deleted_at is null;
 `
 	groups := make([]Route, 0)
-	err := r.conn.SelectContext(ctx, &groups, query)
+	err := conn.SelectContext(ctx, &groups, query)
 	if err != nil {
 		return nil, err
 	}

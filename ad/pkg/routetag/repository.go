@@ -9,7 +9,7 @@ import (
 
 func Merge(ctx context.Context, conn *sqlx.DB, tx *sqlx.Tx, routeId int, tagNames []string) ([]string, error) {
 
-	currentTagIds, err := getRouteTags(ctx, conn, routeId)
+	currentTagIds, err := GetRouteTags(ctx, conn, routeId)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func contains(set []int, el int) bool {
 	return false
 }
 
-func getRouteTags(ctx context.Context, conn *sqlx.DB, routeId int) ([]int, error) {
+func GetRouteTags(ctx context.Context, conn *sqlx.DB, routeId int) ([]int, error) {
 	query := `
 			select tag_id 
 			  from ad.routes_tags 

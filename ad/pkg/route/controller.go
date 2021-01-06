@@ -10,7 +10,8 @@ import (
 )
 
 type Repository interface {
-	List(ctx context.Context) ([]Route, error)
+	List(ctx context.Context) ([]RouteWithTags, error)
+	GetById(ctx context.Context, id int) (*RouteWithTags, error)
 	Insert(ctx context.Context, group *Route) (*Route, error)
 	InsertWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error)
 	Delete(ctx context.Context, id int) error
@@ -84,6 +85,29 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 	util.NewResp(w).Status(http.StatusOK).Json(newListResponse(list)).Send()
 }
 
+func (c *controller) getById(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var req getRequest
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+	list, err := c.rep.GetById(ctx, req.Id)
+	if err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
+		return
+	}
+
+	util.NewResp(w).Status(http.StatusOK).Json(list).Send()
+}
+
 func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
@@ -110,6 +134,7 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 
 func (c *controller) Mount(r chi.Router) {
 	r.Post("/v1/route/list", c.list)
+	r.Post("/v1/route/get", c.getById)
 	r.Post("/v1/route/create", c.create)
 	r.Post("/v1/route/delete", c.delete)
 	r.Post("/v1/route/update", c.update)

@@ -23,13 +23,19 @@
         <HttpMethodBox :method="item.method"></HttpMethodBox>
       </template>
 
+      <template v-slot:item.tags="{ item }">
+        <div class="d-inline-block" v-for="tag in item.tags">
+          <v-chip>{{tag}}</v-chip>
+        </div>
+      </template>
+
       <template v-slot:item.actions="{ item }">
         <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
         <v-icon small @click="remove(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
     <DeleteRouteDialog :route-id="activeItemId" v-model="showDeleteDialog"/>
-    <UpdateRouteDialog :item="activeRoute" v-model="showEditDialog"/>
+    <UpdateRouteDialog :route-id="activeItemId" v-model="showEditDialog"/>
   </div>
 </template>
 
@@ -75,7 +81,7 @@ export default class TabRouteTable extends DictTable<Route> {
     { text: 'Метод', value: 'method', width: '80px' },
     { text: 'Маршруты', value: 'route' },
     { text: 'Описание', value: 'description' },
-
+    { text: 'Теги', value: 'tags', width: '30%' },
     {
  text: 'Actions', value: 'actions', sortable: false, width: '80px',
 },

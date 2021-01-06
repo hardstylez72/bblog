@@ -2,7 +2,7 @@
   <div>
     <v-form ref="refss" v-model="valid" lazy-validation>
       <v-row>
-        <v-col cols="12" sm="12" md="10">
+        <v-col cols="12" sm="10" md="10">
           <v-text-field
             v-model="route.route"
             required
@@ -10,7 +10,7 @@
             label="Маршрут"
           />
         </v-col>
-        <v-col cols="15" sm="2" md="4">
+        <v-col cols="2" sm="2" md="2">
           <v-select
             v-model="route.method"
             required
@@ -19,7 +19,7 @@
             label="Метод"
           />
         </v-col>
-        <v-col cols="12" sm="10" md="8">
+        <v-col cols="12" sm="12" md="12">
           <v-textarea
             v-model="route.description"
             outlined
@@ -28,8 +28,10 @@
             label="Описание"
           />
         </v-col>
-        <v-col cols="12" sm="15" md="15">
+        <v-col cols="12" sm="12" md="12">
           <v-autocomplete
+            label="Теги"
+            placeholder="Введите название тега"
             ref="autocomplete-input"
             v-model="selectedTags"
             :items="suggestedTags"
@@ -98,8 +100,8 @@ export default class RouteForm extends Vue {
 
   @Watch('selectedTags')
   async onChangeSelectedTags(pattern: string) {
-    this.route.tags = this.selectedTags;
     this.searchTags = '';
+    this.$set(this.route.tags, this.selectedTags);
   }
 
   async delay(ms: number) {
@@ -113,22 +115,19 @@ export default class RouteForm extends Vue {
   @Watch('searchTags')
   async onChangeSearchTags(pattern: string) {
     if (!pattern) return;
-
+    await this.delay(400);
     if (this.isSuggestUpdating) {
       return;
     }
 
-    await this.delay(400);
-
     this.isSuggestUpdating = true;
-
     // api suggest
     this.suggestedTags = await this.$store.direct.dispatch.tag.GetByPattern(pattern)
       .finally(() => {
         this.isSuggestUpdating = false;
       });
 
-    // after suggest request focus fades away
+    // // after suggest request focus fades away
      this.$refs['autocomplete-input'].focus();
     // if not found => create new tag
     if (this.suggestedTags.length === 0) {
@@ -147,9 +146,28 @@ export default class RouteForm extends Vue {
   @Model('change', { default: {} })
   readonly value!: Route
 
-  @Watch('value', { immediate: true })
+  isTagInitialized = false
+
+  @Watch('value', { immediate: true, deep: true })
   protected onChangeValue(route: Route): void {
-    this.route = route;
+    if (route.id === -1) {
+      return;
+    }
+    if (route.tags && !this.isTagInitialized) {
+      this.isTagInitialized = true;
+      this.selectedTags = route.tags;
+      // without it does not load props...
+      this.onChangeSearchTags('test');
+      // blur selectItem setSearch setValue
+    }
+    // this.$set(this.route, route);
+    this.route = {
+      tags: this.selectedTags,
+      id: route.id,
+      route: route.route,
+      method: route.method,
+      description: route.description,
+    };
   }
 
   @Watch('route', { deep: true })

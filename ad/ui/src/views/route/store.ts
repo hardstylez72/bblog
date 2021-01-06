@@ -48,6 +48,10 @@ const module = defineModule({
       commit.setRoutes(routes);
       return routes;
     },
+    async GetById(context, id: number): Promise<Route> {
+      const { state } = actionContext(context);
+      return state.service.GetById(id);
+    },
     async Create(context, route: Route): Promise<Route> {
       const { state, commit } = actionContext(context);
       const createdRoute = await state.service.Create(route);

@@ -19,4 +19,13 @@ export default class RouteService extends DefaultService<Route> {
     };
     return makeRequest(req);
   }
+
+  GetById(id: number): Promise<Route> {
+    const req: Request = {
+      data: { id },
+      method: this.methodPost,
+      url: `${this.baseUrl}/get`,
+    };
+    return makeRequest(req);
+  }
 }

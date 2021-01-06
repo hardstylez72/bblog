@@ -42,12 +42,16 @@ func newUpdateResponse(route *Route) *updateResponse {
 	return (*updateResponse)(route)
 }
 
-type listResponse []Route
+type listResponse []RouteWithTags
 
-func newListResponse(groups []Route) listResponse {
-	return groups
+func newListResponse(routes []RouteWithTags) listResponse {
+	return routes
 }
 
 type deleteRequest struct {
+	Id int `json:"id" validate:"required"`
+}
+
+type getRequest struct {
 	Id int `json:"id" validate:"required"`
 }

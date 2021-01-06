@@ -25,6 +25,8 @@ import {
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import Dialog from '@/views/base/components/Dialog.vue';
+import _ from 'lodash';
+
 import RouteForm from './RouteForm.vue';
 
 @Component({
@@ -40,7 +42,7 @@ export default class UpdateRouteDialog extends Vue {
 
   valid = true
 
-  @Prop({ required: true }) item!: Route
+  @Prop() routeId!: number
 
   @Model('change', { default: false, type: Boolean })
   readonly value!: boolean
@@ -55,36 +57,43 @@ export default class UpdateRouteDialog extends Vue {
     id: -1,
     method: '',
     route: '/',
+    tags: [],
   }
 
-   initialRouteState: Route | undefined
+   initialRouteState: Route = this.route
 
-  @Watch('item', { deep: true })
-  protected onChangeItem(item: Route): void {
-    this.route = {
-      description: item.description,
-      id: item.id,
-      method: item.method,
-      route: item.route,
-    };
-    this.initialRouteState = {
-      description: item.description,
-      id: item.id,
-      method: item.method,
-      route: item.route,
-    };
+  @Watch('routeId')
+  protected onChangeItem(id: number): void {
+    this.$store.direct.dispatch.route.GetById(id).then((item) => {
+      this.route = {
+        description: item.description,
+        id: item.id,
+        method: item.method,
+        route: item.route,
+        tags: item.tags,
+      };
+
+      this.initialRouteState = {
+        description: item.description,
+        id: item.id,
+        method: item.method,
+        route: item.route,
+        tags: item.tags,
+      };
+    });
   }
 
   @Watch('route', { deep: true })
   protected onChangeRoute(route: Route): void {
-    if (!this.routesSame(this.item, route)) {
-      this.disableUpdateButton = false;
+    console.log('sdsonChangeRouted');
+    this.disableUpdateButton = false;
+    if (this.routesSame(this.initialRouteState, route)) {
+      this.disableUpdateButton = true;
+      return;
     }
 
-    if (this.initialRouteState) {
-      if (this.routesSame(this.initialRouteState, route)) {
-        this.disableUpdateButton = true;
-      }
+    if (!this.routesSame(this.route, route)) {
+      this.disableUpdateButton = false;
     }
   }
 
@@ -103,9 +112,12 @@ export default class UpdateRouteDialog extends Vue {
   }
 
   routesSame(a: Route, b: Route): boolean {
+    console.log(a.tags, b.tags, _.isEqual(a.tags, b.tags));
+
     return (a.description === b.description
       && a.method === b.method
-      && a.route === b.route);
+      && a.route === b.route
+     && _.isEqual(a.tags, b.tags));
   }
 
   close() {
