@@ -20,6 +20,29 @@ func NewRepository(conn *sqlx.DB) *repository {
 	return &repository{conn: conn}
 }
 
+func (r *repository) UpdateWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error) {
+	tx, err := r.conn.BeginTxx(ctx, nil)
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+		} else {
+			_ = tx.Commit()
+		}
+	}()
+	updatedRoute, err := UpdateTx(ctx, tx, route)
+	if err != nil {
+		return nil, err
+	}
+
+	tagNames, err = routetag.Merge(ctx, r.conn, tx, updatedRoute.Id, tagNames)
+	if err != nil {
+		return nil, err
+	}
+	return &RouteWithTags{
+		Route: *updatedRoute,
+		Tags:  tagNames,
+	}, nil
+}
 func (r *repository) Update(ctx context.Context, route *Route) (*Route, error) {
 	query := `
 	
@@ -38,6 +61,39 @@ func (r *repository) Update(ctx context.Context, route *Route) (*Route, error) {
 `
 
 	rows, err := r.conn.NamedQueryContext(ctx, query, route)
+	if err != nil {
+		return nil, err
+	}
+
+	var g Route
+	for rows.Next() {
+		err = rows.StructScan(&g)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &g, nil
+}
+
+func UpdateTx(ctx context.Context, tx *sqlx.Tx, route *Route) (*Route, error) {
+	query := `
+	
+			update ad.routes
+			   set route = :route,
+				   method = :method,
+				   description = :description,
+				   updated_at = now()
+			where id = :id returning id,
+						   route,
+						   method,
+						   description,
+						   created_at,
+						   updated_at,
+						   deleted_at
+`
+
+	rows, err := tx.NamedQuery(query, route)
 	if err != nil {
 		return nil, err
 	}

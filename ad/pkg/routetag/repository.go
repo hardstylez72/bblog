@@ -116,7 +116,7 @@ func insertPair(ctx context.Context, tx *sqlx.Tx, routeId, tagId int) error {
 	return nil
 }
 func deletePair(ctx context.Context, tx *sqlx.Tx, routeId, tagId int) error {
-	query := `delete from ad.routes_tags where user_id = $1 and tag_id = $2`
+	query := `delete from ad.routes_tags where route_id = $1 and tag_id = $2`
 
 	_, err := tx.ExecContext(ctx, query, routeId, tagId)
 	if err != nil {

@@ -14,6 +14,7 @@ type Repository interface {
 	GetById(ctx context.Context, id int) (*RouteWithTags, error)
 	Insert(ctx context.Context, group *Route) (*Route, error)
 	InsertWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error)
+	UpdateWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error)
 	Delete(ctx context.Context, id int) error
 	Update(ctx context.Context, group *Route) (*Route, error)
 }
@@ -64,13 +65,13 @@ func (c *controller) update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	route, err := c.rep.Update(ctx, updateRequestConvert(&req))
+	route, err := c.rep.UpdateWithTags(ctx, updateRequestConvert(&req), req.Tags)
 	if err != nil {
 		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return
 	}
 
-	util.NewResp(w).Status(http.StatusOK).Json(newUpdateResponse(route)).Send()
+	util.NewResp(w).Status(http.StatusOK).Json(route).Send()
 }
 
 func (c *controller) list(w http.ResponseWriter, r *http.Request) {

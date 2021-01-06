@@ -143,6 +143,9 @@ func Start(r chi.Router) error {
 	for _, r := range rs {
 		_, err = route.NewRepository(pgx).InsertWithTags(context.Background(), &r, []string{"system"})
 		if err != nil {
+			if err == route.ErrRouteAlreadyExists {
+				continue
+			}
 			return err
 		}
 	}
