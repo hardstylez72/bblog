@@ -18,7 +18,16 @@ export default class GroupService extends DefaultService<Group> {
     return makeRequest(req);
   }
 
-  CreateBasedOnAnother(t: T, baseGroupId: number): Promise<T> {
+  Update(t: Group): Promise<T> {
+    const req: Request = {
+      data: t,
+      method: this.methodPost,
+      url: `${this.baseUrl}/update`,
+    };
+    return makeRequest(req);
+  }
+
+  CreateBasedOnAnother(t: Group, baseGroupId: number): Promise<T> {
     const req: Request = {
       data: { ...t, baseGroupId },
       method: this.methodPost,

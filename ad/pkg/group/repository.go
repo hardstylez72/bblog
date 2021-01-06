@@ -79,6 +79,37 @@ insert into ad.groups (
 
 	return &g, nil
 }
+
+func (r *repository) Update(ctx context.Context, group *Group) (*Group, error) {
+	query := `
+	update ad.groups 
+	   set code = :code,
+		   description = :description,
+		   updated_at = now()
+	 where id = :id returning  id,
+                               code,
+                               description,
+                               created_at,
+                               updated_at,
+                               deleted_at;
+`
+
+	rows, err := r.conn.NamedQueryContext(ctx, query, group)
+	if err != nil {
+		return nil, err
+	}
+
+	var g Group
+	for rows.Next() {
+		err = rows.StructScan(&g)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &g, nil
+}
+
 func (r *repository) Insert(ctx context.Context, group *Group) (*Group, error) {
 	query := `
 insert into ad.groups (

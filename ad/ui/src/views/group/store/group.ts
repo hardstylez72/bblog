@@ -4,13 +4,14 @@
 import {
   defineActions, defineModule, defineMutations, defineGetters,
 } from 'direct-vuex';
+import { Route } from '@/views/route/service';
 import { moduleActionContext } from '../../base/store';
 import Service from '../../base/services/default';
 import GroupService, { Group } from '../services/group';
 
 export interface State<T>{
   service: GroupService;
-  entities: T[];
+  entities: Group[];
 }
 
 const state1 = {
@@ -28,6 +29,14 @@ const mutations = defineMutations < State < Group >>()({
   addEntity(state, entities) {
     state.entities.push(entities);
   },
+  updateGroup(state, group: Group) {
+    state.entities = state.entities.map((r) => {
+      if (group.id === r.id) {
+        return group;
+      }
+      return r;
+    });
+  },
 });
 
 const actions = defineActions({
@@ -40,6 +49,12 @@ const actions = defineActions({
     const entities = await state.service.GetList();
     commit.setEntities(entities);
     return entities;
+  },
+  async Update(context, route: Group): Promise<Group> {
+    const { state, commit } = actionContext(context);
+    const createdEntity = await state.service.Update(route);
+    commit.updateGroup(createdEntity);
+    return createdEntity;
   },
   async Create(context, route: Group): Promise<Group> {
     const { state, commit } = actionContext(context);

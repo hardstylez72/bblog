@@ -10,15 +10,15 @@
       </v-card-title>
       <v-card-text>
 
-        <EditRouteForm v-model="route">
+        <RouteForm v-model="route">
           <template v-slot:actions="{ref}">
             <v-card-actions>
               <v-spacer />
               <v-btn color="blue darken-1" text @click="close">Отмена</v-btn>
-              <v-btn color="blue darken-1" text @click="createRoute(ref)">Создать</v-btn>
+              <v-btn color="blue darken-1" text :disabled="disableCreateButton" @click="createRoute(ref)">Создать</v-btn>
             </v-card-actions>
           </template>
-        </EditRouteForm>
+        </RouteForm>
 
       </v-card-text>
     </v-card>
@@ -27,16 +27,16 @@
 
 <script lang="ts">
 import {
-  Component, Vue,
+  Component, Vue, Watch,
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import Dialog from '@/views/base/components/Dialog.vue';
-import EditRouteForm from './EditRouteForm.vue';
+import RouteForm from './RouteForm.vue';
 
 @Component({
   components: {
     Dialog,
-    EditRouteForm,
+    RouteForm,
   },
 })
 
@@ -54,29 +54,46 @@ export default class CreateRouteDialog extends Vue {
     route: '/',
   }
 
+  disableCreateButton = true
+
+  routeInitialState: Route = {
+    description: '',
+    id: -1,
+    method: '',
+    route: '/',
+  }
+
+  @Watch('route', { deep: true })
+  protected onChangeRoute(route: Route): void {
+    this.disableCreateButton = this.routesSame(this.routeInitialState, route);
+  }
+
+  routesSame(a: Route, b: Route): boolean {
+    return (a.description === b.description
+      && a.method === b.method
+      && a.route === b.route);
+  }
+
   async createRoute(ref: any) {
     if (ref) {
       ref.validate();
     }
-    if (!this.route.description) {
+    if (!this.route.description || !this.route.method || !this.route.route) {
       return;
     }
 
-    if (!this.route.method) {
-      return;
-    }
-
-    if (!this.route.route) {
-      return;
-    }
     await this.$store.direct.dispatch.route.Create(this.$data.route);
+    this.clearForm();
+    this.show = false;
+  }
+
+  clearForm() {
     this.route = {
       route: '',
       method: 'POST',
       description: '',
       id: -1,
     };
-    this.show = false;
   }
 
   close() {

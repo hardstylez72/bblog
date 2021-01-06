@@ -5,15 +5,15 @@
         Редактирование маршрута
       </v-card-title>
       <v-card-text>
-        <EditRouteForm v-model="route">
+        <RouteForm v-model="route">
           <template v-slot:actions="{ref}">
             <v-card-actions>
               <v-spacer />
               <v-btn color="blue darken-1" text @click="close">Отмена</v-btn>
-              <v-btn color="blue darken-1" text @click="updateRoute(ref)">Обновить</v-btn>
+              <v-btn color="blue darken-1" text :disabled="disableUpdateButton" @click="updateRoute(ref)">Обновить</v-btn>
             </v-card-actions>
           </template>
-        </EditRouteForm>
+        </RouteForm>
       </v-card-text>
     </v-card>
   </Dialog>
@@ -25,16 +25,18 @@ import {
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import Dialog from '@/views/base/components/Dialog.vue';
-import EditRouteForm from './EditRouteForm.vue';
+import RouteForm from './RouteForm.vue';
 
 @Component({
   components: {
     Dialog,
-    EditRouteForm,
+    RouteForm,
   },
 })
-export default class CreateRouteDialog extends Vue {
+export default class UpdateRouteDialog extends Vue {
   show = false
+
+  disableUpdateButton = true
 
   valid = true
 
@@ -55,39 +57,55 @@ export default class CreateRouteDialog extends Vue {
     route: '/',
   }
 
+   initialRouteState: Route | undefined
+
   @Watch('item', { deep: true })
-  protected onChangeItem(value: Route): void {
+  protected onChangeItem(item: Route): void {
     this.route = {
-      description: value.description,
-      id: value.id,
-      method: value.method,
-      route: value.route,
+      description: item.description,
+      id: item.id,
+      method: item.method,
+      route: item.route,
     };
+    this.initialRouteState = {
+      description: item.description,
+      id: item.id,
+      method: item.method,
+      route: item.route,
+    };
+  }
+
+  @Watch('route', { deep: true })
+  protected onChangeRoute(route: Route): void {
+    if (!this.routesSame(this.item, route)) {
+      this.disableUpdateButton = false;
+    }
+
+    if (this.initialRouteState) {
+      if (this.routesSame(this.initialRouteState, route)) {
+        this.disableUpdateButton = true;
+      }
+    }
   }
 
   async updateRoute(ref: any) {
     if (ref) {
-      ref.validate();
+      ref.validate(); // vee-validate specifics
     }
 
-    if (!this.route.id) {
-      return;
-    }
-    if (!this.route.description) {
-      return;
-    }
-
-    if (!this.route.method) {
-      return;
-    }
-
-    if (!this.route.route) {
+    if (!this.route.id || !this.route.description || !this.route.method || !this.route.route) {
       return;
     }
 
     await this.$store.direct.dispatch.route.Update(this.$data.route);
     this.$emit('change', false);
     this.show = false;
+  }
+
+  routesSame(a: Route, b: Route): boolean {
+    return (a.description === b.description
+      && a.method === b.method
+      && a.route === b.route);
   }
 
   close() {

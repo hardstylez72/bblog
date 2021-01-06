@@ -1,11 +1,7 @@
 <template>
   <Dialog v-model="show">
-    <template v-slot:activator="props">
-      <v-btn color="primary" class="mb-2" v-bind="props" v-on="props.on">Новая группа</v-btn>
-    </template>
-
     <v-card>
-      <v-card-title class="headline grey lighten-2">Создание группы</v-card-title>
+      <v-card-title class="headline grey lighten-2">Редактирование группы</v-card-title>
       <v-card-text>
         <v-form ref="create-group-form" v-model="valid" lazy-validation>
           <v-row>
@@ -15,15 +11,6 @@
                 required
                 :rules="codeRules"
                 label="Код"
-              />
-            </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <v-select
-                :items="groups"
-                item-text="code"
-                item-value="id"
-                v-model="baseGroupId"
-                label="Код базовой группы"
               />
             </v-col>
             <v-col cols="12" sm="10" md="10">
@@ -41,7 +28,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="createGroup">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="updateGroup">Save</v-btn>
         </v-card-actions>
       </v-card-text>
     </v-card>
@@ -50,9 +37,10 @@
 
 <script lang="ts">
 import {
-  Component, Vue,
+  Component, Model, Prop, Vue, Watch,
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
+import { Route } from '@/views/route/service';
 
 @Component({
   components: {
@@ -65,7 +53,29 @@ import { Group } from '@/views/group/services/group';
   },
 
 })
-export default class CreateRouteDialog extends Vue {
+export default class UpdateGroupDialog extends Vue {
+  @Prop({ required: true }) id!: number
+
+  @Model('change', { default: false, type: Boolean })
+  readonly value!: boolean
+
+  @Watch('value')
+  protected onChangeValue(value: boolean): void {
+    this.show = value;
+  }
+
+  @Watch('id')
+  protected onChangeItem(groupId: number): void {
+    this.group.id = groupId;
+  }
+
+  @Watch('activeGroup')
+  protected onChangeActiveGroup(g: Group): void {
+    this.group.id = g.id;
+    this.group.code = g.code;
+    this.group.description = g.description;
+  }
+
   show = false
 
   valid = false
@@ -76,7 +86,9 @@ export default class CreateRouteDialog extends Vue {
     code: '',
   }
 
-  baseGroupId = 0
+  get activeGroup(): Group {
+    return this.$store.direct.getters.group.getEntities.filter(((route) => route.id === this.id))[0];
+  }
 
   get groups(): readonly Group[] {
     return this.$store.direct.getters.group.getEntities;
@@ -96,33 +108,24 @@ export default class CreateRouteDialog extends Vue {
 
   descriptionRules = this.rules
 
-  async createGroup() {
+  async updateGroup() {
     this.validate();
     if (!this.valid) {
       return;
     }
 
-    if (!this.group.code) {
-      return;
-    }
-    if (!this.group.description) {
+    if (!this.group.code || !this.group.description || !this.group.id) {
       return;
     }
 
-    if (this.baseGroupId === 0) {
-      await this.$store.direct.dispatch.group.Create(this.group);
-    } else {
-      await this.$store.direct.dispatch.group.CreateBasedOnAnother({
-        group: this.group,
-        baseGroupId: this.baseGroupId,
-      });
-    }
-
+    await this.$store.direct.dispatch.group.Update(this.group);
+    this.$emit('change', false);
     this.show = false;
   }
 
   close() {
     this.show = false;
+    this.$emit('change', false);
   }
 }
 </script>

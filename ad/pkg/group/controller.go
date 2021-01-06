@@ -15,6 +15,7 @@ type Repository interface {
 	Insert(ctx context.Context, group *Group) (*Group, error)
 	InsertGroupBasedOnAnother(ctx context.Context, group *Group, groupBaseId int) (*Group, error)
 	Delete(ctx context.Context, id int) error
+	Update(ctx context.Context, group *Group) (*Group, error)
 }
 
 type controller struct {
@@ -56,6 +57,28 @@ func (c *controller) create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	util.NewResp(w).Status(http.StatusOK).Json(newInsertResponse(group)).Send()
+}
+
+func (c *controller) update(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	var req updateRequest
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	group, err := c.rep.Update(ctx, updateRequestConvert(&req))
+	if err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
+		return
+	}
+	util.NewResp(w).Status(http.StatusOK).Json(newUpdateResponse(group)).Send()
 }
 
 func (c *controller) list(w http.ResponseWriter, r *http.Request) {
@@ -116,5 +139,6 @@ func (c *controller) Mount(r chi.Router) {
 	r.Post("/v1/group/get", c.getById)
 	r.Post("/v1/group/create", c.create)
 	r.Post("/v1/group/delete", c.delete)
+	r.Post("/v1/group/update", c.update)
 
 }

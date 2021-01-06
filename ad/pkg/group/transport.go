@@ -19,6 +19,26 @@ func newInsertResponse(group *Group) *insertResponse {
 	return (*insertResponse)(group)
 }
 
+type updateRequest struct {
+	Id          int    `json:"id"  validate:"required"`
+	Code        string `json:"code" validate:"required"`
+	Description string `json:"description" validate:"required"`
+}
+
+func updateRequestConvert(r *updateRequest) *Group {
+	return &Group{
+		Id:          r.Id,
+		Code:        r.Code,
+		Description: r.Description,
+	}
+}
+
+type updateResponse Group
+
+func newUpdateResponse(group *Group) *updateResponse {
+	return (*updateResponse)(group)
+}
+
 type listResponse []Group
 
 func newListResponse(groups []Group) listResponse {

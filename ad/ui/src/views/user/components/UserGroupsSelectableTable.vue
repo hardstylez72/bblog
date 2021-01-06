@@ -35,7 +35,8 @@ import { DataTableHeader } from 'vuetify';
 @Component
 export default class GroupsBelongUserSelectableTable extends SelectableTable<Group> {
   readonly headers: DataTableHeader[] = [
-    { text: 'ID', value: 'id' },
+    { text: 'ID', value: 'id', width: '50px' },
+    { text: 'Метод', value: 'method', width: '10%' },
     { text: 'Код', value: 'code' },
     { text: 'Описание', value: 'description' },
     { text: 'Actions', value: 'actions' },

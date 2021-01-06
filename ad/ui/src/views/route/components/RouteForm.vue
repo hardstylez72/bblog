@@ -42,7 +42,7 @@ import {
 import { Route } from '@/views/route/service';
 
 @Component
-export default class CreateRouteDialog extends Vue {
+export default class RouteForm extends Vue {
   valid = true
 
   route: Route = {
@@ -52,9 +52,7 @@ export default class CreateRouteDialog extends Vue {
     route: '/',
   }
 
-  @Prop({}) refss!: string
-
-  httpMethodList = ['GET', 'POST', 'PUT', 'DELETE']
+  httpMethodList = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 
   @Model('change', { default: {} })
   readonly value!: Route

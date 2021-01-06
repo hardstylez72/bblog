@@ -29,6 +29,10 @@
       :id="activeItemId"
       v-model="showDeleteDialog"
     />
+    <UpdateGroupDialog
+      :id="activeItemId"
+      v-model="showEditDialog"
+    />
   </div>
 </template>
 
@@ -41,21 +45,25 @@ import { DataTableHeader } from 'vuetify';
 import DictTable from '../../base/components/DictTable.vue';
 import CreateGroupDialog from './CreateGroupDialog.vue';
 import DeleteGroupDialog from './DeleteGroupDialog.vue';
+import UpdateGroupDialog from './UpdateGroupDialog.vue';
 
 @Component({
   components: {
     CreateGroupDialog,
     DeleteGroupDialog,
+    UpdateGroupDialog,
   },
 })
 export default class TapGroupTable extends DictTable<Group> {
   readonly title = 'Группы'
 
   readonly headers: DataTableHeader[] = [
-    { text: 'ID', value: 'id', width: '3%' },
+    { text: 'ID', value: 'id', width: '50px' },
     { text: 'Код', value: 'code', width: '15%' },
-    { text: 'Описание', value: 'description', width: '70%' },
-    { text: 'Actions', value: 'actions', sortable: false },
+    { text: 'Описание', value: 'description' },
+    {
+ text: 'Actions', value: 'actions', sortable: false, width: '100px',
+},
   ]
 
   mounted() {

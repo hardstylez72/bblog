@@ -24,6 +24,10 @@
         <slot name="item.statuses" v-bind="{ item }"/>
       </template>
 
+      <template v-slot:item.method="{ item }">
+        <HttpMethodBox :method="item.method"></HttpMethodBox>
+      </template>
+
     </v-data-table>
   </div>
 </template>
@@ -33,8 +37,13 @@ import {
   Component, Model, Prop, Vue, Watch,
 } from 'vue-property-decorator';
 import { DataTableHeader } from 'vuetify';
+import HttpMethodBox from './HttpMethodBox.vue';
 
-@Component
+@Component({
+  components: {
+    HttpMethodBox,
+  },
+})
 export default class SelectableTable<T> extends Vue {
   @Prop({ default: () => ([]), type: Array }) items!: Array<T>
 

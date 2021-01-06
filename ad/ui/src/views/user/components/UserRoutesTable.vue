@@ -23,6 +23,10 @@
         <slot name="item.statuses" v-bind="{ item }"/>
       </template>
 
+      <template v-slot:item.method="{ item }">
+        <HttpMethodBox :method="item.method"></HttpMethodBox>
+      </template>
+
     </v-data-table>
   </div>
 </template>
@@ -36,13 +40,13 @@ import { DataTableHeader } from 'vuetify';
 @Component
 export default class UserRoutesTable extends SelectableTable<Group> {
   readonly headers: DataTableHeader[] = [
-      { text: 'ID', value: 'id' },
+      { text: 'ID', value: 'id', width: '50px' },
+      { text: 'Метод', value: 'method', width: '80px' },
       { text: 'Маршрут', value: 'route' },
-      { text: 'Метод', value: 'method' },
       { text: 'Описание', value: 'description' },
       { text: 'Группы', value: 'groupCodes' },
-      { text: 'Действия', value: 'actions', width: '10%' },
-      { text: 'Статусы', value: 'statuses', width: '10%' },
+      { text: 'Действия', value: 'actions', width: '80px' },
+      { text: 'Статусы', value: 'statuses', width: '80px' },
     ]
 
   view(group: Group) {

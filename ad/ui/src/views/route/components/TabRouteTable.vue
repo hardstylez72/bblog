@@ -19,6 +19,10 @@
         </v-toolbar>
       </template>
 
+      <template v-slot:item.method="{ item }">
+        <HttpMethodBox :method="item.method"></HttpMethodBox>
+      </template>
+
       <template v-slot:item.actions="{ item }">
         <v-icon small class="mr-2" @click="edit(item)">mdi-pencil</v-icon>
         <v-icon small @click="remove(item)">mdi-delete</v-icon>
@@ -39,12 +43,14 @@ import { DataTableHeader } from 'vuetify';
 import CreateRouteDialog from './CreateRouteDialog.vue';
 import DeleteRouteDialog from './DeleteRouteDialog.vue';
 import UpdateRouteDialog from './UpdateRouteDialog.vue';
+import HttpMethodBox from '../../base/components/HttpMethodBox.vue';
 
 @Component({
   components: {
     CreateRouteDialog,
     DeleteRouteDialog,
     UpdateRouteDialog,
+    HttpMethodBox,
   },
 })
 export default class TabRouteTable extends DictTable<Route> {
@@ -62,14 +68,17 @@ export default class TabRouteTable extends DictTable<Route> {
     return this.$store.direct.getters.route.getRoutes.filter(((route) => route.id === this.activeItemId))[0];
   }
 
-  methods = ['GET', 'POST', 'PUT', 'DELETE']
+  methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 
   readonly headers: DataTableHeader[] = [
-    { text: 'ID', value: 'id' },
+    { text: 'ID', value: 'id', width: '50px' },
+    { text: 'Метод', value: 'method', width: '80px' },
     { text: 'Маршруты', value: 'route' },
-    { text: 'Метод', value: 'method' },
     { text: 'Описание', value: 'description' },
-    { text: 'Actions', value: 'actions', sortable: false },
+
+    {
+ text: 'Actions', value: 'actions', sortable: false, width: '80px',
+},
   ]
 }
 </script>
