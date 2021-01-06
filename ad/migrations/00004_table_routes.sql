@@ -10,7 +10,7 @@ create table if not exists ad.routes (
    deleted_at timestamp default null
 );
 
-create unique index routes_id_index
+create unique index if not exists routes_id_index
     on ad.routes (method, route);
 
 -- +goose Down

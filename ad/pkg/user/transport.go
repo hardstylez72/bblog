@@ -1,14 +1,12 @@
 package user
 
 type insertRequest struct {
-	ExternalId string `json:"externalId"`
-	IsSystem   bool   `json:"isSystem"`
+	ExternalId string `json:"externalId" validate:"required"`
 }
 
 func insertRequestConvert(r *insertRequest) *User {
 	return &User{
 		ExternalId: r.ExternalId,
-		IsSystem:   r.IsSystem,
 	}
 }
 

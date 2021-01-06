@@ -9,6 +9,7 @@ import userModule from '../user/store/store';
 import groupRouteModule from '../group/store/grouproute';
 import userGroupModule from '../user/store/usergroup';
 import userRouteModule from '../user/store/userroute';
+import tagModule from '../tag/store';
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ const {
     user: userModule,
     userGroup: userGroupModule,
     userRoute: userRouteModule,
+    tag: tagModule,
   },
 });
 

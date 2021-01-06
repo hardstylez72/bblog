@@ -7,6 +7,7 @@ export interface Route extends Entity {
   route: string;
   method: string;
   description: string;
+  tags?: string[];
 }
 
 export default class RouteService extends DefaultService<Route> {

@@ -2,7 +2,13 @@ package route
 
 import (
 	"context"
+	"errors"
+	"github.com/hardstylez72/bblog/ad/pkg/routetag"
 	"github.com/jmoiron/sqlx"
+)
+
+var (
+	ErrRouteAlreadyExists = errors.New("route already exist")
 )
 
 type repository struct {
@@ -83,6 +89,73 @@ insert into ad.routes (
 		if err != nil {
 			return nil, err
 		}
+	}
+
+	return &g, nil
+}
+
+func (r *repository) InsertWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error) {
+	tx, err := r.conn.BeginTxx(ctx, nil)
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+		} else {
+			_ = tx.Commit()
+		}
+	}()
+	newRoute, err := InsertTx(ctx, tx, route)
+	if err != nil {
+		return nil, err
+	}
+
+	tagNames, err = routetag.Merge(ctx, r.conn, tx, newRoute.Id, tagNames)
+	if err != nil {
+		return nil, err
+	}
+	return &RouteWithTags{
+		Route: *newRoute,
+		Tags:  tagNames,
+	}, nil
+}
+
+func InsertTx(ctx context.Context, tx *sqlx.Tx, route *Route) (*Route, error) {
+	query := `
+insert into ad.routes (
+                       route,
+                       method,
+                       description,
+                       created_at,
+                       updated_at,
+                       deleted_at
+                       )
+                   values (
+                       :route,
+                       :method,
+                       :description,
+                       now(),
+                       null,
+                       null
+                   ) returning id,
+                               route,
+                       		   method,
+                               description,
+                               created_at,
+                               updated_at,
+                               deleted_at;
+`
+	var g Route
+	rows, err := tx.NamedQuery(query, route)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		err = rows.StructScan(&g)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if g.Id == 0 {
+		return nil, ErrRouteAlreadyExists
 	}
 
 	return &g, nil

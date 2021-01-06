@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -10,6 +11,7 @@ import (
 	"github.com/hardstylez72/bblog/ad/pkg/infra/logger"
 	"github.com/hardstylez72/bblog/ad/pkg/infra/storage"
 	"github.com/hardstylez72/bblog/ad/pkg/route"
+	"github.com/hardstylez72/bblog/ad/pkg/tag"
 	"github.com/hardstylez72/bblog/ad/pkg/user"
 	"github.com/hardstylez72/bblog/ad/pkg/usergroup"
 	"github.com/hardstylez72/bblog/ad/pkg/userroute"
@@ -18,6 +20,10 @@ import (
 	"log"
 	"net/http"
 	"time"
+)
+
+const (
+	apiPathPrefix = "/api"
 )
 
 type Server struct {
@@ -72,9 +78,6 @@ func (s *Server) Run() error {
 }
 
 func (s *Server) Handler() chi.Router {
-	const (
-		apiPathPrefix = "/api"
-	)
 
 	r := s.router
 	c := cors.Handler(cors.Options{
@@ -110,15 +113,39 @@ func Start(r chi.Router) error {
 	if err != nil {
 		return err
 	}
+	err = storage.RunMigrations(pg, "ad/migrations")
+	if err != nil {
+		return err
+	}
 
+	tag.NewController(tag.NewRepository(pgx)).Mount(r)
 	route.NewController(route.NewRepository(pgx)).Mount(r)
-
 	group.NewController(group.NewRepository(pgx)).Mount(r)
 	grouproute.NewController(grouproute.NewRepository(pgx)).Mount(r)
-
 	user.NewController(user.NewRepository(pgx)).Mount(r)
 	usergroup.NewController(usergroup.NewRepository(pgx)).Mount(r)
 	userroute.NewController(userroute.NewRepository(pgx)).Mount(r)
+
+	rs := make([]route.Route, 0)
+	for _, r := range r.Routes() {
+
+		if apiPathPrefix+"/*" == r.Pattern {
+			continue
+		}
+
+		rs = append(rs, route.Route{
+			Route:       apiPathPrefix + r.Pattern,
+			Method:      http.MethodPost,
+			Description: "",
+		})
+	}
+
+	for _, r := range rs {
+		_, err = route.NewRepository(pgx).Insert(context.Background(), &r)
+		if err != nil {
+			return err
+		}
+	}
 
 	return nil
 }

@@ -1,9 +1,10 @@
 package route
 
 type insertRequest struct {
-	Route       string `json:"route" validate:"required"`
-	Description string `json:"description" validate:"required"`
-	Method      string `json:"method" validate:"required"`
+	Route       string   `json:"route" validate:"required"`
+	Description string   `json:"description" validate:"required"`
+	Method      string   `json:"method" validate:"required"`
+	Tags        []string `json:"tags"`
 }
 
 type updateRequest struct {
@@ -30,10 +31,15 @@ func updateRequestConvert(r *updateRequest) *Route {
 	}
 }
 
-type insertResponse Route
+type insertResponse RouteWithTags
+type updateResponse Route
 
-func newInsertResponse(group *Route) *insertResponse {
+func newInsertResponse(group *RouteWithTags) *insertResponse {
 	return (*insertResponse)(group)
+}
+
+func newUpdateResponse(route *Route) *updateResponse {
+	return (*updateResponse)(route)
 }
 
 type listResponse []Route

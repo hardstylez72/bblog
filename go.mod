@@ -16,6 +16,7 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/minio/minio-go/v7 v7.0.4
 	github.com/pkg/errors v0.8.1
+	github.com/pressly/goose v2.6.0+incompatible
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.5.1
 	go.opencensus.io v0.22.1

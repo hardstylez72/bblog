@@ -125,6 +125,11 @@ func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
 	err := c.rep.Delete(ctx, req.Id)
 	if err != nil {
 		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()

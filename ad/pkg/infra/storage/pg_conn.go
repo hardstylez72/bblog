@@ -5,6 +5,9 @@ import (
 	"database/sql"
 	_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
+	"github.com/pressly/goose"
+	"os"
+	"path"
 	"time"
 )
 
@@ -49,4 +52,31 @@ func WrapPgConnWithSqlx(conn *sql.DB) (*sqlx.DB, error) {
 		return nil, err
 	}
 	return sqlxDB, nil
+}
+
+func RunMigrations(pg *sql.DB, subPath string) error {
+
+	dir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	migrationDir := path.Join(dir, subPath)
+	currentMigrationVersion, err := goose.EnsureDBVersion(pg)
+	if err != nil {
+		return err
+	}
+	migrations, err := goose.CollectMigrations(migrationDir, currentMigrationVersion, 100)
+	if err != nil {
+		return err
+	}
+
+	for _, migration := range migrations {
+		err = migration.Up(pg)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

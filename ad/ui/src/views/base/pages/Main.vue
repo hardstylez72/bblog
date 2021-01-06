@@ -16,6 +16,9 @@
         <div v-if="item === tabs[2]">
           <TapUserTable/>
         </div>
+        <div v-if="item === tabs[3]">
+          <TabTagsTable/>
+        </div>
       </v-tab-item>
     </v-tabs-items>
 
@@ -30,12 +33,14 @@ import {
 import TabRouteTable from '@/views/route/components/TabRouteTable.vue';
 import TapGroupTable from '@/views/group/components/TapGroupTable.vue';
 import TapUserTable from '@/views/user/components/TapUserTable.vue';
+import TabTagsTable from '@/views/tag/components/TabTagsTable.vue';
 
 @Component({
   components: {
     TabRouteTable,
     TapGroupTable,
     TapUserTable,
+    TabTagsTable,
   },
 
 })
@@ -45,7 +50,7 @@ export default class MainTabs extends Vue {
   tab = 0;
 
   tabs: string[] = [
-    'routes', 'groups', 'users',
+    'routes', 'groups', 'users', 'tags',
   ];
 
   @Watch('$route')

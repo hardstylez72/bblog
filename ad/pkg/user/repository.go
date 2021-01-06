@@ -17,32 +17,17 @@ func (r *repository) Insert(ctx context.Context, entity *User) (*User, error) {
 	query := `
 insert into ad.users (
                        external_id,
-					   is_system,
-					   name,
-					   description,
-					   email,
-					   phone,
                        created_at,
 					   updated_at,
 					   deleted_at
                        )
                    values (
                        :external_id,
-					   :is_system,
-					   :name,
-					   :description,
-					   :email,
-					   :phone,
 					   now(),
 					   :updated_at,
 					   :deleted_at
                    ) returning id,
                                external_id,
-							   is_system,
-							   name,
-							   description,
-							   email,
-							   phone,
 							   created_at,
 							   updated_at,
 							   deleted_at;
@@ -68,11 +53,6 @@ func (r *repository) GetById(ctx context.Context, id int) (*User, error) {
 	query := `
 		select id,
 			   external_id,
-			   is_system,
-			   name,
-			   description,
-			   email,
-			   phone,
 		       created_at,
 			   updated_at,
 			   deleted_at
@@ -93,11 +73,6 @@ func (r *repository) List(ctx context.Context) ([]User, error) {
 	query := `
 		select id,
 			   external_id,
-			   is_system,
-			   name,
-			   description,
-			   email,
-			   phone,
 		       created_at,
 			   updated_at,
 			   deleted_at

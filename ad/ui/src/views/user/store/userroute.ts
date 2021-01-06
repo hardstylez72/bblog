@@ -30,7 +30,7 @@ const state1 = {
 
 const mutations = defineMutations < State >()({
 
-  updateRoute(state, r: RouteExt) {
+  updateTag(state, r: RouteExt) {
     state.routesBelongToUser = state.routesBelongToUser.map((route) => {
       if (route.id === r.id) {
         return {

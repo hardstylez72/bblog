@@ -14,3 +14,8 @@ type Route struct {
 	UpdatedAt   util.JsonNullTime `json:"updatedAt" db:"updated_at"`
 	DeletedAt   util.JsonNullTime `json:"deletedAt" db:"deleted_at"`
 }
+
+type RouteWithTags struct {
+	Route
+	Tags []string `json:"route" `
+}

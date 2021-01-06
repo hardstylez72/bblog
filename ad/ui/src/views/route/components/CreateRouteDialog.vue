@@ -52,6 +52,7 @@ export default class CreateRouteDialog extends Vue {
     id: -1,
     method: '',
     route: '/',
+    tags: [],
   }
 
   disableCreateButton = true
@@ -61,6 +62,7 @@ export default class CreateRouteDialog extends Vue {
     id: -1,
     method: '',
     route: '/',
+    tags: [],
   }
 
   @Watch('route', { deep: true })
@@ -90,9 +92,10 @@ export default class CreateRouteDialog extends Vue {
   clearForm() {
     this.route = {
       route: '',
-      method: 'POST',
+      method: '',
       description: '',
       id: -1,
+      tags: [],
     };
   }
 
