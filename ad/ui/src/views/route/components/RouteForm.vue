@@ -158,7 +158,6 @@ export default class RouteForm extends Vue {
       this.selectedTags = route.tags;
       // without it does not load props...
       this.onChangeSearchTags('test');
-      // blur selectItem setSearch setValue
     }
     // this.$set(this.route, route);
     this.route = {

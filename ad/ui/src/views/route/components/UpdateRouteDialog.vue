@@ -85,14 +85,13 @@ export default class UpdateRouteDialog extends Vue {
 
   @Watch('route', { deep: true })
   protected onChangeRoute(route: Route): void {
-    console.log('sdsonChangeRouted');
-    this.disableUpdateButton = false;
     if (this.routesSame(this.initialRouteState, route)) {
       this.disableUpdateButton = true;
       return;
     }
 
-    if (!this.routesSame(this.route, route)) {
+    if (this.routesSame(this.route, route)) {
+      console.log('if (!this.routesSame(this.route, route)) {');
       this.disableUpdateButton = false;
     }
   }
@@ -112,8 +111,6 @@ export default class UpdateRouteDialog extends Vue {
   }
 
   routesSame(a: Route, b: Route): boolean {
-    console.log(a.tags, b.tags, _.isEqual(a.tags, b.tags));
-
     return (a.description === b.description
       && a.method === b.method
       && a.route === b.route
