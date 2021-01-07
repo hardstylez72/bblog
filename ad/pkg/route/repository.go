@@ -3,9 +3,11 @@ package route
 import (
 	"context"
 	"errors"
+	sq "github.com/Masterminds/squirrel"
 	"github.com/hardstylez72/bblog/ad/pkg/routetag"
 	"github.com/hardstylez72/bblog/ad/pkg/tag"
 	"github.com/jmoiron/sqlx"
+	"strings"
 )
 
 var (
@@ -250,8 +252,9 @@ func getTagsByRouteId(ctx context.Context, conn *sqlx.DB, id int) ([]string, err
 	}
 	return tagNames, nil
 }
-func (r *repository) List(ctx context.Context) ([]RouteWithTags, error) {
-	routes, err := ListDb(ctx, r.conn)
+func (r *repository) List(ctx context.Context, f filter) ([]RouteWithTags, error) {
+
+	routes, err := ListDb(ctx, r.conn, f)
 	if err != nil {
 		return nil, err
 	}
@@ -294,20 +297,65 @@ func GetByIdDb(ctx context.Context, conn *sqlx.DB, id int) (*Route, error) {
 	return &route, nil
 }
 
-func ListDb(ctx context.Context, conn *sqlx.DB) ([]Route, error) {
-	query := `
-		select id,
-			   route,
-		       method,
-			   description,
-			   created_at,
-			   updated_at,
-			   deleted_at
-		from ad.routes
-	   where deleted_at is null;
-`
+func formArrayStringSql(arr []string) string {
+	buf := make([]string, 0)
+
+	for i := range arr {
+		buf = append(buf, `'`+arr[i]+`'`)
+	}
+
+	return strings.Join(buf, ", ")
+}
+
+func printQuestions(n int) string {
+	out := ""
+	for i := 0; i < n; i++ {
+		out = out + "?,"
+	}
+
+	out = out[:len(out)-1]
+	return out
+}
+
+func ListDb(ctx context.Context, conn *sqlx.DB, f filter) ([]Route, error) {
+	psql := sq.StatementBuilder.PlaceholderFormat(sq.Dollar)
+
+	routes1 := psql.Select(`
+			   r.id,
+			   r.route,
+		       r.method,
+			   r.description,
+			   r.created_at,
+			   r.updated_at,
+			   r.deleted_at
+			`).
+		From("ad.routes r").
+		InnerJoin("ad.routes_tags rt on rt.route_id = r.id").
+		InnerJoin("ad.tags t on rt.tag_id = t.id").
+		Where("r.deleted_at is null").
+		Where("t.deleted_at is null")
+
+	if len(f.Tags.Names) > 0 {
+		if f.Tags.Exclude {
+			//routes1 = routes1.Where(sq.NotEq{"t.name": f.Tags.Names[i]})
+			routes1 = routes1.Where(`rt.route_id not in (
+													select route_id from ad.routes_tags where tag_id in (
+												   	   select id from ad.tags where name in (` + formArrayStringSql(f.Tags.Names) + `)
+													)
+										     )`)
+			routes1 = routes1.Where(`t.name not in (` + formArrayStringSql(f.Tags.Names) + `)`)
+		} else {
+			routes1 = routes1.Where(`t.name in (` + formArrayStringSql(f.Tags.Names) + `)`)
+		}
+	}
+
+	query, args, err := routes1.ToSql()
+	if err != nil {
+		return nil, err
+	}
+
 	groups := make([]Route, 0)
-	err := conn.SelectContext(ctx, &groups, query)
+	err = conn.SelectContext(ctx, &groups, query, args...)
 	if err != nil {
 		return nil, err
 	}

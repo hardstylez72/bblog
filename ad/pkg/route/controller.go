@@ -10,7 +10,7 @@ import (
 )
 
 type Repository interface {
-	List(ctx context.Context) ([]RouteWithTags, error)
+	List(ctx context.Context, f filter) ([]RouteWithTags, error)
 	GetById(ctx context.Context, id int) (*RouteWithTags, error)
 	Insert(ctx context.Context, group *Route) (*Route, error)
 	InsertWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error)
@@ -76,8 +76,19 @@ func (c *controller) update(w http.ResponseWriter, r *http.Request) {
 
 func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
+	var req listRequest
 
-	list, err := c.rep.List(ctx)
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	if err := c.validator.Struct(req); err != nil {
+		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
+		return
+	}
+
+	list, err := c.rep.List(ctx, req.Filter)
 	if err != nil {
 		util.NewResp(w).Error(err).Status(http.StatusInternalServerError).Send()
 		return

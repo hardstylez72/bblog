@@ -4,16 +4,23 @@
 import { defineModule } from 'direct-vuex';
 import { moduleActionContext } from '../base/store';
 import DefaultService from '../base/services/default';
-import RouteService, { Route } from './service';
+import RouteService, { Filter, Route } from './service';
 
 export interface State {
   service: RouteService;
   routes: Route[];
+  filter: Filter;
 }
 
 const module = defineModule({
   namespaced: true as true,
   state: {
+    filter: {
+      tags: {
+        exclude: false,
+        names: [],
+      },
+    },
     service: new RouteService({ host: '', baseUrl: '/api/v1/route' }),
     routes: [],
   } as State,
@@ -21,8 +28,17 @@ const module = defineModule({
     getRoutes(state) {
       return state.routes;
     },
+    getFilter(state) {
+      return state.filter;
+    },
   },
   mutations: {
+    setFilter(state, filter: Filter) {
+      state.filter = filter;
+    },
+    setFilterTagNames(state, names: string[]) {
+      state.filter.tags.names = names;
+    },
     setRoutes(state, routes: Route[]) {
       state.routes = routes;
     },
@@ -42,9 +58,9 @@ const module = defineModule({
     },
   },
   actions: {
-    async GetList(context): Promise<Route[]> {
+    async GetList(context, filter: Filter): Promise<Route[]> {
       const { state, commit } = actionContext(context);
-      const routes = await state.service.GetList();
+      const routes = await state.service.GetListV2(filter);
       commit.setRoutes(routes);
       return routes;
     },

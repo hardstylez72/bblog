@@ -1,5 +1,5 @@
 <template>
-  <c-dialog
+  <Dialog
     v-model="show"
     max-width="2000px"
   >
@@ -54,7 +54,7 @@
         <v-spacer />
       </v-card-actions>
     </v-card>
-  </c-dialog>
+  </Dialog>
 </template>
 
 <script lang="ts">
@@ -62,20 +62,14 @@ import {
   Component, Vue, Prop, Watch,
 } from 'vue-property-decorator';
 import { Group } from '@/views/group/services/group';
-
 import { Route } from '@/views/route/service';
+import Dialog from '@/views/base/components/Dialog.vue';
 import UserRoutesSelectableTable from './UserRoutesSelectableTable.vue';
 
 @Component({
   components: {
-    'c-dialog': () => import('../../base/components/Dialog.vue'),
+    Dialog,
     UserRoutesSelectableTable,
-  },
-  destroyed() {
-    console.log('destroyed');
-  },
-  updated() {
-    console.log('updated');
   },
 })
 export default class RoutesTableSelectAddDialog extends Vue {

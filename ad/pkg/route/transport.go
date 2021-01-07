@@ -33,14 +33,9 @@ func updateRequestConvert(r *updateRequest) *Route {
 }
 
 type insertResponse RouteWithTags
-type updateResponse Route
 
 func newInsertResponse(group *RouteWithTags) *insertResponse {
 	return (*insertResponse)(group)
-}
-
-func newUpdateResponse(route *Route) *updateResponse {
-	return (*updateResponse)(route)
 }
 
 type listResponse []RouteWithTags
@@ -55,4 +50,17 @@ type deleteRequest struct {
 
 type getRequest struct {
 	Id int `json:"id" validate:"required"`
+}
+
+type listRequest struct {
+	Filter filter `json:"filter"`
+}
+
+type filter struct {
+	Tags tags `json:"tags"`
+}
+
+type tags struct {
+	Names   []string `json:"names"`
+	Exclude bool     `json:"exclude"`
 }

@@ -10,6 +10,13 @@ export interface Route extends Entity {
   tags?: string[];
 }
 
+export interface Filter {
+  tags: {
+    names: string[];
+    exclude: boolean;
+  };
+}
+
 export default class RouteService extends DefaultService<Route> {
   Update(t: Route): Promise<Route> {
     const req: Request = {
@@ -25,6 +32,15 @@ export default class RouteService extends DefaultService<Route> {
       data: { id },
       method: this.methodPost,
       url: `${this.baseUrl}/get`,
+    };
+    return makeRequest(req);
+  }
+
+  GetListV2(filter: Filter): Promise<Route[]> {
+    const req: Request = {
+      data: { filter },
+      method: this.methodPost,
+      url: `${this.baseUrl}/list`,
     };
     return makeRequest(req);
   }

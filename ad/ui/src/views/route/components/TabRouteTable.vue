@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TagFilter></TagFilter>
     <v-data-table
       :items="routes"
       :headers="headers"
@@ -25,7 +26,7 @@
 
       <template v-slot:item.tags="{ item }">
         <div class="d-inline-block" v-for="tag in item.tags">
-          <v-chip>{{tag}}</v-chip>
+          <v-chip  @click="tagClick(tag)">{{tag}}</v-chip>
         </div>
       </template>
 
@@ -41,14 +42,15 @@
 
 <script lang="ts">
 import {
-  Component, Vue,
+  Component, Vue, Watch,
 } from 'vue-property-decorator';
-import { Route } from '@/views/route/service';
+import { Filter, Route } from '@/views/route/service';
 import DictTable from '@/views/base/components/DictTable.vue';
 import { DataTableHeader } from 'vuetify';
 import CreateRouteDialog from './CreateRouteDialog.vue';
 import DeleteRouteDialog from './DeleteRouteDialog.vue';
 import UpdateRouteDialog from './UpdateRouteDialog.vue';
+import TagFilter from './TagFilter.vue';
 import HttpMethodBox from '../../base/components/HttpMethodBox.vue';
 
 @Component({
@@ -57,13 +59,31 @@ import HttpMethodBox from '../../base/components/HttpMethodBox.vue';
     DeleteRouteDialog,
     UpdateRouteDialog,
     HttpMethodBox,
+    TagFilter,
   },
 })
 export default class TabRouteTable extends DictTable<Route> {
   readonly title = 'Маршруты'
 
   mounted() {
-    this.$store.direct.dispatch.route.GetList();
+    const filter = this.$store.direct.getters.route.getFilter;
+    this.$store.direct.dispatch.route.GetList(filter);
+  }
+
+  @Watch('filter', { deep: true })
+  private onFilterChange(filter: Filter) {
+    this.$store.direct.dispatch.route.GetList(filter);
+  }
+
+  get filter(): Filter {
+    return this.$store.direct.getters.route.getFilter;
+  }
+
+  tagClick(tagName: string) {
+    const filter = this.$store.direct.getters.route.getFilter;
+    filter.tags.exclude = false;
+    this.$store.direct.commit.route.setFilter(filter);
+    this.$store.direct.commit.route.setFilterTagNames([tagName]);
   }
 
   get routes(): readonly Route[] {

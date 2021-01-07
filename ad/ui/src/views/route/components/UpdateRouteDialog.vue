@@ -91,7 +91,6 @@ export default class UpdateRouteDialog extends Vue {
     }
 
     if (this.routesSame(this.route, route)) {
-      console.log('if (!this.routesSame(this.route, route)) {');
       this.disableUpdateButton = false;
     }
   }
