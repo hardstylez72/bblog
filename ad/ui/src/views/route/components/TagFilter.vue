@@ -123,6 +123,8 @@ export default class TagFilter extends Vue {
     this.suggestedTags = tags.map((tag) => tag.name);
 
     // // after suggest request focus fades away
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     this.$refs['autocomplete-input'].focus();
 
     // to keep selected tags in input

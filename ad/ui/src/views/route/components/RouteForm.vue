@@ -128,7 +128,9 @@ export default class RouteForm extends Vue {
         this.isSuggestUpdating = false;
       });
 
-    // // after suggest request focus fades away
+    // after suggest request focus fades away
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
      this.$refs['autocomplete-input'].focus();
     // if not found => create new tag
     if (this.suggestedTags.length === 0) {
