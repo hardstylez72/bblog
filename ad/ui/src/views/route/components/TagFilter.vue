@@ -54,7 +54,7 @@ import { Filter, Route } from '@/views/route/service';
 export default class TagFilter extends Vue {
   filter: Filter = {
     tags: {
-      names: ['system'],
+      names: ['sys'],
       exclude: true,
     },
   }
@@ -78,13 +78,11 @@ export default class TagFilter extends Vue {
 
   @Watch('filter', { deep: true })
   async onChangeFilter(filter: Filter) {
-    console.log('filter', filter);
     this.$store.direct.commit.route.setFilter(filter);
   }
 
   @Watch('storeFilter', { deep: true })
   async onChangeStoreFilter(f: Filter) {
-    console.log('storeFilter', f);
     this.selectedTags = f.tags.names;
     this.suggestedTags = f.tags.names;
     this.filter = f;

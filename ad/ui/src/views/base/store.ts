@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable import/no-cycle */
 
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { createDirectStore } from 'direct-vuex';
+import GroupRouteService from '@/views/group/services/grouproute';
+import { Route } from '@/views/route/service';
+import { makeRequest, Request } from '@/views/base/services/utils/requester';
 import routeModule from '../route/store';
 import groupModule from '../group/store/group';
 import userModule from '../user/store/store';
@@ -13,6 +17,10 @@ import tagModule from '../tag/store';
 
 Vue.use(Vuex);
 
+export interface State{
+  isAuthorized: boolean;
+}
+
 const {
   store,
   rootActionContext,
@@ -21,7 +29,42 @@ const {
   moduleGetterContext,
 } = createDirectStore({
 
-  actions: {},
+  state: {
+    isAuthorized: false,
+  } as State,
+  getters: {
+    isAuthorized(state) {
+      return state.isAuthorized;
+    },
+  },
+  mutations: {
+    setAuthorized(state, isAuthorized: boolean) {
+      state.isAuthorized = isAuthorized;
+    },
+  },
+  actions: {
+    login(context, payload?: {login: string; password: string}): Promise<void> {
+      const { state, commit } = actionContext(context);
+      const req: Request = {
+        data: {},
+        method: 'POST',
+        url: '/api/v1/user/login',
+      };
+
+      if (payload) {
+        req.headers = { token: window.btoa(`${payload.login}:${payload.password}`) };
+      }
+
+      return makeRequest(req)
+        .then(() => {
+          commit.setAuthorized(true);
+        })
+        .catch((err) => {
+          console.error(err);
+          commit.setAuthorized(false);
+        });
+    },
+  },
   modules: {
     route: routeModule,
     group: groupModule,
@@ -41,6 +84,11 @@ export {
   rootGetterContext,
   moduleGetterContext,
 };
+
+// @typescript-eslint/no-use-before-define
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+const actionContext = (context: any) => rootActionContext(context);
 
 export type AppStore = typeof store
 declare module 'vuex' {

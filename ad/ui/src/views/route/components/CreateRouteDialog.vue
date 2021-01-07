@@ -31,6 +31,7 @@ import {
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import Dialog from '@/views/base/components/Dialog.vue';
+import _ from 'lodash';
 import RouteForm from './RouteForm.vue';
 
 @Component({
@@ -73,7 +74,8 @@ export default class CreateRouteDialog extends Vue {
   routesSame(a: Route, b: Route): boolean {
     return (a.description === b.description
       && a.method === b.method
-      && a.route === b.route);
+      && a.route === b.route
+     && _.isEqual(a, b));
   }
 
   async createRoute(ref: any) {

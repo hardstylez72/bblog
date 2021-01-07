@@ -24,7 +24,7 @@ func (r *repository) deletePair(ctx context.Context, tx *sqlx.Tx, groupId, userI
 	return nil
 }
 
-func (r *repository) Delete(ctx context.Context, params []params) error {
+func (r *repository) Delete(ctx context.Context, params []Pair) error {
 	tx, err := r.conn.BeginTxx(ctx, nil)
 	defer func() {
 		if err != nil {
@@ -76,7 +76,7 @@ func (r *repository) insertPair(ctx context.Context, tx *sqlx.Tx, groupId, userI
 	return &route, nil
 }
 
-func (r *repository) Insert(ctx context.Context, params []params) ([]Group, error) {
+func (r *repository) Insert(ctx context.Context, params []Pair) ([]Group, error) {
 
 	tx, err := r.conn.BeginTxx(ctx, nil)
 	defer func() {

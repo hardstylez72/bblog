@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig, Route } from 'vue-router';
-import Home from '../../main-page.vue';
+import Home from '../../Main.vue';
 import Group from '../../group/pages/main.vue';
 import User from '../../user/pages/main.vue';
 

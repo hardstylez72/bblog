@@ -4,11 +4,14 @@ import (
 	"context"
 	"github.com/hardstylez72/bblog/ad/pkg/grouproute"
 	"github.com/jmoiron/sqlx"
+	"github.com/pkg/errors"
 )
 
 type repository struct {
 	conn *sqlx.DB
 }
+
+var ErrGroupAlreadyExists = errors.New("group alredy exist")
 
 func NewRepository(conn *sqlx.DB) *repository {
 	return &repository{conn: conn}
@@ -146,11 +149,35 @@ insert into ad.groups (
 		}
 	}
 
+	if g.Id == 0 {
+		return nil, ErrGroupAlreadyExists
+	}
+
 	return &g, nil
 }
 
 func (r *repository) GetById(ctx context.Context, id int) (*Group, error) {
 	return GetByIdDb(ctx, r.conn, id)
+}
+
+func GetByCodeDb(ctx context.Context, conn *sqlx.DB, code string) (*Group, error) {
+	query := `
+		select id,
+			   code,
+			   description,
+			   created_at,
+			   updated_at,
+			   deleted_at
+		from ad.groups
+	   where code = $1
+`
+	var group Group
+	err := conn.GetContext(ctx, &group, query, code)
+	if err != nil {
+		return nil, err
+	}
+
+	return &group, nil
 }
 
 func GetByIdDb(ctx context.Context, conn *sqlx.DB, id int) (*Group, error) {

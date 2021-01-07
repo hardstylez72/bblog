@@ -2,8 +2,11 @@ package user
 
 import (
 	"context"
+	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"github.com/jmoiron/sqlx"
 )
+
+var ErrEntityAlreadyExists = util.ErrEntityAlreadyExists
 
 type repository struct {
 	conn *sqlx.DB
@@ -46,7 +49,30 @@ insert into ad.users (
 		}
 	}
 
+	if g.Id == 0 {
+		return nil, ErrEntityAlreadyExists
+	}
 	return &g, nil
+}
+
+func (r *repository) GetByExternalId(ctx context.Context, id string) (*User, error) {
+	query := `
+		select id,
+			   external_id,
+		       created_at,
+			   updated_at,
+			   deleted_at
+		from ad.users
+	   where deleted_at is null
+ 		 and external_id = $1
+`
+	var user User
+	err := r.conn.GetContext(ctx, &user, query, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
 }
 
 func (r *repository) GetById(ctx context.Context, id int) (*User, error) {

@@ -6,4 +6,7 @@ admin:
   password: password
 databases:
   postgres: "postgres://postgres:postgres@localhost:6667/bback?sslmode=disable"
+user:
+  login: hs
+  password: 1234
 

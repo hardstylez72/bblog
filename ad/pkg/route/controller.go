@@ -12,6 +12,7 @@ import (
 type Repository interface {
 	List(ctx context.Context, f filter) ([]RouteWithTags, error)
 	GetById(ctx context.Context, id int) (*RouteWithTags, error)
+	GetByMethodAndRoute(ctx context.Context, route, method string) (*RouteWithTags, error)
 	Insert(ctx context.Context, group *Route) (*Route, error)
 	InsertWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error)
 	UpdateWithTags(ctx context.Context, route *Route, tagNames []string) (*RouteWithTags, error)

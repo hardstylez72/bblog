@@ -2,6 +2,7 @@ package grouproute
 
 import (
 	"context"
+	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -62,7 +63,7 @@ func InsertTx(ctx context.Context, tx *sqlx.Tx, params []Pair) ([]Route, error) 
 	routes := make([]Route, 0)
 	for _, pair := range params {
 
-		route, err := insertPair(ctx, tx, pair.GroupId, pair.RouteId)
+		route, err := InsertPairTx(ctx, tx, pair.GroupId, pair.RouteId)
 		if err != nil {
 			return nil, err
 		}
@@ -72,7 +73,7 @@ func InsertTx(ctx context.Context, tx *sqlx.Tx, params []Pair) ([]Route, error) 
 	return routes, nil
 }
 
-func insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route, error) {
+func InsertPairTx(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route, error) {
 	query := `
 		with insert_row as (
 			insert into ad.groups_routes (
@@ -82,7 +83,7 @@ func insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route,
 				   values (
 					   $1,
 					   $2
-				   )
+				   ) on conflict do nothing 
 		)
 		select r.id,
 			   r.route,
@@ -99,6 +100,10 @@ func insertPair(ctx context.Context, tx *sqlx.Tx, groupId, routeId int) (*Route,
 	err := rows.StructScan(&route)
 	if err != nil {
 		return nil, err
+	}
+
+	if route.Id == 0 {
+		return nil, util.ErrEntityAlreadyExists
 	}
 
 	return &route, nil

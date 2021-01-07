@@ -71,10 +71,11 @@
 
 <script lang="ts">
 import {
-  Component, Model, Prop, Vue, Watch,
+  Component, Model, Vue, Watch,
 } from 'vue-property-decorator';
 import { Route } from '@/views/route/service';
 import { Tag } from '@/views/tag/service';
+import _ from 'lodash';
 
 @Component
 export default class RouteForm extends Vue {
@@ -99,9 +100,9 @@ export default class RouteForm extends Vue {
   httpMethodList = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 
   @Watch('selectedTags')
-  async onChangeSelectedTags(pattern: string) {
+  async onChangeSelectedTags(selected: string[]) {
     this.searchTags = '';
-    this.$set(this.route.tags, this.selectedTags);
+    this.route.tags = selected;
   }
 
   async delay(ms: number) {
@@ -171,7 +172,7 @@ export default class RouteForm extends Vue {
 
   @Watch('route', { deep: true })
   protected onChangeRoute(route: Route): void {
-    if (JSON.stringify(route) !== JSON.stringify(this.value)) {
+    if (!_.isEqual(route, this.value)) {
       this.$emit('change', route);
     }
   }

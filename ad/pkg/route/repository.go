@@ -2,16 +2,17 @@ package route
 
 import (
 	"context"
-	"errors"
+
 	sq "github.com/Masterminds/squirrel"
 	"github.com/hardstylez72/bblog/ad/pkg/routetag"
 	"github.com/hardstylez72/bblog/ad/pkg/tag"
+	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"github.com/jmoiron/sqlx"
 	"strings"
 )
 
 var (
-	ErrRouteAlreadyExists = errors.New("route already exist")
+	ErrEntityAlreadyExists = util.ErrEntityAlreadyExists
 )
 
 type repository struct {
@@ -214,11 +215,28 @@ insert into ad.routes (
 		}
 	}
 	if g.Id == 0 {
-		return nil, ErrRouteAlreadyExists
+		return nil, ErrEntityAlreadyExists
 	}
 
 	return &g, nil
 }
+func (r *repository) GetByMethodAndRoute(ctx context.Context, route, method string) (*RouteWithTags, error) {
+	rr, err := GetByMethodAndRouteDb(ctx, r.conn, method, route)
+	if err != nil {
+		return nil, err
+	}
+
+	tagNames, err := getTagsByRouteId(ctx, r.conn, rr.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &RouteWithTags{
+		Route: *rr,
+		Tags:  tagNames,
+	}, nil
+}
+
 func (r *repository) GetById(ctx context.Context, id int) (*RouteWithTags, error) {
 	route, err := GetByIdDb(ctx, r.conn, id)
 	if err != nil {
@@ -273,6 +291,29 @@ func (r *repository) List(ctx context.Context, f filter) ([]RouteWithTags, error
 		})
 	}
 	return routesWithTags, nil
+}
+
+func GetByMethodAndRouteDb(ctx context.Context, conn *sqlx.DB, method, route string) (*Route, error) {
+	query := `
+		select id,
+			   route,
+		       method,
+			   description,
+			   created_at,
+			   updated_at,
+			   deleted_at
+		from ad.routes
+	   where deleted_at is null
+  		 and method = $1
+ 		 and route = $2
+`
+	var r Route
+	err := conn.GetContext(ctx, &r, query, method, route)
+	if err != nil {
+		return nil, err
+	}
+
+	return &r, nil
 }
 
 func GetByIdDb(ctx context.Context, conn *sqlx.DB, id int) (*Route, error) {
@@ -337,7 +378,6 @@ func ListDb(ctx context.Context, conn *sqlx.DB, f filter) ([]Route, error) {
 
 	if len(f.Tags.Names) > 0 {
 		if f.Tags.Exclude {
-			//routes1 = routes1.Where(sq.NotEq{"t.name": f.Tags.Names[i]})
 			routes1 = routes1.Where(`rt.route_id not in (
 													select route_id from ad.routes_tags where tag_id in (
 												   	   select id from ad.tags where name in (` + formArrayStringSql(f.Tags.Names) + `)
@@ -348,6 +388,8 @@ func ListDb(ctx context.Context, conn *sqlx.DB, f filter) ([]Route, error) {
 			routes1 = routes1.Where(`t.name in (` + formArrayStringSql(f.Tags.Names) + `)`)
 		}
 	}
+
+	routes1 = routes1.GroupBy("r.id")
 
 	query, args, err := routes1.ToSql()
 	if err != nil {

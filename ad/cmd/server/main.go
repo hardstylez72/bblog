@@ -15,6 +15,7 @@ import (
 	"github.com/hardstylez72/bblog/ad/pkg/user"
 	"github.com/hardstylez72/bblog/ad/pkg/usergroup"
 	"github.com/hardstylez72/bblog/ad/pkg/userroute"
+	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"log"
@@ -126,6 +127,32 @@ func Start(r chi.Router) error {
 	usergroup.NewController(usergroup.NewRepository(pgx)).Mount(r)
 	userroute.NewController(userroute.NewRepository(pgx)).Mount(r)
 
+	ctx := context.Background()
+
+	const (
+		sysGroupCode = "sys_group"
+		sysRouteTag  = "sys"
+	)
+	var (
+		login = viper.GetString("user.login")
+		//password = viper.GetString("user.password")
+	)
+	g, err := group.NewRepository(pgx).Insert(ctx, &group.Group{
+		Code:        sysGroupCode,
+		Description: "internal system group",
+	})
+	if err != nil {
+		if err == group.ErrGroupAlreadyExists {
+			var getGroupErr error
+			g, getGroupErr = group.GetByCodeDb(ctx, pgx, sysGroupCode)
+			if getGroupErr != nil {
+				return err
+			}
+		} else {
+			return err
+		}
+	}
+
 	rs := make([]route.Route, 0)
 	for _, r := range r.Routes() {
 
@@ -140,12 +167,66 @@ func Start(r chi.Router) error {
 		})
 	}
 
+	groupRoutePairs := make([]grouproute.Pair, 0)
 	for _, r := range rs {
-		_, err = route.NewRepository(pgx).InsertWithTags(context.Background(), &r, []string{"system"})
+		rr, err := route.NewRepository(pgx).InsertWithTags(ctx, &r, []string{sysRouteTag})
 		if err != nil {
-			if err == route.ErrRouteAlreadyExists {
+			if err == route.ErrEntityAlreadyExists {
+				var gerRouteErr error
+				rr, gerRouteErr = route.NewRepository(pgx).GetByMethodAndRoute(ctx, r.Route, r.Method)
+				if gerRouteErr != nil {
+					return gerRouteErr
+				}
+			} else {
+				return err
+			}
+		}
+		groupRoutePairs = append(groupRoutePairs, grouproute.Pair{
+			GroupId: g.Id,
+			RouteId: rr.Id,
+		})
+	}
+
+	tx, err := pgx.BeginTxx(ctx, nil)
+	defer func() {
+		if err != nil {
+			_ = tx.Rollback()
+		} else {
+			_ = tx.Commit()
+		}
+	}()
+
+	for i := range groupRoutePairs {
+		_, err = grouproute.InsertPairTx(ctx, tx, groupRoutePairs[i].GroupId, groupRoutePairs[i].RouteId)
+		if err != nil {
+			if err == util.ErrEntityAlreadyExists {
 				continue
 			}
+			return err
+		}
+	}
+
+	u, err := user.NewRepository(pgx).Insert(ctx, &user.User{
+		ExternalId: login,
+	})
+	if err != nil {
+		if err == util.ErrEntityAlreadyExists {
+			var getUserErr error
+			u, getUserErr = user.NewRepository(pgx).GetByExternalId(ctx, login)
+			if getUserErr != nil {
+				return getUserErr
+			}
+		} else {
+			return err
+		}
+	}
+
+	_, err = usergroup.NewRepository(pgx).Insert(ctx, []usergroup.Pair{{
+		GroupId: g.Id,
+		UserId:  u.Id,
+	}})
+	if err != nil {
+		if err != util.ErrEntityAlreadyExists {
 			return err
 		}
 	}

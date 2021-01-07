@@ -1,8 +1,8 @@
 package usergroup
 
-type insertRequest []params
+type insertRequest []Pair
 
-func insertRequestConvert(r insertRequest) []params {
+func insertRequestConvert(r insertRequest) []Pair {
 	return r
 }
 
@@ -18,5 +18,5 @@ func newListResponse(routes []Group) listResponse {
 }
 
 type deleteRequest struct {
-	Params []params `json:"groupId" validate:"dive"`
+	Params []Pair `json:"groupId" validate:"dive"`
 }

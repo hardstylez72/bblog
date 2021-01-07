@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-type params struct {
+type Pair struct {
 	GroupId int `json:"groupId" validate:"required"`
 	UserId  int `json:"userId" validate:"required"`
 }
@@ -18,8 +18,8 @@ type params struct {
 type Repository interface {
 	List(ctx context.Context, groupId int) ([]Group, error)
 	ListNotInGroup(ctx context.Context, groupId int) ([]Group, error)
-	Insert(ctx context.Context, params []params) ([]Group, error)
-	Delete(ctx context.Context, params []params) error
+	Insert(ctx context.Context, params []Pair) ([]Group, error)
+	Delete(ctx context.Context, params []Pair) error
 }
 
 type controller struct {
@@ -87,7 +87,7 @@ func (c *controller) list(w http.ResponseWriter, r *http.Request) {
 func (c *controller) delete(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	var req []params
+	var req []Pair
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		util.NewResp(w).Error(err).Status(http.StatusBadRequest).Send()
