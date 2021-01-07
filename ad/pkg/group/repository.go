@@ -2,26 +2,26 @@ package group
 
 import (
 	"context"
+	"database/sql"
 	"github.com/hardstylez72/bblog/ad/pkg/grouproute"
+	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"github.com/jmoiron/sqlx"
-	"github.com/pkg/errors"
 )
 
 type repository struct {
 	conn *sqlx.DB
 }
 
-var ErrGroupAlreadyExists = errors.New("group alredy exist")
+var (
+	ErrGroupAlreadyExists = util.ErrEntityAlreadyExists
+	ErrEntityNotFound     = util.ErrEntityNotFound
+)
 
 func NewRepository(conn *sqlx.DB) *repository {
 	return &repository{conn: conn}
 }
 
 func (r *repository) InsertGroupBasedOnAnother(ctx context.Context, g *Group, groupBaseId int) (*Group, error) {
-	routes, err := grouproute.ListDb(ctx, r.conn, groupBaseId)
-	if err != nil {
-		return nil, err
-	}
 
 	tx, err := r.conn.BeginTxx(ctx, nil)
 	defer func() {
@@ -33,6 +33,11 @@ func (r *repository) InsertGroupBasedOnAnother(ctx context.Context, g *Group, gr
 	}()
 
 	group, err := InsertTx(ctx, tx, g)
+	if err != nil {
+		return nil, err
+	}
+
+	routes, err := grouproute.ListDb(ctx, r.conn, groupBaseId)
 	if err != nil {
 		return nil, err
 	}
@@ -160,6 +165,10 @@ func (r *repository) GetById(ctx context.Context, id int) (*Group, error) {
 	return GetByIdDb(ctx, r.conn, id)
 }
 
+func (r *repository) GetByCodeDb(ctx context.Context, code string) (*Group, error) {
+	return GetByCodeDb(ctx, r.conn, code)
+}
+
 func GetByCodeDb(ctx context.Context, conn *sqlx.DB, code string) (*Group, error) {
 	query := `
 		select id,
@@ -174,6 +183,9 @@ func GetByCodeDb(ctx context.Context, conn *sqlx.DB, code string) (*Group, error
 	var group Group
 	err := conn.GetContext(ctx, &group, query, code)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, ErrEntityNotFound
+		}
 		return nil, err
 	}
 

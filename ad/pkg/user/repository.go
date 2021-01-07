@@ -2,11 +2,13 @@ package user
 
 import (
 	"context"
+	"database/sql"
 	"github.com/hardstylez72/bblog/ad/pkg/util"
 	"github.com/jmoiron/sqlx"
 )
 
 var ErrEntityAlreadyExists = util.ErrEntityAlreadyExists
+var ErrEntityNotFound = util.ErrEntityNotFound
 
 type repository struct {
 	conn *sqlx.DB
@@ -69,6 +71,9 @@ func (r *repository) GetByExternalId(ctx context.Context, id string) (*User, err
 	var user User
 	err := r.conn.GetContext(ctx, &user, query, id)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, ErrEntityNotFound
+		}
 		return nil, err
 	}
 

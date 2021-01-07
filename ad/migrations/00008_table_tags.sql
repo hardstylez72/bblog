@@ -5,7 +5,8 @@ create table if not exists ad.tags (
    name text not null,
    updated_at timestamp default null,
    created_at timestamp not null default now(),
-   deleted_at timestamp default null
+   deleted_at timestamp default null,
+   unique (deleted_at, name)
 );
 
 -- +goose Down

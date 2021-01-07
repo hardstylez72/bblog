@@ -2,6 +2,7 @@ package route
 
 import (
 	"context"
+	"database/sql"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/hardstylez72/bblog/ad/pkg/routetag"
@@ -13,6 +14,7 @@ import (
 
 var (
 	ErrEntityAlreadyExists = util.ErrEntityAlreadyExists
+	ErrEntityNotFound      = util.ErrEntityNotFound
 )
 
 type repository struct {
@@ -310,6 +312,9 @@ func GetByMethodAndRouteDb(ctx context.Context, conn *sqlx.DB, method, route str
 	var r Route
 	err := conn.GetContext(ctx, &r, query, method, route)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, ErrEntityNotFound
+		}
 		return nil, err
 	}
 
